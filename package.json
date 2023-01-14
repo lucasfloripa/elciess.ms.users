@@ -1,0 +1,52 @@
+{
+  "name": "elciess.ms.users",
+  "version": "1.0.0",
+  "description": "API to register users to be used in any Elciess services.",
+  "author": "Lucas Gonçalves",
+  "repository": "https://github.com/lucasfloripa/elciess.ms.users",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "test": "jest --passWithNoTests --runInBand --no-cache",
+    "test:unit": "npm test -- --watchAll -c jest-unit.config.js",
+    "test:integration": "npm test -- --watch -c jest-integration.config.js",
+    "test:staged": "npm test -- --findRelatedTests",
+    "test:ci": "npm test -- --coverage",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "module-alias": "^2.2.2"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "^17.4.2",
+    "@types/jest": "^29.2.5",
+    "@types/module-alias": "^2.0.1",
+    "@types/node": "^18.11.18",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "commitlint": "^17.4.2",
+    "eslint": "^8.31.0",
+    "eslint-config-standard-with-typescript": "^27.0.1",
+    "eslint-plugin-import": "^2.27.4",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.0",
+    "jest": "^29.3.1",
+    "lint-staged": "^13.1.0",
+    "rimraf": "^4.0.4",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
+  },
+  "_moduleAliases": {
+    "@src": "./src",
+    "@test": "./test"
+  },
+  "lint-staged": {
+    "**/*.ts": [
+      "eslint 'src/**' --fix",
+      "npm run test:staged",
+      "git add"
+    ]
+  }
+}
