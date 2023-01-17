@@ -1,6 +1,7 @@
 import { CreateUserController } from '../../../src/presentation/controllers'
+import { Validation } from '../../../src/presentation/protocols'
 import { CreateUserImplementation } from '../../../src/domain/implementation'
-import { mockCreateUserRequest } from '../mocks'
+import { mockCreateUserRequest, mockValidationStub } from '../mocks'
 import { mockCreateUserImplementationStub } from '../../domain/mocks'
 
 const mockRequest = mockCreateUserRequest()
@@ -8,12 +9,14 @@ const mockRequest = mockCreateUserRequest()
 interface SutTypes {
   sut: CreateUserController
   createUserImplementationStub: CreateUserImplementation
+  validationStub: Validation
 }
 
 const makeSut = (): SutTypes => {
   const createUserImplementationStub = mockCreateUserImplementationStub()
-  const sut = new CreateUserController(createUserImplementationStub)
-  return { sut, createUserImplementationStub }
+  const validationStub = mockValidationStub()
+  const sut = new CreateUserController(createUserImplementationStub, validationStub)
+  return { sut, createUserImplementationStub, validationStub }
 }
 
 describe('CreateUserController', () => {
@@ -22,5 +25,11 @@ describe('CreateUserController', () => {
     const spyCreateUserImplementation = jest.spyOn(createUserImplementationStub, 'create')
     await sut.handle(mockRequest)
     expect(spyCreateUserImplementation).toHaveBeenCalledWith(mockRequest)
+  })
+  test('Should call validation with correct params', async () => {
+    const { sut, validationStub } = makeSut()
+    const spyValidation = jest.spyOn(validationStub, 'validate')
+    await sut.handle(mockRequest)
+    expect(spyValidation).toHaveBeenCalledWith(mockRequest)
   })
 })
