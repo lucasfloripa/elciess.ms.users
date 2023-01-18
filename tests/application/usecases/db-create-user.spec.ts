@@ -56,4 +56,10 @@ describe('DbCreateUserUseCase', () => {
     await sut.create(mockRequest)
     expect(spyHash).toHaveBeenCalledWith(mockRequest.password)
   })
+  test('Should throw if hasher throws', async () => {
+    const { sut, hasherStub } = makeSut()
+    jest.spyOn(hasherStub, 'hash').mockImplementationOnce(async () => (await Promise.reject(new Error())))
+    const exists = sut.create(mockRequest)
+    await expect(exists).rejects.toThrow()
+  })
 })
