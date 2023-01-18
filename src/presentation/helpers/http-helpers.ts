@@ -2,7 +2,10 @@ import { HttpResponse } from 'presentation/protocols'
 
 export const badRequest = (error: Error): HttpResponse => ({
   statusCode: 400,
-  body: {
-    message: error.message
-  }
+  body: error
+})
+
+export const forbidden = (error: Error): HttpResponse => ({
+  statusCode: 403,
+  body: error
 })
