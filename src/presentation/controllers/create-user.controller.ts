@@ -1,4 +1,5 @@
-import { CreateUserImplementation } from 'domain/implementation'
+import { CreateUserImplementation } from '../../domain/implementation'
+import { badRequest } from '../helpers'
 import { Controller, HttpResponse, Validation } from '../protocols'
 
 export class CreateUserController implements Controller {
@@ -8,10 +9,9 @@ export class CreateUserController implements Controller {
   ) {}
 
   async handle (request: CreateUserController.Params): Promise<HttpResponse<string>> {
-    this.validation.validate(request)
-
+    const error = this.validation.validate(request)
+    if (error != null) return badRequest(error)
     await this.createUserImplementation.create(request)
-
     return {
       statusCode: 200,
       body: 'user created successfully'
