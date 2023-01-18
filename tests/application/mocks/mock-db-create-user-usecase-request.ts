@@ -1,11 +1,8 @@
-import { CreateUserController } from 'presentation/controllers'
+import { CreateUserImplementationParams } from '../../../src/domain/implementation'
 
 import { faker } from '@faker-js/faker'
 
-const fakePassword = faker.internet.password()
-
-export const mockDbCreateUserUseCaseRequest = (): CreateUserController.Params => ({
+export const mockDbCreateUserUseCaseRequest = (): CreateUserImplementationParams => ({
   email: faker.internet.email(),
-  password: fakePassword,
-  confirmPassword: fakePassword
+  password: faker.internet.password()
 })
