@@ -3,8 +3,8 @@ import { Validation } from '../../../src/presentation/protocols'
 import { forbidden, badRequest, serverError, ok } from '../../../src/presentation/helpers'
 import { EmailInUseError, ServerError } from '../../../src/presentation/errors'
 import { CreateUserImplementation } from '../../../src/domain/implementation'
-import { mockCreateUserRequest, mockValidationStub } from '../mocks'
-import { mockCreateUserImplementationStub } from '../../domain/mocks'
+import { mockCreateUserImplementationStub, mockCreateUserRequest } from '../../domain/mocks'
+import { mockValidationStub } from '../mocks'
 
 const mockRequest = mockCreateUserRequest()
 
