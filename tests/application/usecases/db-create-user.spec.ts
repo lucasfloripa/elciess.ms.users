@@ -1,6 +1,6 @@
 import { DbCreateUserUseCase } from '../../../src/application/usecases'
-import { CheckUserByEmailRepository } from '../../../src/application/protocols'
-import { mockDbCreateUserUseCaseRequest } from '../../application/mocks'
+import { CheckUserByEmailRepository, IdGenerator } from '../../../src/application/protocols'
+import { mockDbCreateUserUseCaseRequest, mockIdGeneratorStub } from '../../application/mocks'
 import { mockCheckUserByEmailRepositoryStub } from '../mocks'
 
 const mockRequest = mockDbCreateUserUseCaseRequest()
@@ -8,20 +8,22 @@ const mockRequest = mockDbCreateUserUseCaseRequest()
 interface SutTypes {
   sut: DbCreateUserUseCase
   checkUserByEmailRepositoryStub: CheckUserByEmailRepository
+  idGeneratorStub: IdGenerator
 }
 
 const makeSut = (): SutTypes => {
   const checkUserByEmailRepositoryStub = mockCheckUserByEmailRepositoryStub()
-  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub)
-  return { sut, checkUserByEmailRepositoryStub }
+  const idGeneratorStub = mockIdGeneratorStub()
+  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub, idGeneratorStub)
+  return { sut, checkUserByEmailRepositoryStub, idGeneratorStub }
 }
 
 describe('DbCreateUserUseCase', () => {
   test('Should call checkUserByEmailRepository with correct params', async () => {
     const { sut, checkUserByEmailRepositoryStub } = makeSut()
-    const spyCreateUserImplementation = jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail')
+    const spyCheckByEmail = jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail')
     await sut.create(mockRequest)
-    expect(spyCreateUserImplementation).toHaveBeenCalledWith(mockRequest.email)
+    expect(spyCheckByEmail).toHaveBeenCalledWith(mockRequest.email)
   })
   test('Should return false if checkUserByEmailRepository returns an true', async () => {
     const { sut, checkUserByEmailRepositoryStub } = makeSut()
@@ -34,5 +36,11 @@ describe('DbCreateUserUseCase', () => {
     jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail').mockImplementationOnce(async () => (await Promise.reject(new Error())))
     const exists = sut.create(mockRequest)
     await expect(exists).rejects.toThrow()
+  })
+  test('Should call idGenerator correctly', async () => {
+    const { sut, idGeneratorStub } = makeSut()
+    const spyGenerate = jest.spyOn(idGeneratorStub, 'generate')
+    await sut.create(mockRequest)
+    expect(spyGenerate).toHaveBeenCalled()
   })
 })
