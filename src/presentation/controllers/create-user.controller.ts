@@ -1,5 +1,6 @@
 import { CreateUserImplementation } from '../../domain/implementation'
-import { badRequest } from '../helpers'
+import { badRequest, forbidden, serverError } from '../helpers'
+import { EmailInUseError, ServerError } from '../errors'
 import { Controller, HttpResponse, Validation } from '../protocols'
 
 export class CreateUserController implements Controller {
@@ -9,12 +10,17 @@ export class CreateUserController implements Controller {
   ) {}
 
   async handle (request: CreateUserController.Params): Promise<HttpResponse<string>> {
-    const error = this.validation.validate(request)
-    if (error != null) return badRequest(error)
-    await this.createUserImplementation.create(request)
-    return {
-      statusCode: 200,
-      body: 'user created successfully'
+    try {
+      const error = this.validation.validate(request)
+      if (error != null) return badRequest(error)
+      const isValid = await this.createUserImplementation.create(request)
+      if (isValid == null) return forbidden(new EmailInUseError())
+      return {
+        statusCode: 200,
+        body: 'user created successfully'
+      }
+    } catch (error) {
+      return serverError(new ServerError(error))
     }
   }
 }
