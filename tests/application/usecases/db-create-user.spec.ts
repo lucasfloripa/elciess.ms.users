@@ -23,4 +23,10 @@ describe('DbCreateUserUseCase', () => {
     await sut.create(mockRequest)
     expect(spyCreateUserImplementation).toHaveBeenCalledWith(mockRequest.email)
   })
+  test('Should return false if checkUserByEmailRepository returns an true', async () => {
+    const { sut, checkUserByEmailRepositoryStub } = makeSut()
+    jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail').mockReturnValueOnce(Promise.resolve(true))
+    const exists = await sut.create(mockRequest)
+    expect(exists).toBe(false)
+  })
 })
