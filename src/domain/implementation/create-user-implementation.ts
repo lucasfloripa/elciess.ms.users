@@ -1,7 +1,5 @@
-import { User } from 'domain/models'
-
 export interface CreateUserImplementation {
-  create: (params: CreateUserImplementationParams) => Promise<User | null>
+  create: (params: CreateUserImplementationParams) => Promise<boolean>
 }
 
 export interface CreateUserImplementationParams {

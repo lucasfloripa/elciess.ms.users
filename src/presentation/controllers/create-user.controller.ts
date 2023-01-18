@@ -14,7 +14,7 @@ export class CreateUserController implements Controller {
       const error = this.validation.validate(request)
       if (error != null) return badRequest(error)
       const isValid = await this.createUserImplementation.create(request)
-      if (isValid == null) return forbidden(new EmailInUseError())
+      if (!isValid) return forbidden(new EmailInUseError())
       return ok(`${request.email} registered successfully`)
     } catch (error) {
       return serverError(new ServerError(error))

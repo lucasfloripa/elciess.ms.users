@@ -42,7 +42,7 @@ describe('CreateUserController', () => {
   })
   test('Should return 403 if createUserImplementation returns null', async () => {
     const { sut, createUserImplementationStub } = makeSut()
-    jest.spyOn(createUserImplementationStub, 'create').mockReturnValueOnce(Promise.resolve(null))
+    jest.spyOn(createUserImplementationStub, 'create').mockReturnValueOnce(Promise.resolve(false))
     const httpResponse = await sut.handle(mockRequest)
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
