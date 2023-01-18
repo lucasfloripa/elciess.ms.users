@@ -1,6 +1,6 @@
 import { CreateUserController } from '../../../src/presentation/controllers'
 import { Validation } from '../../../src/presentation/protocols'
-import { forbidden, badRequest, serverError } from '../../../src/presentation/helpers'
+import { forbidden, badRequest, serverError, ok } from '../../../src/presentation/helpers'
 import { EmailInUseError, ServerError } from '../../../src/presentation/errors'
 import { CreateUserImplementation } from '../../../src/domain/implementation'
 import { mockCreateUserRequest, mockValidationStub } from '../mocks'
@@ -51,5 +51,10 @@ describe('CreateUserController', () => {
     jest.spyOn(createUserImplementationStub, 'create').mockImplementationOnce(async () => (await Promise.reject(new Error())))
     const httpResponse = await sut.handle(mockRequest)
     expect(httpResponse).toEqual(serverError(new ServerError()))
+  })
+  test('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(mockRequest)
+    expect(httpResponse).toEqual(ok(`${mockRequest.email} registered successfully`))
   })
 })
