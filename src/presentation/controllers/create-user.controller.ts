@@ -1,5 +1,5 @@
 import { CreateUserImplementation } from '../../domain/implementation'
-import { badRequest, forbidden, serverError } from '../helpers'
+import { badRequest, forbidden, serverError, ok } from '../helpers'
 import { EmailInUseError, ServerError } from '../errors'
 import { Controller, HttpResponse, Validation } from '../protocols'
 
@@ -9,16 +9,13 @@ export class CreateUserController implements Controller {
     private readonly validation: Validation
   ) {}
 
-  async handle (request: CreateUserController.Params): Promise<HttpResponse<string>> {
+  async handle (request: CreateUserController.Params): Promise<HttpResponse<CreateUserController.Response>> {
     try {
       const error = this.validation.validate(request)
       if (error != null) return badRequest(error)
       const isValid = await this.createUserImplementation.create(request)
       if (isValid == null) return forbidden(new EmailInUseError())
-      return {
-        statusCode: 200,
-        body: 'user created successfully'
-      }
+      return ok(`${request.email} registered successfully`)
     } catch (error) {
       return serverError(new ServerError(error))
     }
@@ -30,5 +27,8 @@ export namespace CreateUserController {
     email: string
     password: string
     confirmPassword: string
+  }
+  export interface Response {
+    message: string
   }
 }
