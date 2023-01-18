@@ -1,7 +1,6 @@
 import { DbCreateUserUseCase } from '../../../src/application/usecases'
-import { CheckUserByEmailRepository, IdGenerator } from '../../../src/application/protocols'
-import { mockDbCreateUserUseCaseRequest, mockIdGeneratorStub } from '../../application/mocks'
-import { mockCheckUserByEmailRepositoryStub } from '../mocks'
+import { CheckUserByEmailRepository, Hasher, IdGenerator } from '../../../src/application/protocols'
+import { mockDbCreateUserUseCaseRequest, mockIdGeneratorStub, mockHasherStub, mockCheckUserByEmailRepositoryStub } from '../../application/mocks'
 
 const mockRequest = mockDbCreateUserUseCaseRequest()
 
@@ -9,13 +8,15 @@ interface SutTypes {
   sut: DbCreateUserUseCase
   checkUserByEmailRepositoryStub: CheckUserByEmailRepository
   idGeneratorStub: IdGenerator
+  hasherStub: Hasher
 }
 
 const makeSut = (): SutTypes => {
   const checkUserByEmailRepositoryStub = mockCheckUserByEmailRepositoryStub()
   const idGeneratorStub = mockIdGeneratorStub()
-  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub, idGeneratorStub)
-  return { sut, checkUserByEmailRepositoryStub, idGeneratorStub }
+  const hasherStub = mockHasherStub()
+  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub)
+  return { sut, checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub }
 }
 
 describe('DbCreateUserUseCase', () => {
@@ -48,5 +49,11 @@ describe('DbCreateUserUseCase', () => {
     jest.spyOn(idGeneratorStub, 'generate').mockImplementationOnce(async () => (await Promise.reject(new Error())))
     const exists = sut.create(mockRequest)
     await expect(exists).rejects.toThrow()
+  })
+  test('Should call hasher with correct params', async () => {
+    const { sut, hasherStub } = makeSut()
+    const spyHash = jest.spyOn(hasherStub, 'hash')
+    await sut.create(mockRequest)
+    expect(spyHash).toHaveBeenCalledWith(mockRequest.password)
   })
 })
