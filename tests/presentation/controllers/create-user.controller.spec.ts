@@ -32,4 +32,10 @@ describe('CreateUserController', () => {
     await sut.handle(mockRequest)
     expect(spyValidation).toHaveBeenCalledWith(mockRequest)
   })
+  test('Should return 400 if validation returns an error', async () => {
+    const { sut, validationStub } = makeSut()
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new Error())
+    const httpResponse = await sut.handle(mockRequest)
+    expect(httpResponse.statusCode).toBe(400)
+  })
 })
