@@ -43,4 +43,10 @@ describe('DbCreateUserUseCase', () => {
     await sut.create(mockRequest)
     expect(spyGenerate).toHaveBeenCalled()
   })
+  test('Should throw if idGenerator throws', async () => {
+    const { sut, idGeneratorStub } = makeSut()
+    jest.spyOn(idGeneratorStub, 'generate').mockImplementationOnce(async () => (await Promise.reject(new Error())))
+    const exists = sut.create(mockRequest)
+    await expect(exists).rejects.toThrow()
+  })
 })
