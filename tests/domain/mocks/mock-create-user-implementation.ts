@@ -3,7 +3,7 @@ import { CreateUserImplementation, CreateUserImplementationParams } from '../../
 export const mockCreateUserImplementationStub = (): CreateUserImplementation => {
   class CreateUserImplementationStub implements CreateUserImplementation {
     async create (params: CreateUserImplementationParams): Promise<boolean> {
-      return true
+      return await Promise.resolve(true)
     }
   }
 
