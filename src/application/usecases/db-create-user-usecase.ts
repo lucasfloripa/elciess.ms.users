@@ -1,5 +1,4 @@
 import { CheckUserByEmailRepository } from '../protocols'
-import { User } from '../../domain/models'
 import { CreateUserImplementation, CreateUserImplementationParams } from '../../domain/implementation'
 
 export class DbCreateUserUseCase implements CreateUserImplementation {
@@ -7,9 +6,11 @@ export class DbCreateUserUseCase implements CreateUserImplementation {
     private readonly checkUserByEmailRepository: CheckUserByEmailRepository
   ) {}
 
-  async create (params: CreateUserImplementationParams): Promise<User | null> {
+  async create (params: CreateUserImplementationParams): Promise<boolean> {
     const { email } = params
-    await this.checkUserByEmailRepository.checkByEmail(email)
-    return null
+    const exists = await this.checkUserByEmailRepository.checkByEmail(email)
+    const isValid = false
+    if (exists) { /* empty */ }
+    return isValid
   }
 }
