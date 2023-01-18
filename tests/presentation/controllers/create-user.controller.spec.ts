@@ -1,5 +1,7 @@
 import { CreateUserController } from '../../../src/presentation/controllers'
 import { Validation } from '../../../src/presentation/protocols'
+import { forbidden, badRequest, serverError } from '../../../src/presentation/helpers'
+import { EmailInUseError, ServerError } from '../../../src/presentation/errors'
 import { CreateUserImplementation } from '../../../src/domain/implementation'
 import { mockCreateUserRequest, mockValidationStub } from '../mocks'
 import { mockCreateUserImplementationStub } from '../../domain/mocks'
@@ -36,6 +38,18 @@ describe('CreateUserController', () => {
     const { sut, validationStub } = makeSut()
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new Error())
     const httpResponse = await sut.handle(mockRequest)
-    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse).toEqual(badRequest(new Error()))
+  })
+  test('Should return 403 if createUserImplementation returns null', async () => {
+    const { sut, createUserImplementationStub } = makeSut()
+    jest.spyOn(createUserImplementationStub, 'create').mockReturnValueOnce(Promise.resolve(null))
+    const httpResponse = await sut.handle(mockRequest)
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
+  })
+  test('Should return 500 if createUserImplementation throws', async () => {
+    const { sut, createUserImplementationStub } = makeSut()
+    jest.spyOn(createUserImplementationStub, 'create').mockImplementationOnce(async () => (await Promise.reject(new Error())))
+    const httpResponse = await sut.handle(mockRequest)
+    expect(httpResponse).toEqual(serverError(new ServerError()))
   })
 })
