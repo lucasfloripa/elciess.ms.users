@@ -1,9 +1,9 @@
 import { DbCreateUserUseCase } from '../../../src/application/usecases'
 import { CheckUserByEmailRepository } from '../../../src/application/protocols'
-import { mockCreateUserRequest } from '../../domain/mocks'
+import { mockDbCreateUserUseCaseRequest } from '../../application/mocks'
 import { mockCheckUserByEmailRepositoryStub } from '../mocks'
 
-const mockRequest = mockCreateUserRequest()
+const mockRequest = mockDbCreateUserUseCaseRequest()
 
 interface SutTypes {
   sut: DbCreateUserUseCase
@@ -28,5 +28,11 @@ describe('DbCreateUserUseCase', () => {
     jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail').mockReturnValueOnce(Promise.resolve(true))
     const exists = await sut.create(mockRequest)
     expect(exists).toBe(false)
+  })
+  test('Should throw if checkUserByEmailRepository throws', async () => {
+    const { sut, checkUserByEmailRepositoryStub } = makeSut()
+    jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail').mockImplementationOnce(async () => (await Promise.reject(new Error())))
+    const exists = sut.create(mockRequest)
+    await expect(exists).rejects.toThrow()
   })
 })
