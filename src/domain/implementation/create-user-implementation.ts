@@ -5,5 +5,4 @@ export interface CreateUserImplementation {
 export interface CreateUserImplementationParams {
   email: string
   password: string
-  confirmPassword: string
 }
