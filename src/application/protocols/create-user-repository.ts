@@ -6,6 +6,6 @@ export namespace CreateUserRepository {
   export interface Params {
     id: string
     email: string
-    hashedPassword: string
+    password: string
   }
 }

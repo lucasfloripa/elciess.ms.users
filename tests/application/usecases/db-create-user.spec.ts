@@ -1,6 +1,6 @@
 import { DbCreateUserUseCase } from '../../../src/application/usecases'
-import { CheckUserByEmailRepository, Hasher, IdGenerator } from '../../../src/application/protocols'
-import { mockDbCreateUserUseCaseRequest, mockIdGeneratorStub, mockHasherStub, mockCheckUserByEmailRepositoryStub } from '../../application/mocks'
+import { CheckUserByEmailRepository, CreateUserRepository, Hasher, IdGenerator } from '../../../src/application/protocols'
+import { mockDbCreateUserUseCaseRequest, mockIdGeneratorStub, mockHasherStub, mockCheckUserByEmailRepositoryStub, mockCreateUserRepositoryStub } from '../../application/mocks'
 
 const mockRequest = mockDbCreateUserUseCaseRequest()
 
@@ -9,14 +9,16 @@ interface SutTypes {
   checkUserByEmailRepositoryStub: CheckUserByEmailRepository
   idGeneratorStub: IdGenerator
   hasherStub: Hasher
+  createUserRepositoryStub: CreateUserRepository
 }
 
 const makeSut = (): SutTypes => {
   const checkUserByEmailRepositoryStub = mockCheckUserByEmailRepositoryStub()
   const idGeneratorStub = mockIdGeneratorStub()
   const hasherStub = mockHasherStub()
-  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub)
-  return { sut, checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub }
+  const createUserRepositoryStub = mockCreateUserRepositoryStub()
+  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub, createUserRepositoryStub)
+  return { sut, checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub, createUserRepositoryStub }
 }
 
 describe('DbCreateUserUseCase', () => {
@@ -61,5 +63,17 @@ describe('DbCreateUserUseCase', () => {
     jest.spyOn(hasherStub, 'hash').mockImplementationOnce(async () => (await Promise.reject(new Error())))
     const exists = sut.create(mockRequest)
     await expect(exists).rejects.toThrow()
+  })
+  test('Should call createUserRepository with correct params', async () => {
+    const { sut, idGeneratorStub, hasherStub, createUserRepositoryStub } = makeSut()
+    const spyCreate = jest.spyOn(createUserRepositoryStub, 'create')
+    const spyGenerate = jest.spyOn(idGeneratorStub, 'generate')
+    const spyHash = jest.spyOn(hasherStub, 'hash')
+    await sut.create(mockRequest)
+    expect(spyCreate).toHaveBeenCalledWith({
+      id: await spyGenerate.mock.results[0].value,
+      email: mockRequest.email,
+      password: await spyHash.mock.results[0].value
+    })
   })
 })
