@@ -12,11 +12,11 @@ export class DbCreateUserUseCase implements CreateUserImplementation {
   async create (params: CreateUserImplementationParams): Promise<boolean> {
     const { email, password } = params
     const exists = await this.checkUserByEmailRepository.checkByEmail(email)
-    const isValid = false
+    let isValid = false
     if (!exists) {
       const id = await this.idGenerator.generate()
       const hashedPassword = await this.hasher.hash(password)
-      await this.createUserRepository.create({
+      isValid = await this.createUserRepository.create({
         id,
         password: hashedPassword,
         email
