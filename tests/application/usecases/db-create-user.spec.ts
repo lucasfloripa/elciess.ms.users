@@ -31,14 +31,14 @@ describe('DbCreateUserUseCase', () => {
   test('Should return false if checkUserByEmailRepository returns an true', async () => {
     const { sut, checkUserByEmailRepositoryStub } = makeSut()
     jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail').mockReturnValueOnce(Promise.resolve(true))
-    const exists = await sut.create(mockRequest)
-    expect(exists).toBe(false)
+    const isValid = await sut.create(mockRequest)
+    expect(isValid).toBe(false)
   })
   test('Should throw if checkUserByEmailRepository throws', async () => {
     const { sut, checkUserByEmailRepositoryStub } = makeSut()
     jest.spyOn(checkUserByEmailRepositoryStub, 'checkByEmail').mockImplementationOnce(async () => (await Promise.reject(new Error())))
-    const exists = sut.create(mockRequest)
-    await expect(exists).rejects.toThrow()
+    const isValid = sut.create(mockRequest)
+    await expect(isValid).rejects.toThrow()
   })
   test('Should call idGenerator correctly', async () => {
     const { sut, idGeneratorStub } = makeSut()
@@ -49,8 +49,8 @@ describe('DbCreateUserUseCase', () => {
   test('Should throw if idGenerator throws', async () => {
     const { sut, idGeneratorStub } = makeSut()
     jest.spyOn(idGeneratorStub, 'generate').mockImplementationOnce(async () => (await Promise.reject(new Error())))
-    const exists = sut.create(mockRequest)
-    await expect(exists).rejects.toThrow()
+    const isValid = sut.create(mockRequest)
+    await expect(isValid).rejects.toThrow()
   })
   test('Should call hasher with correct params', async () => {
     const { sut, hasherStub } = makeSut()
@@ -61,8 +61,8 @@ describe('DbCreateUserUseCase', () => {
   test('Should throw if hasher throws', async () => {
     const { sut, hasherStub } = makeSut()
     jest.spyOn(hasherStub, 'hash').mockImplementationOnce(async () => (await Promise.reject(new Error())))
-    const exists = sut.create(mockRequest)
-    await expect(exists).rejects.toThrow()
+    const isValid = sut.create(mockRequest)
+    await expect(isValid).rejects.toThrow()
   })
   test('Should call createUserRepository with correct params', async () => {
     const { sut, idGeneratorStub, hasherStub, createUserRepositoryStub } = makeSut()
@@ -79,7 +79,12 @@ describe('DbCreateUserUseCase', () => {
   test('Should throw if createUserRepository throws', async () => {
     const { sut, createUserRepositoryStub } = makeSut()
     jest.spyOn(createUserRepositoryStub, 'create').mockImplementationOnce(async () => (await Promise.reject(new Error())))
-    const exists = sut.create(mockRequest)
-    await expect(exists).rejects.toThrow()
+    const isValid = sut.create(mockRequest)
+    await expect(isValid).rejects.toThrow()
+  })
+  test('Should return true on success', async () => {
+    const { sut } = makeSut()
+    const isValid = sut.create(mockRequest)
+    expect(isValid).toBeTruthy()
   })
 })
