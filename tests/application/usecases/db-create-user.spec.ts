@@ -76,4 +76,10 @@ describe('DbCreateUserUseCase', () => {
       password: await spyHash.mock.results[0].value
     })
   })
+  test('Should throw if createUserRepository throws', async () => {
+    const { sut, createUserRepositoryStub } = makeSut()
+    jest.spyOn(createUserRepositoryStub, 'create').mockImplementationOnce(async () => (await Promise.reject(new Error())))
+    const exists = sut.create(mockRequest)
+    await expect(exists).rejects.toThrow()
+  })
 })
