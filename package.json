@@ -14,11 +14,13 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.4.2",
     "@faker-js/faker": "^7.6.0",
+    "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.2.5",
     "@types/module-alias": "^2.0.1",
     "@types/node": "^18.11.18",
