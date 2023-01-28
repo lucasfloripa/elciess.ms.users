@@ -11,6 +11,7 @@
     },
     "rules": {
         "@typescript-eslint/no-namespace": 0,
-        "@typescript-eslint/no-misused-promises": 0
+        "@typescript-eslint/no-misused-promises": 0,
+        "@typescript-eslint/strict-boolean-expressions": 0
     }
 }
