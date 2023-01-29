@@ -1,4 +1,4 @@
-import { Controller } from '../../presentation/protocols'
+import { Controller } from '@src/presentation/protocols'
 
 import { Request, Response } from 'express'
 

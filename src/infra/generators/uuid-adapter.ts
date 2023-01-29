@@ -1,4 +1,4 @@
-import { IdGenerator } from '../../../src/application/protocols'
+import { IdGenerator } from '@src/application/protocols'
 
 import { v4 as uuidv4 } from 'uuid'
 

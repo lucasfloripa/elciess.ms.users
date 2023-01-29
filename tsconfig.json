@@ -10,7 +10,7 @@
     "baseUrl": "src",
     "paths": {
       "@src/*": ["../src/*"],
-      "@test/*": ["../test/*"],
+      "@test/*": ["../tests/*"],
     }
   },
   "include": ["src", "tests"],

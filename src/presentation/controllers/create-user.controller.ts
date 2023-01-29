@@ -1,7 +1,7 @@
-import { CreateUserImplementation } from '../../domain/implementation'
-import { badRequest, forbidden, serverError, ok } from '../helpers'
-import { EmailInUseError, ServerError } from '../errors'
-import { Controller, HttpResponse, Validation } from '../protocols'
+import { badRequest, forbidden, serverError, ok } from '@src/presentation/helpers'
+import { EmailInUseError, ServerError } from '@src/presentation/errors'
+import { Controller, HttpResponse, Validation } from '@src/presentation/protocols'
+import { CreateUserImplementation } from '@src/domain/implementation'
 
 export class CreateUserController implements Controller {
   constructor (
