@@ -2,6 +2,7 @@ import { PostgresHelper, UserPostgresRepository } from '../../../src/infra/db/po
 
 import { Client } from 'pg'
 import { mockCreateUserRepositoryParam } from '../../application/mocks'
+import { mockUserModel } from '../../domain/mocks'
 
 jest.mock('pg', () => {
   const mockPgClient = {
@@ -75,6 +76,32 @@ describe('UserPostgresRepository', () => {
       })
 
       const exists = await userPostgresRepository.create(mockCreateUserRepositoryParams)
+
+      expect(exists).toBeFalsy()
+    })
+  })
+  describe('get()', () => {
+    test('Should return an user on success', async () => {
+      const result = mockUserModel()
+
+      client.query.mockResolvedValueOnce({
+        rows: [
+          result
+        ],
+        rowCount: 1
+      })
+
+      const user = await userPostgresRepository.get('1')
+
+      expect(user).toEqual(result)
+    })
+    test('Should return null if user not found', async () => {
+      client.query.mockResolvedValueOnce({
+        rows: [],
+        rowCount: 0
+      })
+
+      const exists = await userPostgresRepository.get('1')
 
       expect(exists).toBeFalsy()
     })
