@@ -1,6 +1,6 @@
-import { GetUserRepository } from '@src/application/protocols/get-user-repository'
-import { GetUserImplementation } from '@src/domain/implementation'
-import { User } from '@src/domain/models'
+import { GetUserRepository } from '../../application/protocols/get-user-repository'
+import { GetUserImplementation } from '../../domain/implementation'
+import { User } from '../../domain/models'
 
 export class DbGetUserUseCase implements GetUserImplementation {
   constructor (

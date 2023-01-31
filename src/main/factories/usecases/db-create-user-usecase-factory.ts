@@ -1,7 +1,7 @@
-import { DbCreateUserUseCase } from '@src/application/usecases'
-import { BcryptAdapter } from '@src/infra/cryptography'
-import { UserPostgresRepository } from '@src/infra/db/postgres'
-import { UuidAdapter } from '@src/infra/generators'
+import { DbCreateUserUseCase } from '../../../application/usecases'
+import { BcryptAdapter } from '../../../infra/cryptography'
+import { UserPostgresRepository } from '../../../infra/db/postgres'
+import { UuidAdapter } from '../../../infra/generators'
 
 export const makeDbCreateUserRepository = (): DbCreateUserUseCase => {
   const salt = 12

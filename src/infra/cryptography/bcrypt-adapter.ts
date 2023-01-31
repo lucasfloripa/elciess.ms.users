@@ -1,4 +1,4 @@
-import { Hasher } from '@src/application/protocols'
+import { Hasher } from '../../application/protocols'
 
 import bcrypt from 'bcrypt'
 

@@ -1,5 +1,5 @@
-import { Validation } from '@src/presentation/protocols'
-import { InvalidParamError } from '@src/presentation/errors'
+import { Validation } from '../../presentation/protocols'
+import { InvalidParamError } from '../../presentation/errors'
 
 export class ConfirmPasswordValidation implements Validation {
   validate (input: any): Error | undefined {

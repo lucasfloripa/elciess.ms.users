@@ -1,7 +1,7 @@
-import { GetUserImplementation } from '@src/domain/implementation'
-import { User } from '@src/domain/models'
-import { badRequest, notFound, ok, serverError } from '@src/presentation/helpers'
-import { Controller, HttpResponse, Validation } from '@src/presentation/protocols'
+import { GetUserImplementation } from '../../domain/implementation'
+import { User } from '../../domain/models'
+import { badRequest, notFound, ok, serverError } from '../../presentation/helpers'
+import { Controller, HttpResponse, Validation } from '../../presentation/protocols'
 
 export class GetUserController implements Controller {
   constructor (

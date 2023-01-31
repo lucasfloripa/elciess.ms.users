@@ -1,7 +1,7 @@
-import { Validation } from '@src/presentation/protocols'
-import { ValidationComposite, RequiredFieldValidation, EmailValidation } from '@src/utils/validators'
-import { EmailValidatorAdapter } from '@src/infra/validators'
-import { ConfirmPasswordValidation } from '@src/utils/validators/confirm-password-validation'
+import { Validation } from '../../../presentation/protocols'
+import { ValidationComposite, RequiredFieldValidation, EmailValidation } from '../../../utils/validators'
+import { EmailValidatorAdapter } from '../../../infra/validators'
+import { ConfirmPasswordValidation } from '../../../utils/validators/confirm-password-validation'
 
 export const makeCreateUserControllerValidation = (): ValidationComposite => {
   const validations: Validation[] = []

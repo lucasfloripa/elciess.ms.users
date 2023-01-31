@@ -1,5 +1,5 @@
-import { adaptRoute } from '@src/main/adapters'
-import { makeCreateUserController, makeGetUserController } from '@src/main/factories/controllers'
+import { adaptRoute } from '../../main/adapters'
+import { makeCreateUserController, makeGetUserController } from '../../main/factories/controllers'
 
 import { Router } from 'express'
 

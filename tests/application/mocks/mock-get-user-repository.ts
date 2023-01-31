@@ -1,5 +1,5 @@
 import { mockUserModel } from '../../domain/mocks'
-import { User } from '@src/domain/models'
+import { User } from '../../domain/models'
 import { GetUserRepository } from '../../../src/application/protocols'
 
 export const mockGetUserRepositoryStub = (): GetUserRepository => {

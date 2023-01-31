@@ -1,6 +1,6 @@
-import { GetUserController } from '@src/presentation/controllers'
-import { makeDbGetUserUseCase } from '@src/main/factories/usecases'
-import { makeGetUserControllerValidation } from '@src/main/factories/validations'
+import { GetUserController } from '../../../presentation/controllers'
+import { makeDbGetUserUseCase } from '../../../main/factories/usecases'
+import { makeGetUserControllerValidation } from '../../../main/factories/validations'
 
 export const makeGetUserController = (): GetUserController => {
   const getUserApplication = makeDbGetUserUseCase()

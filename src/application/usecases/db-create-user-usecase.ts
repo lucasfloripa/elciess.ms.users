@@ -1,5 +1,5 @@
-import { CheckUserByEmailRepository, IdGenerator, Hasher, CreateUserRepository } from '@src/application/protocols'
-import { CreateUserImplementation, CreateUserImplementationParams } from '@src/domain/implementation'
+import { CheckUserByEmailRepository, IdGenerator, Hasher, CreateUserRepository } from '../../application/protocols'
+import { CreateUserImplementation, CreateUserImplementationParams } from '../../domain/implementation'
 
 export class DbCreateUserUseCase implements CreateUserImplementation {
   constructor (

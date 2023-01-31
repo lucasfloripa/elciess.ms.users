@@ -2,7 +2,7 @@
 import dotenv from 'dotenv'
 dotenv.config({ path: './.env' })
 
-import { PostgresHelper } from '@src/infra/db/postgres'
+import { PostgresHelper } from '../../src/infra/db/postgres'
 
 PostgresHelper.connect()
   .then(async () => {

@@ -1,4 +1,4 @@
-import { CreateUserController } from 'presentation/controllers'
+import { CreateUserController } from '../../presentation/controllers'
 
 import { faker } from '@faker-js/faker'
 
