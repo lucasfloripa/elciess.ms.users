@@ -7,7 +7,6 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "rootDirs": ["src", "tests"],
-    "baseUrl": "src"
   },
   "include": ["src", "tests"],
   "exclude": []

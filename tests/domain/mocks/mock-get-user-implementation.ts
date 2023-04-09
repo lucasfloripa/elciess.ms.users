@@ -1,4 +1,4 @@
-import { User } from 'domain/models'
+import { User } from '../../domain/models'
 import { GetUserImplementation } from '../../../src/domain/implementation'
 import { mockUserModel } from './mock-user-model'
 

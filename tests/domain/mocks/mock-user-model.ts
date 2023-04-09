@@ -1,4 +1,4 @@
-import { User } from 'domain/models'
+import { User } from '../../domain/models'
 
 import { faker } from '@faker-js/faker'
 
