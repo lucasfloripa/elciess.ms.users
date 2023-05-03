@@ -1,4 +1,4 @@
-import { CheckUserByEmailRepository, IdGenerator, Hasher, CreateUserRepository, EventStreamProducer } from '../../application/protocols'
+import { CheckUserByEmailRepository, IdGenerator, Hasher, CreateUserRepository } from '../../application/protocols'
 import { CreateUserImplementation, CreateUserImplementationParams } from '../../domain/implementation'
 
 export class DbCreateUserUseCase implements CreateUserImplementation {
@@ -6,8 +6,7 @@ export class DbCreateUserUseCase implements CreateUserImplementation {
     private readonly checkUserByEmailRepository: CheckUserByEmailRepository,
     private readonly idGenerator: IdGenerator,
     private readonly hasher: Hasher,
-    private readonly createUserRepository: CreateUserRepository,
-    private readonly eventStreamProducer: EventStreamProducer
+    private readonly createUserRepository: CreateUserRepository
   ) {}
 
   async create (params: CreateUserImplementationParams): Promise<boolean> {
@@ -21,7 +20,6 @@ export class DbCreateUserUseCase implements CreateUserImplementation {
       password: hashedPassword,
       email
     })
-    await this.eventStreamProducer.produce('confirm-user-register', [{ key: 'user-email', value: email }])
     return newUser
   }
 }

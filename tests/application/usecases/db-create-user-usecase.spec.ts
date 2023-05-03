@@ -1,6 +1,6 @@
 import { DbCreateUserUseCase } from '../../../src/application/usecases'
-import { CheckUserByEmailRepository, CreateUserRepository, EventStreamProducer, Hasher, IdGenerator } from '../../../src/application/protocols'
-import { mockDbCreateUserUseCaseRequest, mockIdGeneratorStub, mockHasherStub, mockCheckUserByEmailRepositoryStub, mockCreateUserRepositoryStub, mockEventStreamProducerStub } from '../../application/mocks'
+import { CheckUserByEmailRepository, CreateUserRepository, Hasher, IdGenerator } from '../../../src/application/protocols'
+import { mockDbCreateUserUseCaseRequest, mockIdGeneratorStub, mockHasherStub, mockCheckUserByEmailRepositoryStub, mockCreateUserRepositoryStub } from '../../application/mocks'
 
 const mockRequest = mockDbCreateUserUseCaseRequest()
 
@@ -10,8 +10,6 @@ interface SutTypes {
   idGeneratorStub: IdGenerator
   hasherStub: Hasher
   createUserRepositoryStub: CreateUserRepository
-  eventStreamProducerStub: EventStreamProducer
-
 }
 
 const makeSut = (): SutTypes => {
@@ -19,9 +17,8 @@ const makeSut = (): SutTypes => {
   const idGeneratorStub = mockIdGeneratorStub()
   const hasherStub = mockHasherStub()
   const createUserRepositoryStub = mockCreateUserRepositoryStub()
-  const eventStreamProducerStub = mockEventStreamProducerStub()
-  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub, createUserRepositoryStub, eventStreamProducerStub)
-  return { sut, checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub, createUserRepositoryStub, eventStreamProducerStub }
+  const sut = new DbCreateUserUseCase(checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub, createUserRepositoryStub)
+  return { sut, checkUserByEmailRepositoryStub, idGeneratorStub, hasherStub, createUserRepositoryStub }
 }
 
 describe('DbCreateUserUseCase', () => {
@@ -82,18 +79,6 @@ describe('DbCreateUserUseCase', () => {
   test('Should throw if createUserRepository throws', async () => {
     const { sut, createUserRepositoryStub } = makeSut()
     jest.spyOn(createUserRepositoryStub, 'create').mockImplementationOnce(async () => (await Promise.reject(new Error())))
-    const isValid = sut.create(mockRequest)
-    await expect(isValid).rejects.toThrow()
-  })
-  test('Should call eventStreamProducer correctly', async () => {
-    const { sut, eventStreamProducerStub } = makeSut()
-    const spyGenerate = jest.spyOn(eventStreamProducerStub, 'produce')
-    await sut.create(mockRequest)
-    expect(spyGenerate).toHaveBeenCalledWith('confirm-user-register', [{ key: 'user-email', value: mockRequest.email }])
-  })
-  test('Should throw if eventStreamProducer throws', async () => {
-    const { sut, eventStreamProducerStub } = makeSut()
-    jest.spyOn(eventStreamProducerStub, 'produce').mockImplementationOnce(async () => { await Promise.reject(new Error()) })
     const isValid = sut.create(mockRequest)
     await expect(isValid).rejects.toThrow()
   })
