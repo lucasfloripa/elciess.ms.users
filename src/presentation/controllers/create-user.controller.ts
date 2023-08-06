@@ -1,6 +1,7 @@
-import { badRequest, forbidden, serverError, ok } from '../../presentation/helpers'
-import { EmailInUseError, ServerError } from '../../presentation/errors'
-import { Controller, HttpResponse, Validation } from '../../presentation/protocols'
+import { badRequest, forbidden, serverError, ok } from '../helpers'
+import { EmailInUseError, ServerError } from '../errors'
+import { Controller, HttpResponse, Validation } from '../protocols'
+import { CreateUserRequestDTO, CreateUserResponseDTO } from '../dtos'
 import { CreateUserImplementation } from '../../domain/implementation'
 
 export class CreateUserController implements Controller {
@@ -9,7 +10,7 @@ export class CreateUserController implements Controller {
     private readonly validation: Validation
   ) {}
 
-  async handle (request: CreateUserController.Params): Promise<HttpResponse<CreateUserController.Response>> {
+  async handle (request: CreateUserRequestDTO): Promise<HttpResponse<CreateUserResponseDTO>> {
     try {
       const error = this.validation.validate(request)
       if (error != null) return badRequest(error)
@@ -19,16 +20,5 @@ export class CreateUserController implements Controller {
     } catch (error) {
       return serverError(new ServerError(error))
     }
-  }
-}
-
-export namespace CreateUserController {
-  export interface Params {
-    email: string
-    password: string
-    confirmPassword: string
-  }
-  export interface Response {
-    message: string
   }
 }

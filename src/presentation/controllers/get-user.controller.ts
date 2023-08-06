@@ -1,7 +1,7 @@
+import { badRequest, notFound, ok, serverError } from '../helpers'
+import { Controller, HttpResponse, Validation } from '../protocols'
+import { GetUserRequestDTO, GetUserResponseDTO } from '../dtos'
 import { GetUserImplementation } from '../../domain/implementation'
-import { User } from '../../domain/models'
-import { badRequest, notFound, ok, serverError } from '../../presentation/helpers'
-import { Controller, HttpResponse, Validation } from '../../presentation/protocols'
 
 export class GetUserController implements Controller {
   constructor (
@@ -9,7 +9,7 @@ export class GetUserController implements Controller {
     private readonly validation: Validation
   ) {}
 
-  async handle (request: GetUserController.Params): Promise<HttpResponse<GetUserController.Result>> {
+  async handle (request: GetUserRequestDTO): Promise<HttpResponse<GetUserResponseDTO>> {
     try {
       const error = this.validation.validate(request)
       if (error != null) return badRequest(error)
@@ -19,15 +19,5 @@ export class GetUserController implements Controller {
     } catch (error) {
       return serverError(error)
     }
-  }
-}
-
-export namespace GetUserController {
-  export interface Params {
-    id: string
-  }
-
-  export interface Result {
-    user: User
   }
 }

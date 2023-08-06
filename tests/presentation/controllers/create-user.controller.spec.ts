@@ -4,10 +4,10 @@ import { forbidden, badRequest, serverError, ok } from '../../../src/presentatio
 import { EmailInUseError, ServerError } from '../../../src/presentation/errors'
 import { CreateUserImplementation } from '../../../src/domain/implementation'
 import { mockCreateUserImplementationStub } from '../../domain/mocks'
-import { mockCreateUserControllerRequest } from '../../presentation/mocks'
+import { mockCreateUserRequestDTO } from '../../presentation/mocks'
 import { mockValidationStub } from '../mocks'
 
-const mockRequest = mockCreateUserControllerRequest()
+const mockRequest = mockCreateUserRequestDTO()
 
 interface SutTypes {
   sut: CreateUserController

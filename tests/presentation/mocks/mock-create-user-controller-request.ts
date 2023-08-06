@@ -1,10 +1,10 @@
-import { CreateUserController } from '../../presentation/controllers'
+import { CreateUserRequestDTO } from '../../presentation/dtos'
 
 import { faker } from '@faker-js/faker'
 
 const fakePassword = faker.internet.password()
 
-export const mockCreateUserControllerRequest = (): CreateUserController.Params => ({
+export const mockCreateUserRequestDTO = (): CreateUserRequestDTO => ({
   email: faker.internet.email(),
   password: fakePassword,
   confirmPassword: fakePassword
