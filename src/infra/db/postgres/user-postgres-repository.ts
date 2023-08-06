@@ -1,7 +1,7 @@
+import { PostgresHelper } from './postgres-helper'
 import { CheckUserByEmailRepository, CreateUserRepository } from '../../../application/protocols'
 import { GetUserRepository } from '../../../application/protocols/get-user-repository'
 import { User } from '../../../domain/models'
-import { PostgresHelper } from './postgres-helper'
 
 export class UserPostgresRepository implements CheckUserByEmailRepository, CreateUserRepository, GetUserRepository {
   async create (params: CreateUserRepository.Params): Promise<boolean> {

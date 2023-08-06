@@ -1,13 +1,13 @@
-import { GetUserRepository } from '../../application/protocols/get-user-repository'
-import { GetUserImplementation } from '../../domain/implementation'
+import { GetUserRepository } from '../protocols/get-user-repository'
+import { GetUser } from '../../domain/implementations'
 import { User } from '../../domain/models'
 
-export class DbGetUserUseCase implements GetUserImplementation {
+export class DbGetUserUseCase implements GetUser {
   constructor (
     private readonly getUserRepository: GetUserRepository
   ) {}
 
-  async getUser (id: string): Promise<User | null> {
+  async execute (id: string): Promise<User | null> {
     return await this.getUserRepository.get(id)
   }
 }

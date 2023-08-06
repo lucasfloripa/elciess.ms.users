@@ -2,8 +2,8 @@ import { CreateUserController } from '../../../src/presentation/controllers'
 import { Validation } from '../../../src/presentation/protocols'
 import { forbidden, badRequest, serverError, ok } from '../../../src/presentation/helpers'
 import { EmailInUseError, ServerError } from '../../../src/presentation/errors'
-import { CreateUserImplementation } from '../../../src/domain/implementation'
-import { mockCreateUserImplementationStub } from '../../domain/mocks'
+import { CreateUser } from '../../domain/implementations'
+import { mockCreateUserStub } from '../../domain/mocks'
 import { mockCreateUserRequestDTO } from '../../presentation/mocks'
 import { mockValidationStub } from '../mocks'
 
@@ -11,12 +11,12 @@ const mockRequest = mockCreateUserRequestDTO()
 
 interface SutTypes {
   sut: CreateUserController
-  createUserImplementationStub: CreateUserImplementation
+  createUserImplementationStub: CreateUser
   validationStub: Validation
 }
 
 const makeSut = (): SutTypes => {
-  const createUserImplementationStub = mockCreateUserImplementationStub()
+  const createUserImplementationStub = mockCreateUserStub()
   const validationStub = mockValidationStub()
   const sut = new CreateUserController(createUserImplementationStub, validationStub)
   return { sut, createUserImplementationStub, validationStub }
@@ -25,7 +25,7 @@ const makeSut = (): SutTypes => {
 describe('CreateUserController', () => {
   test('Should call createUserImplementation with correct params', async () => {
     const { sut, createUserImplementationStub } = makeSut()
-    const spyCreateUserImplementation = jest.spyOn(createUserImplementationStub, 'create')
+    const spyCreateUserImplementation = jest.spyOn(createUserImplementationStub, 'execute')
     await sut.handle(mockRequest)
     expect(spyCreateUserImplementation).toHaveBeenCalledWith(mockRequest)
   })
@@ -43,13 +43,13 @@ describe('CreateUserController', () => {
   })
   test('Should return 403 if createUserImplementation returns null', async () => {
     const { sut, createUserImplementationStub } = makeSut()
-    jest.spyOn(createUserImplementationStub, 'create').mockReturnValueOnce(Promise.resolve(false))
+    jest.spyOn(createUserImplementationStub, 'execute').mockReturnValueOnce(Promise.resolve(false))
     const httpResponse = await sut.handle(mockRequest)
     expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
   test('Should return 500 if createUserImplementation throws', async () => {
     const { sut, createUserImplementationStub } = makeSut()
-    jest.spyOn(createUserImplementationStub, 'create').mockImplementationOnce(async () => (await Promise.reject(new Error())))
+    jest.spyOn(createUserImplementationStub, 'execute').mockImplementationOnce(async () => (await Promise.reject(new Error())))
     const httpResponse = await sut.handle(mockRequest)
     expect(httpResponse).toEqual(serverError(new ServerError()))
   })

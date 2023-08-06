@@ -2,20 +2,20 @@ import { GetUserController } from '../../../src/presentation/controllers'
 import { Validation } from '../../../src/presentation/protocols'
 import { badRequest, serverError, ok, notFound } from '../../../src/presentation/helpers'
 import { ServerError } from '../../../src/presentation/errors'
-import { GetUserImplementation } from '../../../src/domain/implementation'
-import { mockGetUserImplementationStub } from '../../domain/mocks'
+import { GetUser } from '../../domain/implementations'
+import { mockGetUserStub } from '../../domain/mocks'
 import { mockValidationStub } from '../mocks'
 
 const mockRequest = { id: '1' }
 
 interface SutTypes {
   sut: GetUserController
-  getUserImplementation: GetUserImplementation
+  getUserImplementation: GetUser
   validationStub: Validation
 }
 
 const makeSut = (): SutTypes => {
-  const getUserImplementation = mockGetUserImplementationStub()
+  const getUserImplementation = mockGetUserStub()
   const validationStub = mockValidationStub()
   const sut = new GetUserController(getUserImplementation, validationStub)
   return { sut, getUserImplementation, validationStub }
@@ -24,7 +24,7 @@ const makeSut = (): SutTypes => {
 describe('GetUserController', () => {
   test('Should call getUserImplementation with correct params', async () => {
     const { sut, getUserImplementation } = makeSut()
-    const spyGetUserImplementation = jest.spyOn(getUserImplementation, 'getUser')
+    const spyGetUserImplementation = jest.spyOn(getUserImplementation, 'execute')
     await sut.handle(mockRequest)
     expect(spyGetUserImplementation).toHaveBeenCalledWith('1')
   })
@@ -42,19 +42,19 @@ describe('GetUserController', () => {
   })
   test('Should return 404 if getUserImplementation returns null', async () => {
     const { sut, getUserImplementation } = makeSut()
-    jest.spyOn(getUserImplementation, 'getUser').mockReturnValueOnce(Promise.resolve(null))
+    jest.spyOn(getUserImplementation, 'execute').mockReturnValueOnce(Promise.resolve(null))
     const httpResponse = await sut.handle(mockRequest)
     expect(httpResponse).toEqual(notFound('User not found'))
   })
   test('Should return 500 if getUserImplementation throws', async () => {
     const { sut, getUserImplementation } = makeSut()
-    jest.spyOn(getUserImplementation, 'getUser').mockImplementationOnce(async () => (await Promise.reject(new Error())))
+    jest.spyOn(getUserImplementation, 'execute').mockImplementationOnce(async () => (await Promise.reject(new Error())))
     const httpResponse = await sut.handle(mockRequest)
     expect(httpResponse).toEqual(serverError(new ServerError()))
   })
   test('Should return 200 on success', async () => {
     const { sut, getUserImplementation } = makeSut()
-    const spyGetUser = jest.spyOn(getUserImplementation, 'getUser')
+    const spyGetUser = jest.spyOn(getUserImplementation, 'execute')
     const httpResponse = await sut.handle(mockRequest)
     expect(httpResponse).toEqual(ok(await spyGetUser.mock.results[0].value))
   })

@@ -1,7 +1,7 @@
-import { CheckUserByEmailRepository, IdGenerator, Hasher, CreateUserRepository } from '../../application/protocols'
-import { CreateUserImplementation, CreateUserImplementationParams } from '../../domain/implementation'
+import { CheckUserByEmailRepository, IdGenerator, Hasher, CreateUserRepository } from '../protocols'
+import { CreateUser, CreateUserParams } from '../../domain/implementations'
 
-export class DbCreateUserUseCase implements CreateUserImplementation {
+export class DbCreateUserUseCase implements CreateUser {
   constructor (
     private readonly checkUserByEmailRepository: CheckUserByEmailRepository,
     private readonly idGenerator: IdGenerator,
@@ -9,7 +9,7 @@ export class DbCreateUserUseCase implements CreateUserImplementation {
     private readonly createUserRepository: CreateUserRepository
   ) {}
 
-  async create (params: CreateUserImplementationParams): Promise<boolean> {
+  async execute (params: CreateUserParams): Promise<boolean> {
     const { email, password } = params
     const exists = await this.checkUserByEmailRepository.checkByEmail(email)
     if (exists) return false
