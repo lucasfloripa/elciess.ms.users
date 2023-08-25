@@ -4,6 +4,6 @@ export interface GetUserRequestDTO {
   id: string
 }
 
-export interface GetUserResponseDTO {
+export interface GetUserResponse {
   user: User
 }

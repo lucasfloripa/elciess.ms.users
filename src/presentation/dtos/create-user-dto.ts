@@ -4,6 +4,6 @@ export interface CreateUserRequestDTO {
   confirmPassword: string
 }
 
-export interface CreateUserResponseDTO {
+export interface CreateUserResponse {
   message: string
 }

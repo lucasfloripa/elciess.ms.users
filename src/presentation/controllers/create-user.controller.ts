@@ -1,7 +1,7 @@
 import { badRequest, forbidden, serverError, ok } from '../helpers'
 import { EmailInUseError, ServerError } from '../errors'
 import { Controller, HttpResponse, Validation } from '../protocols'
-import { CreateUserRequestDTO, CreateUserResponseDTO } from '../dtos'
+import { CreateUserRequestDTO, CreateUserResponse } from '../dtos'
 import { CreateUser } from '../../domain/implementations'
 
 export class CreateUserController implements Controller {
@@ -10,7 +10,7 @@ export class CreateUserController implements Controller {
     private readonly validation: Validation
   ) {}
 
-  async handle (request: CreateUserRequestDTO): Promise<HttpResponse<CreateUserResponseDTO>> {
+  async handle (request: CreateUserRequestDTO): Promise<HttpResponse<CreateUserResponse>> {
     try {
       const error = this.validation.validate(request)
       if (error != null) return badRequest(error)
