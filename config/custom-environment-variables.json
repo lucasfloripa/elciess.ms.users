@@ -1,0 +1,8 @@
+{
+  "db": {
+    "appPort": "APP_PORT",
+    "mongoUri": "MONGODB_URI",
+    "jwtSecret": "JWT_SECRET",
+    "mongodbName": "MONGODB_DB"
+  }
+}

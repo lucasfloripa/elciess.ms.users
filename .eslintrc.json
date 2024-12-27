@@ -1,0 +1,48 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "standard-with-typescript",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "project": ["./tsconfig.json", "./tsconfig-test.json"],
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-invalid-void-type": "off",
+    "prettier/prettier": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
+  }
+}

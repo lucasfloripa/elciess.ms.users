@@ -1,0 +1,4 @@
+jenkins
+tests
+sonar
+docker

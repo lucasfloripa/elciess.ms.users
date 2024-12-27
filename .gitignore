@@ -1,0 +1,10 @@
+.build
+.serverless
+.vscode
+.env
+.husky
+dist
+coverage
+db
+elciess
+node_modules
