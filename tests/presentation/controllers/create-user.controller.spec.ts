@@ -4,7 +4,7 @@ import { type ICreateUserDTO } from '../../../src/domain/ports/inbounds'
 import { type ICreateUserResponse } from '../../../src/domain/ports/outbounds'
 import { type IValidation } from '../../../src/presentation/contracts'
 import { CreateUserController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/protocols'
+import { htttpResponses } from '../../../src/presentation/interfaces'
 
 describe('CreateUserController', () => {
   let createUserUsecase: jest.Mocked<ICreateUserUsecase>

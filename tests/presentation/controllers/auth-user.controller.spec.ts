@@ -4,7 +4,7 @@ import { type IUserCredentialsDTO } from '../../../src/domain/ports/inbounds'
 import { type IAuthUserResponse } from '../../../src/domain/ports/outbounds'
 import { type IValidation } from '../../../src/presentation/contracts'
 import { AuthUserController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/protocols'
+import { htttpResponses } from '../../../src/presentation/interfaces'
 
 describe('AuthUserController', () => {
   let authUserUsecase: jest.Mocked<IAuthUserUsecase>

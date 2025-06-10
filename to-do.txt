@@ -1,4 +1,5 @@
 jenkins
-tests
 sonar
 docker
+husky
+deployar em algum lugar

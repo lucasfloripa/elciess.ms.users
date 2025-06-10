@@ -14,12 +14,12 @@ export class UserMongodb implements IUserRepository {
     this.mongoHelper = MongoHelper.getInstance()
   }
 
-  private async getCollection(): Promise<Collection> {
+  private async _getCollection(): Promise<Collection> {
     return await this.mongoHelper.getCollection(this.collectionName)
   }
 
   async save(user: User): Promise<void> {
-    const userCollection = await this.getCollection()
+    const userCollection = await this._getCollection()
     const userToInsert = { ...user }
     await userCollection
       .insertOne(userToInsert)
@@ -32,7 +32,7 @@ export class UserMongodb implements IUserRepository {
   }
 
   async loadByEmail(email: string): Promise<User | null> {
-    const userCollection = await this.getCollection()
+    const userCollection = await this._getCollection()
     const user = await userCollection
       .findOne({ email })
       .then((user) => {

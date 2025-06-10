@@ -1,5 +1,5 @@
-import { AuthUserController } from '../../../../src/presentation/controllers'
-import { type IController } from '../../../../src/presentation/protocols'
+import { AuthUserController } from '../../../presentation/controllers'
+import { type IController } from '../../../presentation/interfaces'
 import { makeAuthUserUsecase } from '../usecases'
 import { makeAuthUserValidator } from '../validators'
 

@@ -8,7 +8,7 @@ import {
   type IHttpResponse,
   type IController,
   htttpResponses
-} from '../protocols'
+} from '../interfaces'
 
 export class AuthUserController implements IController {
   constructor(

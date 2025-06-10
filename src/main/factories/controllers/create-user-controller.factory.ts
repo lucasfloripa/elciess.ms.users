@@ -1,5 +1,5 @@
-import { CreateUserController } from '../../../../src/presentation/controllers'
-import { type IController } from '../../../../src/presentation/protocols'
+import { CreateUserController } from '../../../presentation/controllers'
+import { type IController } from '../../../presentation/interfaces'
 import { makeCreateUserUsecase } from '../usecases'
 import { makeCreateUserValidator } from '../validators'
 
