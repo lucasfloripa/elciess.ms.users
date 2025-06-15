@@ -42,6 +42,7 @@ export class AuthUserController implements IController {
       log('AuthUserController response', ucResponse)
       return htttpResponses.http200(ucResponse)
     } catch (error) {
+      logError('AuthUserController error:', error)
       return htttpResponses.http500(error)
     }
   }

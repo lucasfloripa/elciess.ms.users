@@ -17,13 +17,8 @@ export class CreateUserUsecase implements ICreateUserUsecase {
     if (userExists) return new EmailInUseError()
 
     const user = await User.create(createUserData)
-    await this.userRepository.save(user)
+    await this.userRepository.save(user.toPersistence())
 
-    return { user: this._sanitizeUser(user) }
-  }
-
-  private _sanitizeUser(user: User): Omit<User, 'password'> {
-    const { password, ...safeUser } = user
-    return safeUser
+    return { user: user.toReturn() }
   }
 }

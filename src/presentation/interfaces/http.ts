@@ -22,6 +22,6 @@ export const htttpResponses = {
   }),
   http500: (error: Error): IHttpResponse => ({
     statusCode: 500,
-    body: error
+    body: error.message
   })
 }

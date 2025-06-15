@@ -17,17 +17,17 @@ export class CreateUserController implements IController {
   ) {}
 
   async handle(
-    createUserData: ICreateUserDTO
+    createUserDTO: ICreateUserDTO
   ): Promise<IHttpResponse<ICreateUserResponse>> {
     try {
-      log('CreateUserController request:', createUserData)
-      const hasInputError = this.validator.validate(createUserData)
+      log('CreateUserController request:', createUserDTO)
+      const hasInputError = this.validator.validate(createUserDTO)
       if (hasInputError) {
         logError('AuthUserController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.createUserUsecase.execute(createUserData)
+      const ucResponse = await this.createUserUsecase.execute(createUserDTO)
 
       if (ucResponse instanceof EmailInUseError) {
         logError('CreateUserController error:', 'Email already in use')

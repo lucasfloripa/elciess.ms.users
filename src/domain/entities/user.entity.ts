@@ -1,7 +1,9 @@
 import * as jwt from 'jsonwebtoken'
 import * as shortUuid from 'short-uuid'
 
+import { UserType } from '../enums'
 import { type ICreateUserDTO } from '../ports/inbounds'
+import { type DbUser, type UserDTO } from '../ports/outbounds'
 import { Email, Password } from '../value-objects'
 
 export class User {
@@ -11,15 +13,17 @@ export class User {
   constructor(
     readonly userId: string,
     readonly email: Email,
-    readonly password: Password
+    readonly password: Password,
+    readonly userType: UserType
   ) {}
 
   static async create(input: ICreateUserDTO): Promise<User> {
-    const { email, password } = input
+    const { email, password, type } = input
     const userId = this._generateId()
     const userEmail = Email.create(email)
     const hashedPassword = await Password.create(password)
-    return new User(userId, userEmail, hashedPassword)
+    const userType = this._getUserType(type)
+    return new User(userId, userEmail, hashedPassword, userType)
   }
 
   static async generateToken(userId: string): Promise<string> {
@@ -28,5 +32,31 @@ export class User {
 
   private static _generateId(): string {
     return shortUuid.generate()
+  }
+
+  private static _getUserType(userType: string): UserType {
+    switch (userType) {
+      case 'admin':
+        return UserType.ADMIN
+      default:
+        return UserType.CLIENT
+    }
+  }
+
+  toReturn(): UserDTO {
+    return {
+      userId: this.userId,
+      email: this.email.value(),
+      userType: this.userType
+    }
+  }
+
+  toPersistence(): DbUser {
+    return {
+      userId: this.userId,
+      email: this.email.value(),
+      password: this.password.value(),
+      userType: this.userType
+    }
   }
 }

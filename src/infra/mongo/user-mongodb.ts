@@ -1,7 +1,8 @@
 import { type Collection } from 'mongodb'
 
-import { type IUserRepository } from '../../../src/application/contracts'
-import { type User } from '../../../src/domain/entities'
+import { type IUserRepository } from '../../application/contracts'
+import { type User } from '../../domain/entities'
+import { type DbUser } from '../../domain/ports/outbounds'
 import { log, logError } from '../../utils/log'
 
 import { MongoHelper } from './mongo-helper'
@@ -18,23 +19,22 @@ export class UserMongodb implements IUserRepository {
     return await this.mongoHelper.getCollection(this.collectionName)
   }
 
-  async save(user: User): Promise<void> {
+  async save(userToInsert: DbUser): Promise<void> {
     const userCollection = await this._getCollection()
-    const userToInsert = { ...user }
     await userCollection
       .insertOne(userToInsert)
       .then(() => {
-        log('UserMongodb.save succefull:', user)
+        log('UserMongodb.save succefull:', userToInsert)
       })
       .catch((err) => {
         logError('UserMongodb.save error:', err)
       })
   }
 
-  async loadByEmail(email: string): Promise<User | null> {
+  async loadByEmail(email: string): Promise<DbUser | null> {
     const userCollection = await this._getCollection()
     const user = await userCollection
-      .findOne({ email })
+      .findOne<DbUser>({ email })
       .then((user) => {
         log('UserMongodb.loadByEmail succefull:', user)
         return user
@@ -43,6 +43,6 @@ export class UserMongodb implements IUserRepository {
         logError('UserMongodb.loadByEmail error:', err)
         return null
       })
-    return user as unknown as User
+    return user
   }
 }
