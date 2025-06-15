@@ -1,4 +1,3 @@
-import * as jwt from 'jsonwebtoken'
 import * as shortUuid from 'short-uuid'
 
 import { UserType } from '../enums'
@@ -24,10 +23,6 @@ export class User {
     const hashedPassword = await Password.create(password)
     const userType = this._getUserType(type)
     return new User(userId, userEmail, hashedPassword, userType)
-  }
-
-  static async generateToken(userId: string): Promise<string> {
-    return jwt.sign({ userId }, this.JWT_SECRET)
   }
 
   private static _generateId(): string {
