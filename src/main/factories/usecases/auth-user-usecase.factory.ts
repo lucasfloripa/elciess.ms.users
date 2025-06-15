@@ -1,8 +1,10 @@
-import { AuthUserUsecase } from '../../../../src/application/usecases'
-import { UserMongodb } from '../../../../src/infra/mongo'
+import { AuthUserUsecase } from '../../../application/usecases'
+import { JwtService } from '../../../infra/jwt'
+import { UserMongodb } from '../../../infra/mongo'
 
 export const makeAuthUserUsecase = (): AuthUserUsecase => {
   const userMongodb = new UserMongodb()
-  const authUserUsecase = new AuthUserUsecase(userMongodb)
+  const jwtService = new JwtService()
+  const authUserUsecase = new AuthUserUsecase(userMongodb, jwtService)
   return authUserUsecase
 }

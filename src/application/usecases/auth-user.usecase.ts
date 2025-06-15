@@ -1,13 +1,15 @@
 import { type IAuthUserUsecase } from '../../domain/contracts'
-import { User } from '../../domain/entities'
 import { ForbiddenError, UnauthorizedError } from '../../domain/errors'
 import { type IUserCredentialsDTO } from '../../domain/ports/inbounds'
 import { type IAuthUserResponse } from '../../domain/ports/outbounds'
 import { Password } from '../../domain/value-objects'
-import { type IUserRepository } from '../contracts'
+import { type TokenService, type IUserRepository } from '../contracts'
 
 export class AuthUserUsecase implements IAuthUserUsecase {
-  constructor(private readonly userDynamodb: IUserRepository) {}
+  constructor(
+    private readonly userDynamodb: IUserRepository,
+    private readonly tokenService: TokenService
+  ) {}
 
   async execute(
     credentials: IUserCredentialsDTO
@@ -23,7 +25,14 @@ export class AuthUserUsecase implements IAuthUserUsecase {
     )
     if (!passwordMatch) return new ForbiddenError()
 
-    const token = await User.generateToken(userExists.userId)
-    return { token }
+    const accessToken = await this.tokenService.generateAccessToken(
+      userExists.userId
+    )
+    const refreshToken = await this.tokenService.generateRefreshToken(
+      userExists.userId
+    )
+
+    await this.userDynamodb.saveRefreshToken(userExists.userId, refreshToken)
+    return { accessToken, refreshToken }
   }
 }
