@@ -1,7 +1,8 @@
 import { type UserType } from '../../enums'
 
 export interface IAuthUserResponse {
-  token: string
+  accessToken: string
+  refreshToken: string
 }
 
 export interface ICreateUserResponse {

@@ -1,7 +1,6 @@
 import { type Collection } from 'mongodb'
 
 import { type IUserRepository } from '../../application/contracts'
-import { type User } from '../../domain/entities'
 import { type DbUser } from '../../domain/ports/outbounds'
 import { log, logError } from '../../utils/log'
 
@@ -44,5 +43,14 @@ export class UserMongodb implements IUserRepository {
         return null
       })
     return user
+  }
+
+  async saveRefreshToken(userId: string, token: string): Promise<void> {
+    const userCollection = await this._getCollection()
+    await userCollection.findOneAndUpdate(
+      { userId },
+      { $set: { refreshToken: token } },
+      { upsert: false }
+    )
   }
 }
