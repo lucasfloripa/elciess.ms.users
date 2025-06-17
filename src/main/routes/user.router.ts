@@ -1,12 +1,19 @@
 import { Router, type Request, type Response } from 'express'
 
 import {
+  makeGetUserController,
   makeCreateUserController,
   makeAuthUserController,
   makeRefreshTokenController
 } from '../factories/controllers'
 
 const userRouter = Router()
+
+userRouter.post('/get', async (req: Request, res: Response) => {
+  const getUserController = makeGetUserController()
+  const response = await getUserController.handle(req.body)
+  res.send(response)
+})
 
 userRouter.post('/create', async (req: Request, res: Response) => {
   const createUserController = makeCreateUserController()

@@ -9,6 +9,10 @@ export interface ICreateUserResponseDTO {
   user: ISanitezedUser
 }
 
+export interface IGetUserResponseDTO {
+  user: ISanitezedUser
+}
+
 export interface IRefreshTokenResponseDTO {
   accessToken: string
   refreshToken: string
