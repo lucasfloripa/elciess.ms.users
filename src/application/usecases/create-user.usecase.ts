@@ -12,9 +12,9 @@ export class CreateUserUsecase implements ICreateUserUsecase {
   async execute(
     createUserData: ICreateUserDTO
   ): Promise<ICreateUserResponseDTO | Error> {
-    const userExists: IUser | null = await this.userRepository.loadByEmail(
-      createUserData.email
-    )
+    const userExists: IUser | null = await this.userRepository.getUser({
+      email: createUserData.email
+    })
     if (userExists) return new EmailInUseError()
 
     const user: User = await User.create(createUserData)

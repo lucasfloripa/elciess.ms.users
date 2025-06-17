@@ -17,8 +17,9 @@ export class AuthUserUsecase implements IAuthUserUsecase {
   ): Promise<IAuthUserResponseDTO | Error> {
     const { email, password } = credentials
 
-    const userExists: IUser | null =
-      await this.userRepository.loadByEmail(email)
+    const userExists: IUser | null = await this.userRepository.getUser({
+      email
+    })
     if (!userExists) return new UnauthorizedError('User not found')
 
     const passwordMatch: boolean = await Password.comparePassword(

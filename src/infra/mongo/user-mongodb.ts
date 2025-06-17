@@ -18,31 +18,23 @@ export class UserMongodb implements IUserRepository {
     return await this.mongoHelper.getCollection(this.collectionName)
   }
 
+  async getUser(filter: Partial<IUser>): Promise<IUser | null> {
+    const userCollection = await this._getCollection()
+    const user = await userCollection.findOne<IUser>(filter)
+    log('UserMongodb.getUser success:', user)
+    return user
+  }
+
   async save(userToInsert: IUser): Promise<void> {
     const userCollection = await this._getCollection()
     await userCollection
       .insertOne(userToInsert)
       .then(() => {
-        log('UserMongodb.save succefull:', userToInsert)
+        log('UserMongodb.save success:', userToInsert)
       })
       .catch((err) => {
         logError('UserMongodb.save error:', err)
       })
-  }
-
-  async loadByEmail(email: string): Promise<IUser | null> {
-    const userCollection = await this._getCollection()
-    const user = await userCollection
-      .findOne<IUser>({ email })
-      .then((user) => {
-        log('UserMongodb.loadByEmail succefull:', user)
-        return user
-      })
-      .catch((err) => {
-        logError('UserMongodb.loadByEmail error:', err)
-        return null
-      })
-    return user
   }
 
   async saveRefreshToken(userId: string, token: string): Promise<void> {
