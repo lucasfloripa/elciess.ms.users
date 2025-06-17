@@ -1,7 +1,7 @@
 import { type ICreateUserUsecase } from '../../../src/domain/contracts'
 import { EmailInUseError } from '../../../src/domain/errors'
 import { type ICreateUserDTO } from '../../../src/domain/ports/inbounds'
-import { type ICreateUserResponse } from '../../../src/domain/ports/outbounds'
+import { type ICreateUserResponseDTO } from '../../../src/domain/ports/outbounds'
 import { type IValidation } from '../../../src/presentation/contracts'
 import { CreateUserController } from '../../../src/presentation/controllers'
 import { htttpResponses } from '../../../src/presentation/interfaces'
@@ -46,7 +46,7 @@ describe('CreateUserController', () => {
       password: 'valid_password',
       confirmPassword: 'valid_password'
     }
-    const newUser: ICreateUserResponse = {
+    const newUser: ICreateUserResponseDTO = {
       user: {
         email: createUserData.email,
         userId: 'valid_id'

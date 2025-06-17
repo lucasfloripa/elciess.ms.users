@@ -1,7 +1,7 @@
 export class ForbiddenError extends Error {
   error: string
-  constructor() {
+  constructor(message: string) {
     super('ForbiddenError')
-    this.error = 'Forbidden'
+    this.error = message
   }
 }

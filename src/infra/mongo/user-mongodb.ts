@@ -1,7 +1,7 @@
 import { type Collection } from 'mongodb'
 
 import { type IUserRepository } from '../../application/contracts'
-import { type DbUser } from '../../domain/ports/outbounds'
+import { type IUser } from '../../domain/interfaces/user.interfaces'
 import { log, logError } from '../../utils/log'
 
 import { MongoHelper } from './mongo-helper'
@@ -18,7 +18,7 @@ export class UserMongodb implements IUserRepository {
     return await this.mongoHelper.getCollection(this.collectionName)
   }
 
-  async save(userToInsert: DbUser): Promise<void> {
+  async save(userToInsert: IUser): Promise<void> {
     const userCollection = await this._getCollection()
     await userCollection
       .insertOne(userToInsert)
@@ -30,10 +30,10 @@ export class UserMongodb implements IUserRepository {
       })
   }
 
-  async loadByEmail(email: string): Promise<DbUser | null> {
+  async loadByEmail(email: string): Promise<IUser | null> {
     const userCollection = await this._getCollection()
     const user = await userCollection
-      .findOne<DbUser>({ email })
+      .findOne<IUser>({ email })
       .then((user) => {
         log('UserMongodb.loadByEmail succefull:', user)
         return user
@@ -52,5 +52,13 @@ export class UserMongodb implements IUserRepository {
       { $set: { refreshToken: token } },
       { upsert: false }
     )
+  }
+
+  async checkRefreshToken(userId: string, token: string): Promise<boolean> {
+    const userCollection = await this._getCollection()
+    const user = await userCollection.findOne<IUser>({
+      userId
+    })
+    return user?.refreshToken === token
   }
 }

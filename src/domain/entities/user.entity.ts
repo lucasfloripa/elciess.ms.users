@@ -1,8 +1,8 @@
 import * as shortUuid from 'short-uuid'
 
 import { UserType } from '../enums'
+import { type ISanitezedUser, type IUser } from '../interfaces/user.interfaces'
 import { type ICreateUserDTO } from '../ports/inbounds'
-import { type DbUser, type UserDTO } from '../ports/outbounds'
 import { Email, Password } from '../value-objects'
 
 export class User {
@@ -38,7 +38,7 @@ export class User {
     }
   }
 
-  toReturn(): UserDTO {
+  toReturn(): ISanitezedUser {
     return {
       userId: this.userId,
       email: this.email.value(),
@@ -46,7 +46,7 @@ export class User {
     }
   }
 
-  toPersistence(): DbUser {
+  toPersistence(): IUser {
     return {
       userId: this.userId,
       email: this.email.value(),

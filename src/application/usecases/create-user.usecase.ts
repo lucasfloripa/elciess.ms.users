@@ -1,8 +1,9 @@
 import { type ICreateUserUsecase } from '../../domain/contracts'
 import { User } from '../../domain/entities'
 import { EmailInUseError } from '../../domain/errors'
+import { type IUser } from '../../domain/interfaces/user.interfaces'
 import { type ICreateUserDTO } from '../../domain/ports/inbounds'
-import { type ICreateUserResponse } from '../../domain/ports/outbounds'
+import { type ICreateUserResponseDTO } from '../../domain/ports/outbounds'
 import { type IUserRepository } from '../contracts'
 
 export class CreateUserUsecase implements ICreateUserUsecase {
@@ -10,13 +11,13 @@ export class CreateUserUsecase implements ICreateUserUsecase {
 
   async execute(
     createUserData: ICreateUserDTO
-  ): Promise<ICreateUserResponse | Error> {
-    const userExists = await this.userRepository.loadByEmail(
+  ): Promise<ICreateUserResponseDTO | Error> {
+    const userExists: IUser | null = await this.userRepository.loadByEmail(
       createUserData.email
     )
     if (userExists) return new EmailInUseError()
 
-    const user = await User.create(createUserData)
+    const user: User = await User.create(createUserData)
     await this.userRepository.save(user.toPersistence())
 
     return { user: user.toReturn() }

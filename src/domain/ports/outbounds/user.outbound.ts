@@ -1,23 +1,15 @@
-import { type UserType } from '../../enums'
+import { type ISanitezedUser } from '../../interfaces/user.interfaces'
 
-export interface IAuthUserResponse {
+export interface IAuthUserResponseDTO {
   accessToken: string
   refreshToken: string
 }
 
-export interface ICreateUserResponse {
-  user: UserDTO
+export interface ICreateUserResponseDTO {
+  user: ISanitezedUser
 }
 
-export interface UserDTO {
-  userId: string
-  email: string
-  userType: UserType
-}
-
-export interface DbUser {
-  userId: string
-  email: string
-  password: string
-  userType: UserType
+export interface IRefreshTokenResponseDTO {
+  accessToken: string
+  refreshToken: string
 }

@@ -1,7 +1,7 @@
 import { type IAuthUserUsecase } from '../../../src/domain/contracts'
 import { UnauthorizedError, ForbiddenError } from '../../../src/domain/errors'
 import { type IUserCredentialsDTO } from '../../../src/domain/ports/inbounds'
-import { type IAuthUserResponse } from '../../../src/domain/ports/outbounds'
+import { type IAuthUserResponseDTO } from '../../../src/domain/ports/outbounds'
 import { type IValidation } from '../../../src/presentation/contracts'
 import { AuthUserController } from '../../../src/presentation/controllers'
 import { htttpResponses } from '../../../src/presentation/interfaces'
@@ -41,7 +41,7 @@ describe('AuthUserController', () => {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
-    const token: IAuthUserResponse = {
+    const token: IAuthUserResponseDTO = {
       token: 'valid_token'
     }
     validator.validate.mockReturnValue(undefined)

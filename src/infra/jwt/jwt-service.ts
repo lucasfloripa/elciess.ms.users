@@ -1,8 +1,8 @@
 import * as jwt from 'jsonwebtoken'
 
-import { type TokenService } from '../../application/contracts'
+import { type ITokenService } from '../../application/contracts'
 
-export class JwtService implements TokenService {
+export class JwtService implements ITokenService {
   private readonly JWT_SECRET: string
   private readonly ACCESS_TOKEN_EXPIRATION: string
   private readonly REFRESH_TOKEN_EXPIRATION: string
@@ -26,5 +26,13 @@ export class JwtService implements TokenService {
   }
 
   verifyAccessToken: (token: string) => string
-  verifyRefreshToken: (token: string) => Promise<string>
+
+  async verifyRefreshToken(token: string): Promise<string> {
+    try {
+      const decoded = jwt.verify(token, this.JWT_SECRET)
+      return (decoded as jwt.JwtPayload).userId
+    } catch (error) {
+      return error.name
+    }
+  }
 }

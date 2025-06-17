@@ -1,7 +1,7 @@
 import { type ICreateUserUsecase } from '../../domain/contracts'
 import { EmailInUseError } from '../../domain/errors'
 import { type ICreateUserDTO } from '../../domain/ports/inbounds'
-import { type ICreateUserResponse } from '../../domain/ports/outbounds'
+import { type ICreateUserResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
 import {
@@ -17,20 +17,21 @@ export class CreateUserController implements IController {
   ) {}
 
   async handle(
-    createUserDTO: ICreateUserDTO
-  ): Promise<IHttpResponse<ICreateUserResponse>> {
+    createUserData: ICreateUserDTO
+  ): Promise<IHttpResponse<ICreateUserResponseDTO>> {
     try {
-      log('CreateUserController request:', createUserDTO)
-      const hasInputError = this.validator.validate(createUserDTO)
+      log('CreateUserController request:', createUserData)
+
+      const hasInputError = this.validator.validate(createUserData)
       if (hasInputError) {
-        logError('AuthUserController error:', hasInputError)
+        logError('CreateUserController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.createUserUsecase.execute(createUserDTO)
+      const ucResponse = await this.createUserUsecase.execute(createUserData)
 
       if (ucResponse instanceof EmailInUseError) {
-        logError('CreateUserController error:', 'Email already in use')
+        logError('CreateUserController error:', ucResponse.error)
         return htttpResponses.http400(ucResponse)
       }
 

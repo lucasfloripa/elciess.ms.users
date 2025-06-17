@@ -1,7 +1,8 @@
-import { type DbUser } from '../../domain/ports/outbounds'
+import { type IUser } from '../../domain/ports/outbounds'
 
 export interface IUserRepository {
-  save: (user: DbUser) => Promise<void>
-  loadByEmail: (email: string) => Promise<DbUser | null>
+  save: (user: IUser) => Promise<void>
+  loadByEmail: (email: string) => Promise<IUser | null>
   saveRefreshToken: (userId: string, token: string) => Promise<void>
+  checkRefreshToken: (userId: string, token: string) => Promise<boolean>
 }

@@ -1,8 +1,8 @@
 import { type ICreateUserDTO } from '../ports/inbounds'
-import { type ICreateUserResponse } from '../ports/outbounds'
+import { type ICreateUserResponseDTO } from '../ports/outbounds'
 
 export interface ICreateUserUsecase {
   execute: (
     createUserData: ICreateUserDTO
-  ) => Promise<ICreateUserResponse | Error>
+  ) => Promise<ICreateUserResponseDTO | Error>
 }
