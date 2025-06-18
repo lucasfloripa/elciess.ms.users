@@ -4,10 +4,12 @@ import {
   RequiredFieldValidation
 } from '../../../utils/validators'
 
-export const makeGetUserValidator = (): ValidationComposite => {
+export const makeUpdateUserValidator = (): ValidationComposite => {
   const validations: IValidation[] = []
 
-  validations.push(new RequiredFieldValidation('userId'))
+  for (const field of ['userId']) {
+    validations.push(new RequiredFieldValidation(field))
+  }
 
   return new ValidationComposite(validations)
 }

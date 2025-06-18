@@ -1,6 +1,5 @@
 import { type IGetUserUsecase } from '../../domain/contracts'
 import { User } from '../../domain/entities'
-import { UserType } from '../../domain/enums'
 import { NotFoundError } from '../../domain/errors'
 import { type IUser } from '../../domain/interfaces/user.interfaces'
 import { type IGetUserDTO } from '../../domain/ports/inbounds'
@@ -16,19 +15,14 @@ export class GetUserUsecase implements IGetUserUsecase {
 
     if (!dbUser) return new NotFoundError('User not found')
 
-    const { userId, email, password, userType } = dbUser
+    const { userId, email, password } = dbUser
 
     const user: User = new User(
       userId,
       new Email(email),
-      new Password(password),
-      this._parseUserType(userType)
+      new Password(password)
     )
 
     return { user: user.toReturn() }
-  }
-
-  private _parseUserType(type: string): UserType {
-    return type === 'admin' ? UserType.ADMIN : UserType.CLIENT
   }
 }

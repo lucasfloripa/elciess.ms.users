@@ -4,10 +4,14 @@ export interface ICreateUserDTO {
   email: string
   password: string
   confirmPassword: string
-  type: string
 }
 
 export type IGetUserDTO = Partial<IUser>
+
+export interface IUpdateUserDTO {
+  userId: string
+  email: string
+}
 
 export interface IUserCredentialsDTO {
   email: string

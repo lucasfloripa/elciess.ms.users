@@ -1,7 +1,10 @@
 import { type Collection } from 'mongodb'
 
 import { type IUserRepository } from '../../application/contracts'
-import { type IUser } from '../../domain/interfaces/user.interfaces'
+import {
+  type ISanitezedUser,
+  type IUser
+} from '../../domain/interfaces/user.interfaces'
 import { log, logError } from '../../utils/log'
 
 import { MongoHelper } from './mongo-helper'
@@ -23,6 +26,21 @@ export class UserMongodb implements IUserRepository {
     const user = await userCollection.findOne<IUser>(filter)
     log('UserMongodb.getUser success:', user)
     return user
+  }
+
+  async updateUser(
+    userFields: Partial<ISanitezedUser>
+  ): Promise<ISanitezedUser | null> {
+    const userCollection = await this._getCollection()
+    const { userId, ...updateFields } = userFields
+    const updated = await userCollection.findOneAndUpdate(
+      { userId },
+      { $set: updateFields },
+      { returnDocument: 'after' }
+    )
+    if (!updated) return null
+    const { password, ...sanitized } = updated as unknown as IUser
+    return sanitized as ISanitezedUser
   }
 
   async save(userToInsert: IUser): Promise<void> {

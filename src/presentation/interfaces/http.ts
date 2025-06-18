@@ -21,7 +21,7 @@ export const htttpResponses = {
     body: error
   }),
   http404: (error: Error): IHttpResponse => ({
-    statusCode: 403,
+    statusCode: 404,
     body: error
   }),
   http500: (error: Error): IHttpResponse => ({
