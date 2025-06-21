@@ -5,7 +5,6 @@ import {
   type ISanitezedUser,
   type IUser
 } from '../../domain/interfaces/user.interfaces'
-import { log, logError } from '../../utils/log'
 
 import { MongoHelper } from './mongo-helper'
 
@@ -24,7 +23,6 @@ export class UserMongodb implements IUserRepository {
   async getUser(filter: Partial<IUser>): Promise<IUser | null> {
     const userCollection = await this._getCollection()
     const user = await userCollection.findOne<IUser>(filter)
-    log('UserMongodb.getUser success:', user)
     return user
   }
 
@@ -43,16 +41,15 @@ export class UserMongodb implements IUserRepository {
     return sanitized as ISanitezedUser
   }
 
+  async deleteUser(userId: string): Promise<boolean> {
+    const userCollection = await this._getCollection()
+    const deleteResult = await userCollection.deleteOne({ userId })
+    return deleteResult.deletedCount === 1
+  }
+
   async save(userToInsert: IUser): Promise<void> {
     const userCollection = await this._getCollection()
-    await userCollection
-      .insertOne(userToInsert)
-      .then(() => {
-        log('UserMongodb.save success:', userToInsert)
-      })
-      .catch((err) => {
-        logError('UserMongodb.save error:', err)
-      })
+    await userCollection.insertOne(userToInsert)
   }
 
   async saveRefreshToken(userId: string, token: string): Promise<void> {

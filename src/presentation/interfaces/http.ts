@@ -1,12 +1,15 @@
 export interface IHttpResponse<T = any> {
   statusCode: number
-  body: T
+  body?: T
 }
 
 export const htttpResponses = {
   http200: (data: any): IHttpResponse => ({
     statusCode: 200,
     body: data
+  }),
+  http204: (): IHttpResponse => ({
+    statusCode: 204
   }),
   http400: (error: Error): IHttpResponse => ({
     statusCode: 400,

@@ -5,7 +5,8 @@ import {
   makeCreateUserController,
   makeAuthUserController,
   makeRefreshTokenController,
-  makeUpdateUserController
+  makeUpdateUserController,
+  makeDeleteUserController
 } from '../factories/controllers'
 
 const userRouter = Router()
@@ -17,15 +18,16 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
   res.send(response)
 })
 
-userRouter.post('/create', async (req: Request, res: Response) => {
+userRouter.post('/', async (req: Request, res: Response) => {
   const createUserController = makeCreateUserController()
   const response = await createUserController.handle(req.body)
   res.send(response)
 })
 
-userRouter.post('/update', async (req: Request, res: Response) => {
+userRouter.post('/update/:id', async (req: Request, res: Response) => {
+  const userId = req.params.id
   const updateeUserController = makeUpdateUserController()
-  const response = await updateeUserController.handle(req.body)
+  const response = await updateeUserController.handle({ userId, ...req.body })
   res.send(response)
 })
 
@@ -38,6 +40,13 @@ userRouter.post('/auth', async (req: Request, res: Response) => {
 userRouter.post('/auth/refresh', async (req: Request, res: Response) => {
   const refreshTokenController = makeRefreshTokenController()
   const response = await refreshTokenController.handle(req.body)
+  res.send(response)
+})
+
+userRouter.delete('/:id', async (req: Request, res: Response) => {
+  const userId = req.params.id
+  const deleteUserController = makeDeleteUserController()
+  const response = await deleteUserController.handle(userId)
   res.send(response)
 })
 
