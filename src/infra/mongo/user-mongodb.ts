@@ -52,6 +52,11 @@ export class UserMongodb implements IUserRepository {
     await userCollection.insertOne(userToInsert)
   }
 
+  async getUsers(): Promise<IUser[] | null> {
+    const userCollection = await this._getCollection()
+    return await userCollection.find<IUser>({}).toArray()
+  }
+
   async saveRefreshToken(userId: string, token: string): Promise<void> {
     const userCollection = await this._getCollection()
     await userCollection.findOneAndUpdate(

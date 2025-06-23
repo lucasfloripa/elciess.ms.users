@@ -8,6 +8,10 @@ export interface IGetUserResponseDTO {
   user: ISanitezedUser
 }
 
+export interface IGetUsersResponseDTO {
+  users: ISanitezedUser[]
+}
+
 export interface IUpdateUserResponseDTO {
   user: ISanitezedUser
 }

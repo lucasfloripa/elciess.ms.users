@@ -1,10 +1,11 @@
 import { type IGetUserUsecase } from '../../domain/contracts'
-import { User } from '../../domain/entities'
 import { NotFoundError } from '../../domain/errors'
-import { type IUser } from '../../domain/interfaces/user.interfaces'
+import {
+  type ISanitezedUser,
+  type IUser
+} from '../../domain/interfaces/user.interfaces'
 import { type IGetUserDTO } from '../../domain/ports/inbounds'
 import { type IGetUserResponseDTO } from '../../domain/ports/outbounds'
-import { Email, Password } from '../../domain/value-objects'
 import { type IUserRepository } from '../contracts'
 
 export class GetUserUsecase implements IGetUserUsecase {
@@ -15,14 +16,13 @@ export class GetUserUsecase implements IGetUserUsecase {
 
     if (!dbUser) return new NotFoundError('User not found')
 
-    const { userId, email, password } = dbUser
+    const { userId, email } = dbUser
 
-    const user: User = new User(
+    const user: ISanitezedUser = {
       userId,
-      new Email(email),
-      new Password(password)
-    )
+      email
+    }
 
-    return { user: user.toReturn() }
+    return { user }
   }
 }
