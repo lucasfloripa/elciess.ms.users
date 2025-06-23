@@ -1,3 +1,4 @@
+import { type LogoutStatus } from '../../domain/enums'
 import {
   type ISanitezedUser,
   type IUser
@@ -11,6 +12,7 @@ export interface IUserRepository {
   updateUser: (
     fields: Partial<ISanitezedUser>
   ) => Promise<ISanitezedUser | null>
+  logout: (userId: string) => Promise<LogoutStatus>
   saveRefreshToken: (userId: string, token: string) => Promise<void>
   checkRefreshToken: (userId: string, token: string) => Promise<boolean>
 }

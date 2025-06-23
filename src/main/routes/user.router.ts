@@ -7,7 +7,8 @@ import {
   makeRefreshTokenController,
   makeUpdateUserController,
   makeDeleteUserController,
-  makeGetUsersController
+  makeGetUsersController,
+  makeLogoutController
 } from '../factories/controllers'
 
 const userRouter = Router()
@@ -54,6 +55,12 @@ userRouter.post('/auth', async (req: Request, res: Response) => {
 userRouter.post('/auth/refresh', async (req: Request, res: Response) => {
   const refreshTokenController = makeRefreshTokenController()
   const response = await refreshTokenController.handle(req.body)
+  res.send(response)
+})
+
+userRouter.post('/logout', async (req: Request, res: Response) => {
+  const logoutController = makeLogoutController()
+  const response = await logoutController.handle(req.body)
   res.send(response)
 })
 

@@ -8,6 +8,10 @@ export interface ICreateUserDTO {
 
 export type IGetUserDTO = Partial<IUser>
 
+export interface ILogoutDTO {
+  userId: string
+}
+
 export interface IUpdateUserDTO {
   userId: string
   email: string

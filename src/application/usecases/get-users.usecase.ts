@@ -17,7 +17,8 @@ export class GetUsersUsecase implements IGetUsersUsecase {
 
     const users: ISanitezedUser[] = dbUsers.map((dbUser: IUser) => ({
       userId: dbUser.userId,
-      email: dbUser.email
+      email: dbUser.email,
+      refreshToken: dbUser.refreshToken
     }))
 
     return { users }

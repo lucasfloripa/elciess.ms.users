@@ -1,6 +1,7 @@
 import { type Collection } from 'mongodb'
 
 import { type IUserRepository } from '../../application/contracts'
+import { LogoutStatus } from '../../domain/enums'
 import {
   type ISanitezedUser,
   type IUser
@@ -72,5 +73,18 @@ export class UserMongodb implements IUserRepository {
       userId
     })
     return user?.refreshToken === token
+  }
+
+  async logout(userId: string): Promise<LogoutStatus> {
+    const userCollection = await this._getCollection()
+    const result = await userCollection.updateOne(
+      { userId },
+      { $unset: { refreshToken: '' } }
+    )
+    if (result.matchedCount === 0) return LogoutStatus.USER_NOT_FOUND
+
+    if (result.modifiedCount === 0) return LogoutStatus.ALREADY_LOGGED_OUT
+
+    return LogoutStatus.SUCCESS
   }
 }

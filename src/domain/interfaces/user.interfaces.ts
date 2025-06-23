@@ -8,4 +8,5 @@ export interface IUser {
 export interface ISanitezedUser {
   userId: string
   email: string
+  refreshToken?: string
 }
