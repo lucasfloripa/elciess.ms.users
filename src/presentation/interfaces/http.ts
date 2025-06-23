@@ -27,6 +27,10 @@ export const htttpResponses = {
     statusCode: 404,
     body: error
   }),
+  http409: (error: Error): IHttpResponse => ({
+    statusCode: 409,
+    body: error
+  }),
   http500: (error: Error): IHttpResponse => ({
     statusCode: 500,
     body: error.message

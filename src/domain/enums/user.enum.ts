@@ -1,4 +1,4 @@
-export enum LogoutStatus {
+export enum UserEnums {
   SUCCESS = 'SUCCESS',
   ALREADY_LOGGED_OUT = 'ALREADY_LOGGED_OUT',
   USER_NOT_FOUND = 'USER_NOT_FOUND'

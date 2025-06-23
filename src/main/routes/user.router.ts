@@ -8,7 +8,8 @@ import {
   makeUpdateUserController,
   makeDeleteUserController,
   makeGetUsersController,
-  makeLogoutController
+  makeLogoutController,
+  makeUpdateUserPasswordController
 } from '../factories/controllers'
 
 const userRouter = Router()
@@ -33,10 +34,16 @@ userRouter.delete('/:id', async (req: Request, res: Response) => {
   res.send(response)
 })
 
+userRouter.put('/change-password', async (req: Request, res: Response) => {
+  const updateUserPasswordController = makeUpdateUserPasswordController()
+  const response = await updateUserPasswordController.handle(req.body)
+  res.send(response)
+})
+
 userRouter.put('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id
-  const updateeUserController = makeUpdateUserController()
-  const response = await updateeUserController.handle({ userId, ...req.body })
+  const updateUserController = makeUpdateUserController()
+  const response = await updateUserController.handle({ userId, ...req.body })
   res.send(response)
 })
 

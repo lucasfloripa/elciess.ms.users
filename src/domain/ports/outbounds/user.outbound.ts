@@ -29,3 +29,7 @@ export interface IAuthUserResponseDTO {
 export interface ILogoutResponseDTO {
   message: string
 }
+
+export interface IUpdateUserPasswordResponseDTO {
+  message: string
+}

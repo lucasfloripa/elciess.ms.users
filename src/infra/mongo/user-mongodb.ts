@@ -1,11 +1,8 @@
 import { type Collection } from 'mongodb'
 
 import { type IUserRepository } from '../../application/contracts'
-import { LogoutStatus } from '../../domain/enums'
-import {
-  type ISanitezedUser,
-  type IUser
-} from '../../domain/interfaces/user.interfaces'
+import { UserEnums } from '../../domain/enums'
+import { type ISanitezedUser, type IUser } from '../../domain/interfaces'
 
 import { MongoHelper } from './mongo-helper'
 
@@ -42,6 +39,21 @@ export class UserMongodb implements IUserRepository {
     return sanitized as ISanitezedUser
   }
 
+  async updateUserPassword(
+    userId: string,
+    newPassword: string
+  ): Promise<UserEnums> {
+    const userCollection = await this._getCollection()
+    const result = await userCollection.updateOne(
+      { userId },
+      { $set: { password: newPassword } }
+    )
+
+    if (result.matchedCount === 0) return UserEnums.USER_NOT_FOUND
+
+    return UserEnums.SUCCESS
+  }
+
   async deleteUser(userId: string): Promise<boolean> {
     const userCollection = await this._getCollection()
     const deleteResult = await userCollection.deleteOne({ userId })
@@ -75,16 +87,16 @@ export class UserMongodb implements IUserRepository {
     return user?.refreshToken === token
   }
 
-  async logout(userId: string): Promise<LogoutStatus> {
+  async logout(userId: string): Promise<UserEnums> {
     const userCollection = await this._getCollection()
     const result = await userCollection.updateOne(
       { userId },
       { $unset: { refreshToken: '' } }
     )
-    if (result.matchedCount === 0) return LogoutStatus.USER_NOT_FOUND
+    if (result.matchedCount === 0) return UserEnums.USER_NOT_FOUND
 
-    if (result.modifiedCount === 0) return LogoutStatus.ALREADY_LOGGED_OUT
+    if (result.modifiedCount === 0) return UserEnums.ALREADY_LOGGED_OUT
 
-    return LogoutStatus.SUCCESS
+    return UserEnums.SUCCESS
   }
 }

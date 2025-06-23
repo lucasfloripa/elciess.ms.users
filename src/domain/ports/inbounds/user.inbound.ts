@@ -22,6 +22,13 @@ export interface IUserCredentialsDTO {
   password: string
 }
 
+export interface IUpdateUserPasswordDTO {
+  userId: string
+  password: string
+  confirmPassword: string
+  newPassword: string
+}
+
 export interface IRefreshTokenDTO {
   refreshToken: string
 }

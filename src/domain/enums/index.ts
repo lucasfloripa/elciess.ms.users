@@ -1,1 +1,1 @@
-export * from './logout-status.enum'
+export * from './user.enum'

@@ -1,8 +1,5 @@
-import { type LogoutStatus } from '../../domain/enums'
-import {
-  type ISanitezedUser,
-  type IUser
-} from '../../domain/interfaces/user.interfaces'
+import { type UserEnums } from '../../domain/enums'
+import { type ISanitezedUser, type IUser } from '../../domain/interfaces'
 
 export interface IUserRepository {
   save: (user: IUser) => Promise<void>
@@ -12,7 +9,11 @@ export interface IUserRepository {
   updateUser: (
     fields: Partial<ISanitezedUser>
   ) => Promise<ISanitezedUser | null>
-  logout: (userId: string) => Promise<LogoutStatus>
+  updateUserPassword: (
+    userId: string,
+    newPassword: string
+  ) => Promise<UserEnums>
+  logout: (userId: string) => Promise<UserEnums>
   saveRefreshToken: (userId: string, token: string) => Promise<void>
   checkRefreshToken: (userId: string, token: string) => Promise<boolean>
 }
