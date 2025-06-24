@@ -1,5 +1,6 @@
 import * as shortUuid from 'short-uuid'
 
+import { UserRoles } from '../enums'
 import { type ISanitezedUser, type IUser } from '../interfaces/user.interfaces'
 import { type ICreateUserRequestDTO } from '../ports/inbounds'
 import { Email, Password } from '../value-objects'
@@ -11,7 +12,8 @@ export class User {
   constructor(
     readonly userId: string,
     readonly email: Email,
-    readonly password: Password
+    readonly password: Password,
+    readonly role: string
   ) {}
 
   static async create(input: ICreateUserRequestDTO): Promise<User> {
@@ -19,7 +21,8 @@ export class User {
     const userId = this._generateId()
     const userEmail = Email.create(email)
     const hashedPassword = await Password.create(password)
-    return new User(userId, userEmail, hashedPassword)
+    const defaultRole = UserRoles.DEFAULT
+    return new User(userId, userEmail, hashedPassword, defaultRole)
   }
 
   private static _generateId(): string {
@@ -29,7 +32,8 @@ export class User {
   toReturn(): ISanitezedUser {
     return {
       userId: this.userId,
-      email: this.email.value()
+      email: this.email.value(),
+      role: this.role
     }
   }
 
@@ -37,7 +41,8 @@ export class User {
     return {
       userId: this.userId,
       email: this.email.value(),
-      password: this.password.value()
+      password: this.password.value(),
+      role: this.role
     }
   }
 }

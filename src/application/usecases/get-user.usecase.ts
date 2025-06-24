@@ -18,13 +18,9 @@ export class GetUserUsecase implements IGetUserUsecase {
 
     if (!dbUser) return new NotFoundError('User not found')
 
-    const { userId, email, refreshToken } = dbUser
+    const { password, ...sanitezedUser } = dbUser
 
-    const user: ISanitezedUser = {
-      userId,
-      email,
-      refreshToken
-    }
+    const user: ISanitezedUser = sanitezedUser
 
     return { user }
   }
