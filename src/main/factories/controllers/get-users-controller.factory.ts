@@ -4,6 +4,6 @@ import { makeGetUsersUsecase } from '../usecases'
 
 export const makeGetUsersController = (): IController => {
   const usecase = makeGetUsersUsecase()
-  const getUsersController: GetUsersController = new GetUsersController(usecase)
-  return getUsersController
+  const controller: GetUsersController = new GetUsersController(usecase)
+  return controller
 }

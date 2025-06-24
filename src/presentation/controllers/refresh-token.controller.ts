@@ -1,6 +1,6 @@
 import { type IRefreshTokenUsecase } from '../../domain/contracts'
 import { ForbiddenError, UnauthorizedError } from '../../domain/errors'
-import { type IRefreshTokenDTO } from '../../domain/ports/inbounds'
+import { type IRefreshTokenRequestDTO } from '../../domain/ports/inbounds'
 import { type IRefreshTokenResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
@@ -17,19 +17,19 @@ export class RefreshTokenController implements IController {
   ) {}
 
   async handle(
-    refreshTokenDTO: IRefreshTokenDTO
+    request: IRefreshTokenRequestDTO
   ): Promise<IHttpResponse<IRefreshTokenResponseDTO>> {
     try {
-      log('RefreshTokenController request:', refreshTokenDTO)
+      log('RefreshTokenController request:', request)
+      const hasInputError = this.validator.validate(request)
 
-      const hasInputError = this.validator.validate(refreshTokenDTO)
       if (hasInputError) {
         logError('RefreshTokenController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
       const ucResponse = await this.refreshTokenUsecase.execute(
-        refreshTokenDTO.refreshToken
+        request.refreshToken
       )
 
       if (ucResponse instanceof UnauthorizedError) {

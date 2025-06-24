@@ -1,5 +1,6 @@
 import { type IDeleteUserUsecase } from '../../domain/contracts'
 import { NotFoundError } from '../../domain/errors'
+import { type IDeleteUserRequestDTO } from '../../domain/ports/inbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
 import {
@@ -14,17 +15,17 @@ export class DeleteUserController implements IController {
     private readonly validator: IValidation
   ) {}
 
-  async handle(userId: string): Promise<IHttpResponse<void>> {
+  async handle(request: IDeleteUserRequestDTO): Promise<IHttpResponse<void>> {
     try {
-      log('DeleteUserController request:', `userId: ${userId}`)
+      log('DeleteUserController request:', request)
+      const hasInputError = this.validator.validate(request)
 
-      const hasInputError = this.validator.validate({ userId })
       if (hasInputError) {
         logError('DeleteUserController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.deleteUserUsecase.execute(userId)
+      const ucResponse = await this.deleteUserUsecase.execute(request.userId)
 
       if (ucResponse instanceof NotFoundError) {
         logError('DeleteUserController error:', ucResponse.error)

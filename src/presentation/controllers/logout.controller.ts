@@ -1,6 +1,7 @@
 import { type ILogoutUsecase } from '../../domain/contracts'
 import { NotFoundError } from '../../domain/errors'
-import { type ILogoutDTO } from '../../domain/ports/inbounds'
+import { type ILogoutRequestDTO } from '../../domain/ports/inbounds'
+import { type ILogoutResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
 import {
@@ -15,19 +16,19 @@ export class LogoutController implements IController {
     private readonly validator: IValidation
   ) {}
 
-  async handle(data: ILogoutDTO): Promise<IHttpResponse<string>> {
+  async handle(
+    request: ILogoutRequestDTO
+  ): Promise<IHttpResponse<ILogoutResponseDTO>> {
     try {
-      const { userId } = data
+      log('LogoutController request:', request)
+      const hasInputError = this.validator.validate(request)
 
-      log('LogoutController request:', userId)
-
-      const hasInputError = this.validator.validate(data)
       if (hasInputError) {
         logError('LogoutController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.logoutUsecase.execute(userId)
+      const ucResponse = await this.logoutUsecase.execute(request.userId)
 
       if (ucResponse instanceof NotFoundError) {
         logError('LogoutController error:', ucResponse.error)

@@ -3,6 +3,6 @@ import { UserMongodb } from '../../../../src/infra/mongo'
 
 export const makeCreateUserUsecase = (): CreateUserUsecase => {
   const userMongodb = new UserMongodb()
-  const createUserUsecase = new CreateUserUsecase(userMongodb)
-  return createUserUsecase
+  const usecase = new CreateUserUsecase(userMongodb)
+  return usecase
 }

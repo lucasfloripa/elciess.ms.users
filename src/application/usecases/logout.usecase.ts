@@ -8,12 +8,12 @@ export class LogoutUsecase implements ILogoutUsecase {
   constructor(private readonly userRepository: IUserRepository) {}
 
   async execute(userId: string): Promise<ILogoutResponseDTO | Error> {
-    const logoutCheck: UserEnums = await this.userRepository.logout(userId)
+    const didUserLogout: UserEnums = await this.userRepository.logout(userId)
 
-    if (logoutCheck === UserEnums.USER_NOT_FOUND)
+    if (didUserLogout === UserEnums.USER_NOT_FOUND)
       return new NotFoundError('User not found')
 
-    if (logoutCheck === UserEnums.ALREADY_LOGGED_OUT)
+    if (didUserLogout === UserEnums.ALREADY_LOGGED_OUT)
       return { message: 'User was already logged out.' }
 
     return { message: 'User logged out' }

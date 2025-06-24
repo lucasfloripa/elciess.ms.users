@@ -1,7 +1,7 @@
 import * as shortUuid from 'short-uuid'
 
 import { type ISanitezedUser, type IUser } from '../interfaces/user.interfaces'
-import { type ICreateUserDTO } from '../ports/inbounds'
+import { type ICreateUserRequestDTO } from '../ports/inbounds'
 import { Email, Password } from '../value-objects'
 
 export class User {
@@ -14,7 +14,7 @@ export class User {
     readonly password: Password
   ) {}
 
-  static async create(input: ICreateUserDTO): Promise<User> {
+  static async create(input: ICreateUserRequestDTO): Promise<User> {
     const { email, password } = input
     const userId = this._generateId()
     const userEmail = Email.create(email)

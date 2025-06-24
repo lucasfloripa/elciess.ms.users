@@ -1,6 +1,6 @@
 import { type IGetUsersUsecase } from '../../domain/contracts'
 import { NotFoundError } from '../../domain/errors'
-import { type IUser } from '../../domain/interfaces/user.interfaces'
+import { type IGetUsersResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import {
   type IHttpResponse,
@@ -11,10 +11,9 @@ import {
 export class GetUsersController implements IController {
   constructor(private readonly getUsersUsecase: IGetUsersUsecase) {}
 
-  async handle(): Promise<IHttpResponse<IUser[]>> {
+  async handle(): Promise<IHttpResponse<IGetUsersResponseDTO>> {
     try {
       log('GetUsersController request:', '')
-
       const ucResponse = await this.getUsersUsecase.execute()
 
       if (ucResponse instanceof NotFoundError) {

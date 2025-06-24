@@ -1,7 +1,7 @@
 import { type IGetUserUsecase } from '../../domain/contracts'
 import { NotFoundError } from '../../domain/errors'
-import { type IUser } from '../../domain/interfaces/user.interfaces'
-import { type IGetUserDTO } from '../../domain/ports/inbounds'
+import { type IGetUserRequestDTO } from '../../domain/ports/inbounds'
+import { type IGetUserResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
 import {
@@ -16,17 +16,19 @@ export class GetUserController implements IController {
     private readonly validator: IValidation
   ) {}
 
-  async handle(filter: IGetUserDTO): Promise<IHttpResponse<IUser>> {
+  async handle(
+    request: IGetUserRequestDTO
+  ): Promise<IHttpResponse<IGetUserResponseDTO>> {
     try {
-      log('GetUserController request:', filter)
+      log('GetUserController request:', request)
+      const hasInputError = this.validator.validate(request)
 
-      const hasInputError = this.validator.validate(filter)
       if (hasInputError) {
         logError('GetUserController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.getUserUsecase.execute(filter)
+      const ucResponse = await this.getUserUsecase.execute(request)
 
       if (ucResponse instanceof NotFoundError) {
         logError('GetUserController error:', ucResponse.error)

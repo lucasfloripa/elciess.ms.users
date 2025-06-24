@@ -14,20 +14,24 @@ export class RefreshTokenUsecase implements IRefreshTokenUsecase {
   ): Promise<IRefreshTokenResponseDTO | Error> {
     const isUserIdAuthorized: string =
       await this.tokenService.verifyRefreshToken(refreshToken)
+
     if (isUserIdAuthorized === 'JsonWebTokenError')
       return new UnauthorizedError('Invalid format token')
 
     if (isUserIdAuthorized === 'TokenExpiredError')
       return new UnauthorizedError('Expired token')
 
-    const hasPermission: boolean = await this.userRepository.checkRefreshToken(
-      isUserIdAuthorized,
-      refreshToken
-    )
-    if (!hasPermission) return new ForbiddenError('Invalid refresh token')
+    const userHasPermission: boolean =
+      await this.userRepository.checkRefreshToken(
+        isUserIdAuthorized,
+        refreshToken
+      )
+
+    if (!userHasPermission) return new ForbiddenError('Invalid refresh token')
 
     const newAccessToken: string =
       await this.tokenService.generateAccessToken(isUserIdAuthorized)
+
     const newRefreshToken: string =
       await this.tokenService.generateRefreshToken(isUserIdAuthorized)
 

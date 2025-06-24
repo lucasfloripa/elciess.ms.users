@@ -30,7 +30,7 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
 userRouter.delete('/:id', async (req: Request, res: Response) => {
   const userId = req.params.id
   const deleteUserController = makeDeleteUserController()
-  const response = await deleteUserController.handle(userId)
+  const response = await deleteUserController.handle({ userId })
   res.send(response)
 })
 

@@ -1,7 +1,7 @@
 import { type IUpdateUserPasswordUsecase } from '../../domain/contracts'
 import { ConflictError, NotFoundError } from '../../domain/errors'
-import { type IUpdateUserPasswordDTO } from '../../domain/ports/inbounds'
-import { type ICreateUserResponseDTO } from '../../domain/ports/outbounds'
+import { type IUpdateUserPasswordRequestDTO } from '../../domain/ports/inbounds'
+import { type IUpdateUserPasswordResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
 import {
@@ -17,18 +17,18 @@ export class UpdateUserPasswordController implements IController {
   ) {}
 
   async handle(
-    data: IUpdateUserPasswordDTO
-  ): Promise<IHttpResponse<ICreateUserResponseDTO>> {
+    request: IUpdateUserPasswordRequestDTO
+  ): Promise<IHttpResponse<IUpdateUserPasswordResponseDTO>> {
     try {
-      log('updateUserPasswordController request:', data)
+      log('updateUserPasswordController request:', request)
+      const hasInputError = this.validator.validate(request)
 
-      const hasInputError = this.validator.validate(data)
       if (hasInputError) {
         logError('updateUserPasswordController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.updateUserPasswordUsecase.execute(data)
+      const ucResponse = await this.updateUserPasswordUsecase.execute(request)
 
       if (ucResponse instanceof NotFoundError) {
         logError('updateUserPasswordController error:', ucResponse.error)

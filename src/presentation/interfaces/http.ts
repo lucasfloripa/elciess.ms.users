@@ -8,6 +8,10 @@ export const htttpResponses = {
     statusCode: 200,
     body: data
   }),
+  http201: <T>(data: T): IHttpResponse => ({
+    statusCode: 201,
+    body: data
+  }),
   http204: (): IHttpResponse => ({
     statusCode: 204
   }),

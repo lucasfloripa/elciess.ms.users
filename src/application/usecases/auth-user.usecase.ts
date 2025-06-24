@@ -1,7 +1,7 @@
 import { type IAuthUserUsecase } from '../../domain/contracts'
 import { ForbiddenError, UnauthorizedError } from '../../domain/errors'
 import { type IUser } from '../../domain/interfaces/user.interfaces'
-import { type IUserCredentialsDTO } from '../../domain/ports/inbounds'
+import { type IAuthUserRequestDTO } from '../../domain/ports/inbounds'
 import { type IAuthUserResponseDTO } from '../../domain/ports/outbounds'
 import { Password } from '../../domain/value-objects'
 import { type ITokenService, type IUserRepository } from '../contracts'
@@ -13,9 +13,9 @@ export class AuthUserUsecase implements IAuthUserUsecase {
   ) {}
 
   async execute(
-    credentials: IUserCredentialsDTO
+    request: IAuthUserRequestDTO
   ): Promise<IAuthUserResponseDTO | Error> {
-    const { email, password } = credentials
+    const { email, password } = request
 
     const userExists: IUser | null = await this.userRepository.getUser({
       email

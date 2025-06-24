@@ -6,9 +6,9 @@ import { makeAuthUserValidator } from '../validators'
 export const makeAuthUserController = (): IController => {
   const usecase = makeAuthUserUsecase()
   const validator = makeAuthUserValidator()
-  const authUserController: AuthUserController = new AuthUserController(
+  const controller: AuthUserController = new AuthUserController(
     usecase,
     validator
   )
-  return authUserController
+  return controller
 }

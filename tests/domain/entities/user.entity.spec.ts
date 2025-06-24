@@ -3,7 +3,7 @@ import * as jwt from 'jsonwebtoken'
 import * as shortUuid from 'short-uuid'
 
 import { User } from '../../../src/domain/entities'
-import { type ICreateUserDTO } from '../../../src/domain/ports/inbounds'
+import { type ICreateUserRequestDTO } from '../../../src/domain/ports/inbounds'
 
 jest.mock('bcryptjs')
 jest.mock('jsonwebtoken')
@@ -20,7 +20,7 @@ describe('User Entity', () => {
 
   describe('create', () => {
     it('should create a user with hashed password and generated ID', async () => {
-      const input: ICreateUserDTO = {
+      const input: ICreateUserRequestDTO = {
         email: 'test@example.com',
         password: 'password123',
         confirmPassword: 'password123'

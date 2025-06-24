@@ -3,6 +3,6 @@ import { UserMongodb } from '../../../../src/infra/mongo'
 
 export const makeUpdateUserPasswordUsecase = (): UpdateUserPasswordUsecase => {
   const userMongodb = new UserMongodb()
-  const updateUserUpdateUsecase = new UpdateUserPasswordUsecase(userMongodb)
-  return updateUserUpdateUsecase
+  const usecase = new UpdateUserPasswordUsecase(userMongodb)
+  return usecase
 }

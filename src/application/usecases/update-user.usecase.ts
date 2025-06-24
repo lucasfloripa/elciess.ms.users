@@ -1,6 +1,7 @@
 import { type IUpdateUserUsecase } from '../../domain/contracts'
 import { NotFoundError } from '../../domain/errors'
-import { type IUpdateUserDTO } from '../../domain/ports/inbounds'
+import { type ISanitezedUser } from '../../domain/interfaces'
+import { type IUpdateUserRequestDTO } from '../../domain/ports/inbounds'
 import { type IUpdateUserResponseDTO } from '../../domain/ports/outbounds'
 import { type IUserRepository } from '../contracts'
 
@@ -8,9 +9,10 @@ export class UpdateUserUsecase implements IUpdateUserUsecase {
   constructor(private readonly userRepository: IUserRepository) {}
 
   async execute(
-    updateUserData: IUpdateUserDTO
+    request: IUpdateUserRequestDTO
   ): Promise<IUpdateUserResponseDTO | Error> {
-    const updatedUser = await this.userRepository.updateUser(updateUserData)
+    const updatedUser: ISanitezedUser | null =
+      await this.userRepository.updateUser(request)
 
     if (!updatedUser) return new NotFoundError('User not found')
 

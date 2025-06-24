@@ -2,7 +2,7 @@ import { type IUserRepository } from '../../../src/application/contracts'
 import { CreateUserUsecase } from '../../../src/application/usecases'
 import { User } from '../../../src/domain/entities'
 import { EmailInUseError } from '../../../src/domain/errors'
-import { type ICreateUserDTO } from '../../../src/domain/ports/inbounds'
+import { type ICreateUserRequestDTO } from '../../../src/domain/ports/inbounds'
 
 describe('CreateUserUsecase', () => {
   let createUserUsecase: CreateUserUsecase
@@ -17,7 +17,7 @@ describe('CreateUserUsecase', () => {
   })
 
   it('should create a user successfully', async () => {
-    const createUserData: ICreateUserDTO = {
+    const createUserData: ICreateUserRequestDTO = {
       email: 'test@example.com',
       password: 'password123',
       confirmPassword: 'password123'
@@ -42,7 +42,7 @@ describe('CreateUserUsecase', () => {
   })
 
   it('should return EmailInUseError if email is already in use', async () => {
-    const createUserData: ICreateUserDTO = {
+    const createUserData: ICreateUserRequestDTO = {
       email: 'test@example.com',
       password: 'password123',
       confirmPassword: 'password123'

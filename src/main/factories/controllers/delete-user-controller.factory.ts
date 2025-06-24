@@ -6,9 +6,9 @@ import { makeDeleteUserValidator } from '../validators'
 export const makeDeleteUserController = (): IController => {
   const usecase = makeDeleteUserUsecase()
   const validator = makeDeleteUserValidator()
-  const deleteUserController: DeleteUserController = new DeleteUserController(
+  const controller: DeleteUserController = new DeleteUserController(
     usecase,
     validator
   )
-  return deleteUserController
+  return controller
 }

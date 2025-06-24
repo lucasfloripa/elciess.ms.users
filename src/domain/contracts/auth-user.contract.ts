@@ -1,8 +1,8 @@
-import { type IUserCredentialsDTO } from '../ports/inbounds'
+import { type IAuthUserRequestDTO } from '../ports/inbounds'
 import { type IAuthUserResponseDTO } from '../ports/outbounds'
 
 export interface IAuthUserUsecase {
   execute: (
-    credentials: IUserCredentialsDTO
+    credentials: IAuthUserRequestDTO
   ) => Promise<IAuthUserResponseDTO | Error>
 }

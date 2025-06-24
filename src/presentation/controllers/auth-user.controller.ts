@@ -1,6 +1,6 @@
 import { type IAuthUserUsecase } from '../../domain/contracts'
 import { UnauthorizedError, ForbiddenError } from '../../domain/errors'
-import { type IUserCredentialsDTO } from '../../domain/ports/inbounds'
+import { type IAuthUserRequestDTO } from '../../domain/ports/inbounds'
 import { type IAuthUserResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
@@ -17,18 +17,18 @@ export class AuthUserController implements IController {
   ) {}
 
   async handle(
-    credentials: IUserCredentialsDTO
+    request: IAuthUserRequestDTO
   ): Promise<IHttpResponse<IAuthUserResponseDTO>> {
     try {
-      log('AuthUserController request', credentials)
+      log('AuthUserController request', request)
+      const hasInputError = this.validator.validate(request)
 
-      const hasInputError = this.validator.validate(credentials)
       if (hasInputError) {
         logError('AuthUserController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.authUserUsecase.execute(credentials)
+      const ucResponse = await this.authUserUsecase.execute(request)
 
       if (ucResponse instanceof UnauthorizedError) {
         logError('AuthUserController error:', ucResponse.error)

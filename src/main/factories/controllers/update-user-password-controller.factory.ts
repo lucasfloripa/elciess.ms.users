@@ -6,7 +6,7 @@ import { makeUpdateUserPasswordUserValidator } from '../validators'
 export const makeUpdateUserPasswordController = (): IController => {
   const usecase = makeUpdateUserPasswordUsecase()
   const validator = makeUpdateUserPasswordUserValidator()
-  const updateUserPasswordController: UpdateUserPasswordController =
+  const controller: UpdateUserPasswordController =
     new UpdateUserPasswordController(usecase, validator)
-  return updateUserPasswordController
+  return controller
 }

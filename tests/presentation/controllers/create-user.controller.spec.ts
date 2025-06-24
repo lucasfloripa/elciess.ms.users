@@ -1,6 +1,6 @@
 import { type ICreateUserUsecase } from '../../../src/domain/contracts'
 import { EmailInUseError } from '../../../src/domain/errors'
-import { type ICreateUserDTO } from '../../../src/domain/ports/inbounds'
+import { type ICreateUserRequestDTO } from '../../../src/domain/ports/inbounds'
 import { type ICreateUserResponseDTO } from '../../../src/domain/ports/outbounds'
 import { type IValidation } from '../../../src/presentation/contracts'
 import { CreateUserController } from '../../../src/presentation/controllers'
@@ -25,7 +25,7 @@ describe('CreateUserController', () => {
   })
 
   it('should return 400 if validation fails', async () => {
-    const createUserData: ICreateUserDTO = {
+    const createUserData: ICreateUserRequestDTO = {
       email: 'invalid_email',
       password: 'valid_password',
       confirmPassword: 'valid_password'
@@ -41,7 +41,7 @@ describe('CreateUserController', () => {
   })
 
   it('should return 200 if user is created successfully', async () => {
-    const createUserData: ICreateUserDTO = {
+    const createUserData: ICreateUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password',
       confirmPassword: 'valid_password'
@@ -63,7 +63,7 @@ describe('CreateUserController', () => {
   })
 
   it('should return 400 if email is already in use', async () => {
-    const createUserData: ICreateUserDTO = {
+    const createUserData: ICreateUserRequestDTO = {
       email: 'already_taken@mail.com',
       password: 'valid_password',
       confirmPassword: 'valid_password'
@@ -80,7 +80,7 @@ describe('CreateUserController', () => {
   })
 
   it('should handle errors and return appropriate response', async () => {
-    const createUserData: ICreateUserDTO = {
+    const createUserData: ICreateUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password',
       confirmPassword: 'valid_password'

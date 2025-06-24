@@ -1,6 +1,6 @@
 import { type IAuthUserUsecase } from '../../../src/domain/contracts'
 import { UnauthorizedError, ForbiddenError } from '../../../src/domain/errors'
-import { type IUserCredentialsDTO } from '../../../src/domain/ports/inbounds'
+import { type IAuthUserRequestDTO } from '../../../src/domain/ports/inbounds'
 import { type IAuthUserResponseDTO } from '../../../src/domain/ports/outbounds'
 import { type IValidation } from '../../../src/presentation/contracts'
 import { AuthUserController } from '../../../src/presentation/controllers'
@@ -22,7 +22,7 @@ describe('AuthUserController', () => {
   })
 
   it('should return 400 if validation fails', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'invalid_email',
       password: 'valid_password'
     }
@@ -37,7 +37,7 @@ describe('AuthUserController', () => {
   })
 
   it('should return 200 if user is authenticated successfully', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
@@ -55,7 +55,7 @@ describe('AuthUserController', () => {
   })
 
   it('should return 401 if user is not found', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
@@ -71,7 +71,7 @@ describe('AuthUserController', () => {
   })
 
   it('should return 403 if invalid password is provided', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
@@ -87,7 +87,7 @@ describe('AuthUserController', () => {
   })
 
   it('should handle errors and return appropriate response', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }

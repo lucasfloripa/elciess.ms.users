@@ -1,6 +1,6 @@
 import { type IUpdateUserUsecase } from '../../domain/contracts'
 import { NotFoundError } from '../../domain/errors'
-import { type IUpdateUserDTO } from '../../domain/ports/inbounds'
+import { type IUpdateUserRequestDTO } from '../../domain/ports/inbounds'
 import { type IUpdateUserResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
 import { type IValidation } from '../contracts'
@@ -17,18 +17,18 @@ export class UpdateUserController implements IController {
   ) {}
 
   async handle(
-    updateUserData: IUpdateUserDTO
+    request: IUpdateUserRequestDTO
   ): Promise<IHttpResponse<IUpdateUserResponseDTO>> {
     try {
-      log('UpdateUserController request:', updateUserData)
+      log('UpdateUserController request:', request)
+      const hasInputError = this.validator.validate(request)
 
-      const hasInputError = this.validator.validate(updateUserData)
       if (hasInputError) {
         logError('UpdateUserController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.updateUserUsecase.execute(updateUserData)
+      const ucResponse = await this.updateUserUsecase.execute(request)
 
       if (ucResponse instanceof NotFoundError) {
         logError('UpdateUserController error:', ucResponse.error)

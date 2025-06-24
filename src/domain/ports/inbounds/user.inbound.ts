@@ -1,34 +1,38 @@
 import { type IUser } from '../../interfaces/user.interfaces'
 
-export interface ICreateUserDTO {
+export interface ICreateUserRequestDTO {
   email: string
   password: string
   confirmPassword: string
 }
 
-export type IGetUserDTO = Partial<IUser>
+export type IGetUserRequestDTO = Partial<IUser>
 
-export interface ILogoutDTO {
+export interface IDeleteUserRequestDTO {
   userId: string
 }
 
-export interface IUpdateUserDTO {
+export interface ILogoutRequestDTO {
+  userId: string
+}
+
+export interface IUpdateUserRequestDTO {
   userId: string
   email: string
 }
 
-export interface IUserCredentialsDTO {
+export interface IAuthUserRequestDTO {
   email: string
   password: string
 }
 
-export interface IUpdateUserPasswordDTO {
+export interface IUpdateUserPasswordRequestDTO {
   userId: string
   password: string
   confirmPassword: string
   newPassword: string
 }
 
-export interface IRefreshTokenDTO {
+export interface IRefreshTokenRequestDTO {
   refreshToken: string
 }

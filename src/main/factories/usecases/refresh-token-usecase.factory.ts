@@ -5,6 +5,6 @@ import { UserMongodb } from '../../../../src/infra/mongo'
 export const makeRefreshTokenUsecase = (): RefreshTokenUsecase => {
   const userMongodb = new UserMongodb()
   const jwtService = new JwtService()
-  const refreshTokenUsecase = new RefreshTokenUsecase(userMongodb, jwtService)
-  return refreshTokenUsecase
+  const usecase = new RefreshTokenUsecase(userMongodb, jwtService)
+  return usecase
 }

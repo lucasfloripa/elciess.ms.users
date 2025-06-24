@@ -2,7 +2,7 @@ import { type IUserRepository } from '../../../src/application/contracts'
 import { AuthUserUsecase } from '../../../src/application/usecases'
 import { User } from '../../../src/domain/entities'
 import { UnauthorizedError, ForbiddenError } from '../../../src/domain/errors'
-import { type IUserCredentialsDTO } from '../../../src/domain/ports/inbounds'
+import { type IAuthUserRequestDTO } from '../../../src/domain/ports/inbounds'
 
 describe('AuthUserUsecase', () => {
   let authUserUsecase: AuthUserUsecase
@@ -17,7 +17,7 @@ describe('AuthUserUsecase', () => {
   })
 
   it('should authenticate a user successfully', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'test@example.com',
       password: 'password123'
     }
@@ -44,7 +44,7 @@ describe('AuthUserUsecase', () => {
   })
 
   it('should return UnauthorizedError if user does not exist', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'test@example.com',
       password: 'password123'
     }
@@ -58,7 +58,7 @@ describe('AuthUserUsecase', () => {
   })
 
   it('should return ForbiddenError if password is incorrect', async () => {
-    const credentials: IUserCredentialsDTO = {
+    const credentials: IAuthUserRequestDTO = {
       email: 'test@example.com',
       password: 'password123'
     }
