@@ -1,12 +1,12 @@
-import { type IUser } from '../../interfaces/user.interfaces'
-
 export interface ICreateUserRequestDTO {
   email: string
   password: string
   confirmPassword: string
 }
 
-export type IGetUserRequestDTO = Partial<IUser>
+export interface IGetUserRequestDTO {
+  userId: string
+}
 
 export interface IDeleteUserRequestDTO {
   userId: string

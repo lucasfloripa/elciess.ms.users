@@ -1,5 +1,5 @@
 import { type IUpdateUserUsecase } from '../../domain/contracts'
-import { NotFoundError } from '../../domain/errors'
+import { EmailInUseError, NotFoundError } from '../../domain/errors'
 import { type IUpdateUserRequestDTO } from '../../domain/ports/inbounds'
 import { type IUpdateUserResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
@@ -29,6 +29,11 @@ export class UpdateUserController implements IController {
       }
 
       const ucResponse = await this.updateUserUsecase.execute(request)
+
+      if (ucResponse instanceof EmailInUseError) {
+        logError('CreateUserController error:', ucResponse.error)
+        return htttpResponses.http400(ucResponse)
+      }
 
       if (ucResponse instanceof NotFoundError) {
         logError('UpdateUserController error:', ucResponse.error)

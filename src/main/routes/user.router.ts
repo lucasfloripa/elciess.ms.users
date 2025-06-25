@@ -1,74 +1,40 @@
-import { Router, type Request, type Response } from 'express'
+import { Router } from 'express'
 
+import { adaptExpressRoute } from '../adapters'
 import {
+  makeGetUsersController,
   makeGetUserController,
   makeCreateUserController,
   makeAuthUserController,
   makeRefreshTokenController,
   makeUpdateUserController,
+  makeUpdateUserPasswordController,
   makeDeleteUserController,
-  makeGetUsersController,
-  makeLogoutController,
-  makeUpdateUserPasswordController
+  makeLogoutController
 } from '../factories/controllers'
 
 const userRouter = Router()
 
-userRouter.get('/', async (req: Request, res: Response) => {
-  const getUsersController = makeGetUsersController()
-  const response = await getUsersController.handle({})
-  res.send(response)
-})
+// Rotas públicas
+userRouter.post('/auth', adaptExpressRoute(makeAuthUserController()))
+userRouter.post(
+  '/auth/refresh',
+  adaptExpressRoute(makeRefreshTokenController())
+)
+userRouter.post('/logout', adaptExpressRoute(makeLogoutController()))
+userRouter.post('/', adaptExpressRoute(makeCreateUserController()))
 
-userRouter.get('/:id', async (req: Request, res: Response) => {
-  const userId = req.params.id
-  const getUserController = makeGetUserController()
-  const response = await getUserController.handle({ userId })
-  res.send(response)
-})
+// Middleware de autenticação pode ir aqui:
+// userRouter.use(authMiddleware)
 
-userRouter.delete('/:id', async (req: Request, res: Response) => {
-  const userId = req.params.id
-  const deleteUserController = makeDeleteUserController()
-  const response = await deleteUserController.handle({ userId })
-  res.send(response)
-})
-
-userRouter.put('/change-password', async (req: Request, res: Response) => {
-  const updateUserPasswordController = makeUpdateUserPasswordController()
-  const response = await updateUserPasswordController.handle(req.body)
-  res.send(response)
-})
-
-userRouter.put('/:id', async (req: Request, res: Response) => {
-  const userId = req.params.id
-  const updateUserController = makeUpdateUserController()
-  const response = await updateUserController.handle({ userId, ...req.body })
-  res.send(response)
-})
-
-userRouter.post('/', async (req: Request, res: Response) => {
-  const createUserController = makeCreateUserController()
-  const response = await createUserController.handle(req.body)
-  res.send(response)
-})
-
-userRouter.post('/auth', async (req: Request, res: Response) => {
-  const authUserController = makeAuthUserController()
-  const response = await authUserController.handle(req.body)
-  res.send(response)
-})
-
-userRouter.post('/auth/refresh', async (req: Request, res: Response) => {
-  const refreshTokenController = makeRefreshTokenController()
-  const response = await refreshTokenController.handle(req.body)
-  res.send(response)
-})
-
-userRouter.post('/logout', async (req: Request, res: Response) => {
-  const logoutController = makeLogoutController()
-  const response = await logoutController.handle(req.body)
-  res.send(response)
-})
+// Rotas protegidas (exemplo: authMiddleware aplicado aqui)
+userRouter.get('/', adaptExpressRoute(makeGetUsersController()))
+userRouter.get('/:userId', adaptExpressRoute(makeGetUserController()))
+userRouter.put('/:userId', adaptExpressRoute(makeUpdateUserController()))
+userRouter.put(
+  '/change-password',
+  adaptExpressRoute(makeUpdateUserPasswordController())
+)
+userRouter.delete('/:userId', adaptExpressRoute(makeDeleteUserController()))
 
 export { userRouter }
