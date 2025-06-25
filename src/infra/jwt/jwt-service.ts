@@ -4,11 +4,13 @@ import { type ITokenService } from '../../application/contracts'
 
 export class JwtService implements ITokenService {
   private readonly JWT_SECRET: string
+  private readonly JWT_REFRESH_SECRET: string
   private readonly ACCESS_TOKEN_EXPIRATION: string
   private readonly REFRESH_TOKEN_EXPIRATION: string
 
   constructor() {
     this.JWT_SECRET = String(process.env.JWT_SECRET)
+    this.JWT_REFRESH_SECRET = String(process.env.JWT_REFRESH_SECRET)
     this.ACCESS_TOKEN_EXPIRATION = String(process.env.ACCESS_TOKEN_EXPIRATION)
     this.REFRESH_TOKEN_EXPIRATION = String(process.env.REFRESH_TOKEN_EXPIRATION)
   }
@@ -20,18 +22,26 @@ export class JwtService implements ITokenService {
   }
 
   async generateRefreshToken<T extends object>(payload: T): Promise<string> {
-    return jwt.sign(payload, this.JWT_SECRET, {
+    return jwt.sign(payload, this.JWT_REFRESH_SECRET, {
       expiresIn: this.REFRESH_TOKEN_EXPIRATION
     })
   }
 
-  verifyAccessToken: (token: string) => string
+  async verifyAccessToken<T extends object>(
+    token: string
+  ): Promise<T | string> {
+    try {
+      return jwt.verify(token, this.JWT_SECRET) as T
+    } catch (error) {
+      return error.name
+    }
+  }
 
   async verifyRefreshToken<T extends object>(
     token: string
   ): Promise<T | string> {
     try {
-      return jwt.verify(token, this.JWT_SECRET) as T
+      return jwt.verify(token, this.JWT_REFRESH_SECRET) as T
     } catch (error) {
       return error.name
     }

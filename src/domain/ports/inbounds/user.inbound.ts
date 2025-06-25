@@ -26,6 +26,14 @@ export interface IAuthUserRequestDTO {
   password: string
 }
 
+export interface IAuthTokenRequestDTO {
+  accessToken: string
+}
+
+export interface IAuthRoleRequestDTO {
+  role: string
+}
+
 export interface IUpdateUserPasswordRequestDTO {
   userId: string
   password: string

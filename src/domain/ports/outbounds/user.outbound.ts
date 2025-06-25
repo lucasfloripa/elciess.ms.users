@@ -26,6 +26,11 @@ export interface IAuthUserResponseDTO {
   refreshToken: string
 }
 
+export interface IAuthTokenResponseDTO {
+  userId: string
+  role: string
+}
+
 export interface ILogoutResponseDTO {
   message: string
 }

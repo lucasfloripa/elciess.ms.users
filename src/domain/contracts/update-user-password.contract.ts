@@ -3,6 +3,6 @@ import { type IUpdateUserPasswordResponseDTO } from '../ports/outbounds'
 
 export interface IUpdateUserPasswordUsecase {
   execute: (
-    fields: IUpdateUserPasswordRequestDTO
+    request: IUpdateUserPasswordRequestDTO
   ) => Promise<IUpdateUserPasswordResponseDTO | Error>
 }

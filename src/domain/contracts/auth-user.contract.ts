@@ -3,6 +3,6 @@ import { type IAuthUserResponseDTO } from '../ports/outbounds'
 
 export interface IAuthUserUsecase {
   execute: (
-    credentials: IAuthUserRequestDTO
+    request: IAuthUserRequestDTO
   ) => Promise<IAuthUserResponseDTO | Error>
 }

@@ -13,12 +13,11 @@ export class RefreshTokenUsecase implements IRefreshTokenUsecase {
     const userTokenInfos: IUserTokenInfos | string =
       await this.tokenService.verifyRefreshToken(refreshToken)
 
-    if (userTokenInfos === 'JsonWebTokenError') {
+    if (userTokenInfos === 'JsonWebTokenError')
       return new UnauthorizedError('Invalid format token')
-    }
-    if (userTokenInfos === 'TokenExpiredError') {
+
+    if (userTokenInfos === 'TokenExpiredError')
       return new UnauthorizedError('Expired token')
-    }
 
     const payload = userTokenInfos as IUserTokenInfos
 

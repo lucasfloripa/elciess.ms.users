@@ -1,6 +1,7 @@
 import { Router } from 'express'
 
-import { adaptExpressRoute } from '../adapters'
+import { UserRoles } from '../../domain/enums'
+import { adaptExpressRoute, adaptExpressMiddlware } from '../adapters'
 import {
   makeGetUsersController,
   makeGetUserController,
@@ -12,29 +13,53 @@ import {
   makeDeleteUserController,
   makeLogoutController
 } from '../factories/controllers'
+import {
+  makeAuthTokenMiddleware,
+  makeAuthRoleMiddleware
+} from '../factories/middlewares'
 
 const userRouter = Router()
 
-// Rotas públicas
 userRouter.post('/auth', adaptExpressRoute(makeAuthUserController()))
+
 userRouter.post(
   '/auth/refresh',
   adaptExpressRoute(makeRefreshTokenController())
 )
 userRouter.post('/logout', adaptExpressRoute(makeLogoutController()))
+
 userRouter.post('/', adaptExpressRoute(makeCreateUserController()))
 
-// Middleware de autenticação pode ir aqui:
-// userRouter.use(authMiddleware)
-
-// Rotas protegidas (exemplo: authMiddleware aplicado aqui)
-userRouter.get('/', adaptExpressRoute(makeGetUsersController()))
-userRouter.get('/:userId', adaptExpressRoute(makeGetUserController()))
-userRouter.put('/:userId', adaptExpressRoute(makeUpdateUserController()))
 userRouter.put(
   '/change-password',
   adaptExpressRoute(makeUpdateUserPasswordController())
 )
-userRouter.delete('/:userId', adaptExpressRoute(makeDeleteUserController()))
+
+userRouter.get(
+  '/:userId',
+  adaptExpressMiddlware(makeAuthTokenMiddleware()),
+  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
+  adaptExpressRoute(makeGetUserController())
+)
+
+userRouter.get(
+  '/',
+  adaptExpressMiddlware(makeAuthTokenMiddleware()),
+  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
+  adaptExpressRoute(makeGetUsersController())
+)
+userRouter.put(
+  '/:userId',
+  adaptExpressMiddlware(makeAuthTokenMiddleware()),
+  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
+  adaptExpressRoute(makeUpdateUserController())
+)
+
+userRouter.delete(
+  '/:userId',
+  adaptExpressMiddlware(makeAuthTokenMiddleware()),
+  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
+  adaptExpressRoute(makeDeleteUserController())
+)
 
 export { userRouter }

@@ -3,6 +3,6 @@ import { type ICreateUserResponseDTO } from '../ports/outbounds'
 
 export interface ICreateUserUsecase {
   execute: (
-    createUserData: ICreateUserRequestDTO
+    request: ICreateUserRequestDTO
   ) => Promise<ICreateUserResponseDTO | Error>
 }
