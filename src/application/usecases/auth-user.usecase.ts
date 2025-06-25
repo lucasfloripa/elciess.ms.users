@@ -28,14 +28,17 @@ export class AuthUserUsecase implements IAuthUserUsecase {
     )
     if (!passwordMatch) return new ForbiddenError('Invalid password')
 
-    const accessToken: string = await this.tokenService.generateAccessToken(
-      userExists.userId
-    )
-    const refreshToken: string = await this.tokenService.generateRefreshToken(
-      userExists.userId
-    )
+    const accessToken: string = await this.tokenService.generateAccessToken({
+      userId: userExists.userId,
+      role: userExists.role
+    })
+    const refreshToken: string = await this.tokenService.generateRefreshToken({
+      userId: userExists.userId,
+      role: userExists.role
+    })
 
     await this.userRepository.saveRefreshToken(userExists.userId, refreshToken)
+
     return { accessToken, refreshToken }
   }
 }

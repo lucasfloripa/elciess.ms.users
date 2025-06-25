@@ -1,6 +1,6 @@
 export class ITokenService {
-  generateAccessToken: (payload: any) => Promise<string>
-  generateRefreshToken: (payload: any) => Promise<string>
+  generateAccessToken: <T extends object>(payload: T) => Promise<string>
+  generateRefreshToken: <T extends object>(payload: T) => Promise<string>
   verifyAccessToken: (token: string) => string
-  verifyRefreshToken: (token: string) => Promise<string>
+  verifyRefreshToken: <T extends object>(token: string) => Promise<T | string>
 }

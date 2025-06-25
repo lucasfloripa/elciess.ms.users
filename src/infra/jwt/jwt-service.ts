@@ -13,24 +13,25 @@ export class JwtService implements ITokenService {
     this.REFRESH_TOKEN_EXPIRATION = String(process.env.REFRESH_TOKEN_EXPIRATION)
   }
 
-  async generateAccessToken(userId: string): Promise<string> {
-    return jwt.sign({ userId }, this.JWT_SECRET, {
+  async generateAccessToken<T extends object>(payload: T): Promise<string> {
+    return jwt.sign(payload, this.JWT_SECRET, {
       expiresIn: this.ACCESS_TOKEN_EXPIRATION
     })
   }
 
-  async generateRefreshToken(userId: string): Promise<string> {
-    return jwt.sign({ userId }, this.JWT_SECRET, {
+  async generateRefreshToken<T extends object>(payload: T): Promise<string> {
+    return jwt.sign(payload, this.JWT_SECRET, {
       expiresIn: this.REFRESH_TOKEN_EXPIRATION
     })
   }
 
   verifyAccessToken: (token: string) => string
 
-  async verifyRefreshToken(token: string): Promise<string> {
+  async verifyRefreshToken<T extends object>(
+    token: string
+  ): Promise<T | string> {
     try {
-      const decoded = jwt.verify(token, this.JWT_SECRET)
-      return (decoded as jwt.JwtPayload).userId
+      return jwt.verify(token, this.JWT_SECRET) as T
     } catch (error) {
       return error.name
     }

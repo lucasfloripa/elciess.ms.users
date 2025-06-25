@@ -79,14 +79,6 @@ export class UserMongodb implements IUserRepository {
     )
   }
 
-  async checkRefreshToken(userId: string, token: string): Promise<boolean> {
-    const userCollection = await this._getCollection()
-    const user = await userCollection.findOne<IUser>({
-      userId
-    })
-    return user?.refreshToken === token
-  }
-
   async logout(userId: string): Promise<UserEnums> {
     const userCollection = await this._getCollection()
     const result = await userCollection.updateOne(

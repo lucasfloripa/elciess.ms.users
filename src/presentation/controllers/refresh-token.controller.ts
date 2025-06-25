@@ -1,5 +1,5 @@
 import { type IRefreshTokenUsecase } from '../../domain/contracts'
-import { ForbiddenError, UnauthorizedError } from '../../domain/errors'
+import { UnauthorizedError } from '../../domain/errors'
 import { type IRefreshTokenRequestDTO } from '../../domain/ports/inbounds'
 import { type IRefreshTokenResponseDTO } from '../../domain/ports/outbounds'
 import { logError, log } from '../../utils/log'
@@ -35,11 +35,6 @@ export class RefreshTokenController implements IController {
       if (ucResponse instanceof UnauthorizedError) {
         logError('RefreshTokenController error:', ucResponse.error)
         return htttpResponses.http401(ucResponse)
-      }
-
-      if (ucResponse instanceof ForbiddenError) {
-        logError('RefreshTokenController error:', ucResponse.error)
-        return htttpResponses.http403(ucResponse)
       }
 
       log('RefreshTokenController response:', ucResponse)

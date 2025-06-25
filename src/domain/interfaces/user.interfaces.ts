@@ -12,3 +12,8 @@ export interface ISanitezedUser {
   role: string
   refreshToken?: string
 }
+
+export interface IUserTokenInfos {
+  userId: string
+  role: string
+}
