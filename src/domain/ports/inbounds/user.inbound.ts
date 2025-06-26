@@ -8,6 +8,10 @@ export interface IGetUserRequestDTO {
   userId: string
 }
 
+export interface IGetMeRequestDTO {
+  userId: string
+}
+
 export interface IDeleteUserRequestDTO {
   userId: string
 }

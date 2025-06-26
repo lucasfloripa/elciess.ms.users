@@ -13,9 +13,6 @@ export const adaptExpressMiddlware = (middleware: IMiddleware) => {
       role: req.user?.role
     }
 
-    console.log('@@@@@@')
-    console.log(middlewareRequest)
-
     const middlewareResponse = await middleware.handle(middlewareRequest)
 
     if (middlewareResponse.statusCode === 200) {

@@ -31,7 +31,9 @@ export class JwtService implements ITokenService {
     token: string
   ): Promise<T | string> {
     try {
-      return jwt.verify(token, this.JWT_SECRET) as T
+      const response = jwt.verify(token, this.JWT_SECRET) as any
+      const { exp, iat, ...data } = response
+      return data
     } catch (error) {
       return error.name
     }
@@ -41,7 +43,9 @@ export class JwtService implements ITokenService {
     token: string
   ): Promise<T | string> {
     try {
-      return jwt.verify(token, this.JWT_REFRESH_SECRET) as T
+      const response = jwt.verify(token, this.JWT_REFRESH_SECRET) as any
+      const { exp, iat, ...data } = response
+      return data
     } catch (error) {
       return error.name
     }

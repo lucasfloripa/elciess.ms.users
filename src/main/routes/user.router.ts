@@ -11,7 +11,8 @@ import {
   makeUpdateUserController,
   makeUpdateUserPasswordController,
   makeDeleteUserController,
-  makeLogoutController
+  makeLogoutController,
+  makeGetMeController
 } from '../factories/controllers'
 import {
   makeAuthTokenMiddleware,
@@ -33,6 +34,12 @@ userRouter.post('/', adaptExpressRoute(makeCreateUserController()))
 userRouter.put(
   '/change-password',
   adaptExpressRoute(makeUpdateUserPasswordController())
+)
+
+userRouter.get(
+  '/me',
+  adaptExpressMiddlware(makeAuthTokenMiddleware()),
+  adaptExpressRoute(makeGetMeController())
 )
 
 userRouter.get(

@@ -12,7 +12,6 @@ export class RefreshTokenUsecase implements IRefreshTokenUsecase {
   ): Promise<IRefreshTokenResponseDTO | Error> {
     const userTokenInfos: IUserTokenInfos | string =
       await this.tokenService.verifyRefreshToken(refreshToken)
-
     if (userTokenInfos === 'JsonWebTokenError')
       return new UnauthorizedError('Invalid format token')
 

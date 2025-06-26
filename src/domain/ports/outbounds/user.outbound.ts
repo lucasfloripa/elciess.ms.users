@@ -16,6 +16,10 @@ export interface IUpdateUserResponseDTO {
   user: ISanitezedUser
 }
 
+export interface IGetMeResponseDTO {
+  user: ISanitezedUser
+}
+
 export interface IRefreshTokenResponseDTO {
   accessToken: string
   refreshToken: string
