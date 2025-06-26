@@ -14,7 +14,9 @@ export class GetUserUsecase implements IGetUserUsecase {
   async execute(
     request: IGetUserRequestDTO
   ): Promise<IGetUserResponseDTO | Error> {
-    const dbUser: IUser | null = await this.userRepository.getUser(request)
+    const dbUser: IUser | null = await this.userRepository.getUser({
+      userId: request.id
+    })
 
     if (!dbUser) return new NotFoundError('User not found')
 

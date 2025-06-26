@@ -1,35 +1,35 @@
 import 'dotenv/config'
 import config from 'config'
-import express from 'express'
 
 import { MongoHelper } from '../infra/mongo'
 import { log, logError } from '../utils/log'
 
-import { userRouter } from './routes'
-
-interface DbConfig {
-  mongoUri: string
-  mongodbName: string
-}
-
-const dbConfig = config.get<DbConfig>('db')
+import { createApp } from './app'
+import { type DbConfig } from './interfaces'
 
 async function main(): Promise<void> {
-  const mongoHelper = MongoHelper.getInstance()
-  await mongoHelper
-    .connect(dbConfig.mongoUri, dbConfig.mongodbName)
-    .then(() => {
-      const app = express()
-      const PORT = process.env.APP_PORT
-      app.use(express.json())
-      app.use('/api/users', userRouter)
-      app.listen(PORT, () => {
-        log(`Server is running on http://localhost:${PORT}`)
+  const { appPort, mongoUri, mongodbName } = config.get<DbConfig>('dbConfig')
+  try {
+    await MongoHelper.getInstance().connect(mongoUri, mongodbName)
+    const app = createApp()
+    const server = app.listen(appPort, () => {
+      log(`Server running on port ${appPort}`)
+    })
+    process.on('SIGINT', () => {
+      server.close(() => {
+        ;(async () => {
+          await MongoHelper.getInstance().disconnect()
+          process.exit(0)
+        })().catch((err) => {
+          console.error('Error on shutdown:', err)
+          process.exit(1)
+        })
       })
     })
-    .catch((err) => {
-      logError('Failed to connect to MongoDB', err)
-    })
+  } catch (err) {
+    logError('Failed to start server:', err)
+    process.exit(1)
+  }
 }
 
 void main()

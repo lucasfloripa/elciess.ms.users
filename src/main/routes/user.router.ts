@@ -8,7 +8,6 @@ import {
   makeCreateUserController,
   makeAuthUserController,
   makeRefreshTokenController,
-  makeUpdateUserController,
   makeUpdateUserPasswordController,
   makeDeleteUserController,
   makeLogoutController,
@@ -43,7 +42,7 @@ userRouter.get(
 )
 
 userRouter.get(
-  '/:userId',
+  '/:id',
   adaptExpressMiddlware(makeAuthTokenMiddleware()),
   adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
   adaptExpressRoute(makeGetUserController())
@@ -55,15 +54,9 @@ userRouter.get(
   adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
   adaptExpressRoute(makeGetUsersController())
 )
-userRouter.put(
-  '/:userId',
-  adaptExpressMiddlware(makeAuthTokenMiddleware()),
-  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
-  adaptExpressRoute(makeUpdateUserController())
-)
 
 userRouter.delete(
-  '/:userId',
+  '/:id',
   adaptExpressMiddlware(makeAuthTokenMiddleware()),
   adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
   adaptExpressRoute(makeDeleteUserController())

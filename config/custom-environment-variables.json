@@ -1,8 +1,13 @@
 {
-  "db": {
+  "dbConfig": {
     "appPort": "APP_PORT",
     "mongoUri": "MONGODB_URI",
-    "jwtSecret": "JWT_SECRET",
     "mongodbName": "MONGODB_DB"
+  },
+  "jwtConfig": {
+    "jwtSecret": "JWT_SECRET",
+    "jwtRefreshSecret": "JWT_REFRESH_SECRET",
+    "accessTokenExp": "ACCESS_TOKEN_EXPIRATION",
+    "refreshTokenExp": "REFRESH_TOKEN_EXPIRATION"
   }
 }

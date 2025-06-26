@@ -7,7 +7,7 @@ import {
 export const makeDeleteUserValidator = (): ValidationComposite => {
   const validations: IValidation[] = []
 
-  for (const field of ['userId']) {
+  for (const field of ['id']) {
     validations.push(new RequiredFieldValidation(field))
   }
 

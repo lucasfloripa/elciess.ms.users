@@ -2,7 +2,7 @@ import { type Collection } from 'mongodb'
 
 import { type IUserRepository } from '../../application/contracts'
 import { UserEnums } from '../../domain/enums'
-import { type ISanitezedUser, type IUser } from '../../domain/interfaces'
+import { type IUser } from '../../domain/interfaces'
 
 import { MongoHelper } from './mongo-helper'
 
@@ -24,21 +24,6 @@ export class UserMongodb implements IUserRepository {
     return user
   }
 
-  async updateUser(
-    userFields: Partial<ISanitezedUser>
-  ): Promise<ISanitezedUser | null> {
-    const userCollection = await this._getCollection()
-    const { userId, ...updateFields } = userFields
-    const updated = await userCollection.findOneAndUpdate(
-      { userId },
-      { $set: updateFields },
-      { returnDocument: 'after' }
-    )
-    if (!updated) return null
-    const { password, ...sanitized } = updated as unknown as IUser
-    return sanitized as ISanitezedUser
-  }
-
   async updateUserPassword(
     userId: string,
     newPassword: string
@@ -55,6 +40,7 @@ export class UserMongodb implements IUserRepository {
   }
 
   async deleteUser(userId: string): Promise<boolean> {
+    console.log(userId)
     const userCollection = await this._getCollection()
     const deleteResult = await userCollection.deleteOne({ userId })
     return deleteResult.deletedCount === 1

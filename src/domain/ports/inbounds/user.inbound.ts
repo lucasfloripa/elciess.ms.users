@@ -5,7 +5,7 @@ export interface ICreateUserRequestDTO {
 }
 
 export interface IGetUserRequestDTO {
-  userId: string
+  id: string
 }
 
 export interface IGetMeRequestDTO {
@@ -13,7 +13,7 @@ export interface IGetMeRequestDTO {
 }
 
 export interface IDeleteUserRequestDTO {
-  userId: string
+  id: string
 }
 
 export interface ILogoutRequestDTO {

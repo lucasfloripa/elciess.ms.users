@@ -1,6 +1,6 @@
-import { type IUser } from '../interfaces/user.interfaces'
+import { type IGetUserRequestDTO } from '../ports/inbounds'
 import { type IGetUserResponseDTO } from '../ports/outbounds'
 
 export interface IGetUserUsecase {
-  execute: (request: Partial<IUser>) => Promise<IGetUserResponseDTO | Error>
+  execute: (request: IGetUserRequestDTO) => Promise<IGetUserResponseDTO | Error>
 }

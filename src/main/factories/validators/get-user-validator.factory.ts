@@ -7,7 +7,7 @@ import {
 export const makeGetUserValidator = (): ValidationComposite => {
   const validations: IValidation[] = []
 
-  validations.push(new RequiredFieldValidation('userId'))
+  validations.push(new RequiredFieldValidation('id'))
 
   return new ValidationComposite(validations)
 }
