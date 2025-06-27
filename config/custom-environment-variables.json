@@ -1,6 +1,5 @@
 {
   "dbConfig": {
-    "appPort": "APP_PORT",
     "mongoUri": "MONGODB_URI",
     "mongodbName": "MONGODB_DB"
   },
@@ -9,5 +8,11 @@
     "jwtRefreshSecret": "JWT_REFRESH_SECRET",
     "accessTokenExp": "ACCESS_TOKEN_EXPIRATION",
     "refreshTokenExp": "REFRESH_TOKEN_EXPIRATION"
+  },
+  "appConfig": {
+    "appPort": "APP_PORT"
+  },
+  "rabbitMqConfig": {
+    "rabbitMqUri": "RABBITMQ_URI"
   }
 }

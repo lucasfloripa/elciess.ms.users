@@ -1,5 +1,12 @@
+export interface AppConfig {
+  appPort: string
+}
+
 export interface DbConfig {
   mongoUri: string
   mongodbName: string
-  appPort: string
+}
+
+export interface RabbitMqConfig {
+  rabbitMqUri: string
 }

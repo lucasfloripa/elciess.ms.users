@@ -1,0 +1,36 @@
+version: '3.8'
+name: elciess_containers
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: localMongoDb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: elciess
+      MONGO_INITDB_ROOT_PASSWORD: elciessPass
+    volumes:
+      - ./data:/data/db
+    networks:
+      - meu-local-network
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: localRabbitMQ
+    restart: always
+    ports:
+      - "5672:5672"     # porta padrão do protocolo AMQP
+      - "15672:15672"   # porta da interface de gerenciamento (UI)
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - ./rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - meu-local-network
+
+networks:
+  meu-local-network:
+    driver: bridge

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@types/debug": "^4.1.12",
+    "amqplib": "^0.10.8",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.10",
     "debug": "^4.3.7",
@@ -30,11 +31,12 @@
     "short-uuid": "^4.2.2"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.7",
     "@types/bcryptjs": "^2.4.6",
     "@types/config": "^3.3.5",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.12",
-    "@types/jsonwebtoken": "^9.0.7",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/mongodb": "^4.0.7",
     "@types/node": "^20.10.0",
     "@types/uuid": "^9.0.7",

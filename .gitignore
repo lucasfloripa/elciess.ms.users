@@ -3,6 +3,8 @@
 .vscode
 .env
 .husky
+data
+rabbitmq_data
 dist
 coverage
 db

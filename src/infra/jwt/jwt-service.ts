@@ -7,8 +7,8 @@ import { type JwtConfig } from '../interfaces'
 export class JwtService implements ITokenService {
   private readonly JWT_SECRET: string
   private readonly JWT_REFRESH_SECRET: string
-  private readonly ACCESS_TOKEN_EXPIRATION: string
-  private readonly REFRESH_TOKEN_EXPIRATION: string
+  private readonly ACCESS_TOKEN_EXPIRATION: number
+  private readonly REFRESH_TOKEN_EXPIRATION: number
 
   constructor() {
     const jwtConfig = config.get<JwtConfig>('jwtConfig')

@@ -1,6 +1,6 @@
 export interface JwtConfig {
   jwtSecret: string
   jwtRefreshSecret: string
-  accessTokenExp: string
-  refreshTokenExp: string
+  accessTokenExp: number
+  refreshTokenExp: number
 }
