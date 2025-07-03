@@ -17,5 +17,12 @@
     "exchangeEmailPasswordReset": "RMQ_EXCHANGE_EMAIL_PASSWORD_RESET",
     "queueEmailPasswordReset": "RMQ_QUEUE_EMAIL_PASSWORD_RESET",
     "routingEmailPasswordReset": "RMQ_ROUTING_EMAIL_PASSWORD_RESET"
+  },
+  "redisConfig": {
+    "redisHost": "REDIS_HOST",
+    "redisPort": "REDIS_PORT",
+    "redisPassword": "REDIS_PASSWORD",
+    "redisDb": "REDIS_DB",
+    "redisTtl": "REDIS_TTL"
   }
 }

@@ -5,6 +5,8 @@
 .husky
 data
 rabbitmq_data
+redis_data
+redisinsight_data
 dist
 coverage
 db

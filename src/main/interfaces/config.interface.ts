@@ -10,3 +10,11 @@ export interface DbConfig {
 export interface RabbitMqConfig {
   rabbitMqUri: string
 }
+
+export interface RedisConfig {
+  redisHost: string
+  redisPort: number
+  redisPassword: string
+  redisDb: number
+  redisTtl: number
+}

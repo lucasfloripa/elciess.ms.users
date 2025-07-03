@@ -31,6 +31,37 @@ services:
     networks:
       - meu-local-network
 
+  redis:
+    image: redis:7-alpine
+    container_name: localRedis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis_data:/data
+    networks:
+      - meu-local-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  redis-commander: # NOVO SERVIÇO
+    image: rediscommander/redis-commander:latest
+    container_name: localRedisCommander
+    restart: always
+    environment:
+      # Conecta ao serviço 'redis' na rede Docker
+      REDIS_HOSTS: "local:redis:6379"
+      # Se você tivesse senha: REDIS_PASSWORD: "sua_senha"
+    ports:
+      - "8081:8081" # Porta externa 8081, porta interna 8081
+    networks:
+      - meu-local-network
+    depends_on:
+      redis:
+        condition: service_healthy
 networks:
   meu-local-network:
     driver: bridge
