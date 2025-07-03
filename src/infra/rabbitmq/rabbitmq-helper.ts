@@ -1,5 +1,8 @@
 import * as amqp from 'amqplib'
 import { type Channel, type ChannelModel } from 'amqplib'
+import config from 'config'
+
+import { type RabbitMQConfig } from '../interfaces'
 
 export class RabbitMQHelper {
   private static instance: RabbitMQHelper
@@ -7,7 +10,17 @@ export class RabbitMQHelper {
   private channel: Channel | null = null
   private uri: string = ''
 
-  private constructor() {}
+  private readonly EXCHANGE_EMAIL_PASSWORD_RESET: string
+  private readonly QUEUE_EMAIL_PASSWORD_RESET: string
+  private readonly ROUTING_EMAIL_PASSWORD_RESET: string
+
+  private constructor() {
+    const rabbiMqConfig = config.get<RabbitMQConfig>('rabbitMqConfig')
+    this.EXCHANGE_EMAIL_PASSWORD_RESET =
+      rabbiMqConfig.exchangeEmailPasswordReset
+    this.QUEUE_EMAIL_PASSWORD_RESET = rabbiMqConfig.queueEmailPasswordReset
+    this.ROUTING_EMAIL_PASSWORD_RESET = rabbiMqConfig.routingEmailPasswordReset
+  }
 
   public static getInstance(): RabbitMQHelper {
     if (!RabbitMQHelper.instance) {
@@ -22,6 +35,8 @@ export class RabbitMQHelper {
         this.uri = uri
         this.connection = await amqp.connect(uri)
         this.channel = await this.connection.createChannel()
+
+        await this.initializeRabbitMQInfrastructure()
 
         this.connection.on('close', () => {
           this.reconnect()
@@ -39,6 +54,30 @@ export class RabbitMQHelper {
         })
       }, 5000)
     }
+  }
+
+  private async initializeRabbitMQInfrastructure(): Promise<void> {
+    if (!this.channel) {
+      throw new Error(
+        'Channel is not available to initialize RabbitMQ infrastructure.'
+      )
+    }
+
+    await this.channel.assertExchange(
+      this.EXCHANGE_EMAIL_PASSWORD_RESET,
+      'direct',
+      {
+        durable: true
+      }
+    )
+    await this.channel.assertQueue(this.QUEUE_EMAIL_PASSWORD_RESET, {
+      durable: true
+    })
+    await this.channel.bindQueue(
+      this.QUEUE_EMAIL_PASSWORD_RESET,
+      this.EXCHANGE_EMAIL_PASSWORD_RESET,
+      this.ROUTING_EMAIL_PASSWORD_RESET
+    )
   }
 
   private reconnect(): void {
@@ -60,7 +99,6 @@ export class RabbitMQHelper {
       await this.connection.close()
       this.connection = null
     }
-    console.log('Disconnected from RabbitMQ.')
   }
 
   getChannel(): Channel {

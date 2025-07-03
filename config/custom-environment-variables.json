@@ -13,6 +13,9 @@
     "appPort": "APP_PORT"
   },
   "rabbitMqConfig": {
-    "rabbitMqUri": "RABBITMQ_URI"
+    "rabbitMqUri": "RABBITMQ_URI",
+    "exchangeEmailPasswordReset": "RMQ_EXCHANGE_EMAIL_PASSWORD_RESET",
+    "queueEmailPasswordReset": "RMQ_QUEUE_EMAIL_PASSWORD_RESET",
+    "routingEmailPasswordReset": "RMQ_ROUTING_EMAIL_PASSWORD_RESET"
   }
 }

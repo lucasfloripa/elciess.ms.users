@@ -20,30 +20,30 @@ export class UpdateUserPasswordController implements IController {
     request: IUpdateUserPasswordRequestDTO
   ): Promise<IHttpResponse<IUpdateUserPasswordResponseDTO>> {
     try {
-      log('updateUserPasswordController request:', request)
+      log('UpdateUserPasswordController request:', request)
       const hasInputError = this.validator.validate(request)
 
       if (hasInputError) {
-        logError('updateUserPasswordController error:', hasInputError)
+        logError('UpdateUserPasswordController error:', hasInputError)
         return htttpResponses.http400(hasInputError)
       }
 
       const ucResponse = await this.updateUserPasswordUsecase.execute(request)
 
       if (ucResponse instanceof NotFoundError) {
-        logError('updateUserPasswordController error:', ucResponse.error)
+        logError('UpdateUserPasswordController error:', ucResponse.error)
         return htttpResponses.http404(ucResponse)
       }
 
       if (ucResponse instanceof ConflictError) {
-        logError('updateUserPasswordController error:', ucResponse.error)
+        logError('UpdateUserPasswordController error:', ucResponse.error)
         return htttpResponses.http409(ucResponse)
       }
 
-      log('updateUserPasswordController response:', ucResponse)
+      log('UpdateUserPasswordController response:', ucResponse)
       return htttpResponses.http200(ucResponse)
     } catch (error) {
-      logError('updateUserPasswordController error:', error)
+      logError('UpdateUserPasswordController error:', error)
       return htttpResponses.http500(error)
     }
   }

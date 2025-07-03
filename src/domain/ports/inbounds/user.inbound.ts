@@ -45,6 +45,10 @@ export interface IUpdateUserPasswordRequestDTO {
   newPassword: string
 }
 
+export interface IPasswordResetRequestDTO {
+  email: string
+}
+
 export interface IRefreshTokenRequestDTO {
   refreshToken: string
 }

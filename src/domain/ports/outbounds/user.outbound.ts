@@ -42,3 +42,7 @@ export interface ILogoutResponseDTO {
 export interface IUpdateUserPasswordResponseDTO {
   message: string
 }
+
+export interface IPasswordResetResponseDTO {
+  message: string
+}

@@ -4,3 +4,9 @@ export interface JwtConfig {
   accessTokenExp: number
   refreshTokenExp: number
 }
+
+export interface RabbitMQConfig {
+  exchangeEmailPasswordReset: string
+  queueEmailPasswordReset: string
+  routingEmailPasswordReset: string
+}
