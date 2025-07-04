@@ -1,8 +1,8 @@
 import config from 'config'
 import * as jwt from 'jsonwebtoken'
 
-import { type ITokenService } from '../../application/contracts'
-import { type JwtConfig } from '../interfaces'
+import { type ITokenService } from '@/application/contracts'
+import { type JwtConfig } from '@/infra/interfaces'
 
 export class JwtService implements ITokenService {
   private readonly JWT_SECRET: string

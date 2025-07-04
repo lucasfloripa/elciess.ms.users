@@ -1,14 +1,14 @@
-import { type ICreateUserUsecase } from '../../domain/contracts'
-import { EmailInUseError } from '../../domain/errors'
-import { type ICreateUserRequestDTO } from '../../domain/ports/inbounds'
-import { type ICreateUserResponseDTO } from '../../domain/ports/outbounds'
-import { logError, log } from '../../utils/log'
-import { type IValidation } from '../contracts'
+import { type ICreateUserUsecase } from '@/domain/contracts'
+import { EmailInUseError } from '@/domain/errors'
+import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
+import { type ICreateUserResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
 import {
   type IHttpResponse,
   type IController,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class CreateUserController implements IController {
   constructor(

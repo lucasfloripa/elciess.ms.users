@@ -1,5 +1,5 @@
-import { type IAuthTokenRequestDTO } from '../ports/inbounds'
-import { type IAuthTokenResponseDTO } from '../ports/outbounds'
+import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
+import { type IAuthTokenResponseDTO } from '@/domain/ports/outbounds'
 
 export interface IAuthTokenUsecase {
   execute: (

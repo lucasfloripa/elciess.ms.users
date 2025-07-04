@@ -2,7 +2,7 @@
 import config from 'config'
 import Redis, { type RedisOptions } from 'ioredis'
 
-import { type RedisConfig } from '../../main/interfaces'
+import { type RedisConfig } from '@/main/interfaces'
 
 export class RedisHelper {
   private static instance: RedisHelper

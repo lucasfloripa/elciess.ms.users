@@ -1,11 +1,11 @@
-import { type IGetUsersUsecase } from '../../domain/contracts'
-import { NotFoundError } from '../../domain/errors'
+import { type IUserRepository } from '@/application/contracts'
+import { type IGetUsersUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
 import {
   type ISanitezedUser,
   type IUser
-} from '../../domain/interfaces/user.interfaces'
-import { type IGetUsersResponseDTO } from '../../domain/ports/outbounds'
-import { type IUserRepository } from '../contracts'
+} from '@/domain/interfaces/user.interfaces'
+import { type IGetUsersResponseDTO } from '@/domain/ports/outbounds'
 
 export class GetUsersUsecase implements IGetUsersUsecase {
   constructor(private readonly userRepository: IUserRepository) {}

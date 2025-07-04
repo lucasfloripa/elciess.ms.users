@@ -1,12 +1,12 @@
-import { type IAuthRoleUsecase } from '../../domain/contracts'
-import { ForbiddenError } from '../../domain/errors'
-import { type IAuthRoleRequestDTO } from '../../domain/ports/inbounds'
-import { logError, log } from '../../utils/log'
+import { type IAuthRoleUsecase } from '@/domain/contracts'
+import { ForbiddenError } from '@/domain/errors'
+import { type IAuthRoleRequestDTO } from '@/domain/ports/inbounds'
 import {
   type IHttpResponse,
   type IMiddleware,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class AuthRoleMiddleware implements IMiddleware {
   constructor(

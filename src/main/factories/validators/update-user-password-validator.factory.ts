@@ -1,9 +1,9 @@
-import { type IValidation } from '../../../presentation/contracts'
+import { type IValidation } from '@/presentation/contracts'
 import {
   ValidationComposite,
   RequiredFieldValidation,
   ConfirmPasswordValidation
-} from '../../../utils/validators'
+} from '@/utils/validators'
 
 export const makeUpdateUserPasswordUserValidator = (): ValidationComposite => {
   const validations: IValidation[] = []

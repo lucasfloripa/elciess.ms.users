@@ -1,5 +1,5 @@
-import { UpdateUserPasswordUsecase } from '../../../../src/application/usecases'
-import { UserMongodb } from '../../../../src/infra/mongo'
+import { UpdateUserPasswordUsecase } from '@/application/usecases'
+import { UserMongodb } from '@/infra/mongo'
 
 export const makeUpdateUserPasswordUsecase = (): UpdateUserPasswordUsecase => {
   const userMongodb = new UserMongodb()

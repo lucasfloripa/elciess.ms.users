@@ -1,10 +1,10 @@
-import { type IUpdateUserPasswordUsecase } from '../../domain/contracts'
-import { UserEnums } from '../../domain/enums'
-import { ConflictError, NotFoundError } from '../../domain/errors'
-import { type IUpdateUserPasswordRequestDTO } from '../../domain/ports/inbounds'
-import { type IUpdateUserPasswordResponseDTO } from '../../domain/ports/outbounds'
-import { Password } from '../../domain/value-objects'
-import { type IUserRepository } from '../contracts'
+import { type IUserRepository } from '@/application/contracts'
+import { type IUpdateUserPasswordUsecase } from '@/domain/contracts'
+import { UserEnums } from '@/domain/enums'
+import { ConflictError, NotFoundError } from '@/domain/errors'
+import { type IUpdateUserPasswordRequestDTO } from '@/domain/ports/inbounds'
+import { type IUpdateUserPasswordResponseDTO } from '@/domain/ports/outbounds'
+import { Password } from '@/domain/value-objects'
 
 export class UpdateUserPasswordUsecase implements IUpdateUserPasswordUsecase {
   constructor(private readonly userRepository: IUserRepository) {}

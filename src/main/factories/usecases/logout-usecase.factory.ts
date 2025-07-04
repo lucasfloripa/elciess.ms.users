@@ -1,5 +1,5 @@
-import { LogoutUsecase } from '../../../../src/application/usecases'
-import { UserMongodb } from '../../../../src/infra/mongo'
+import { LogoutUsecase } from '@/application/usecases'
+import { UserMongodb } from '@/infra/mongo'
 
 export const makeLogoutUsecase = (): LogoutUsecase => {
   const userMongodb = new UserMongodb()

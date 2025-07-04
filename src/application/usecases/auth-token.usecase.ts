@@ -1,9 +1,9 @@
-import { type IAuthTokenUsecase } from '../../domain/contracts'
-import { UnauthorizedError } from '../../domain/errors'
-import { type IUserTokenInfos } from '../../domain/interfaces'
-import { type IAuthTokenRequestDTO } from '../../domain/ports/inbounds'
-import { type IAuthTokenResponseDTO } from '../../domain/ports/outbounds'
-import { type ITokenService } from '../contracts'
+import { type ITokenService } from '@/application/contracts'
+import { type IAuthTokenUsecase } from '@/domain/contracts'
+import { UnauthorizedError } from '@/domain/errors'
+import { type IUserTokenInfos } from '@/domain/interfaces'
+import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
+import { type IAuthTokenResponseDTO } from '@/domain/ports/outbounds'
 
 export class AuthTokenUsecase implements IAuthTokenUsecase {
   constructor(private readonly tokenService: ITokenService) {}

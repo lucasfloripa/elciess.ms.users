@@ -1,12 +1,12 @@
-import { type IAuthTokenUsecase } from '../../domain/contracts'
-import { UnauthorizedError } from '../../domain/errors'
-import { type IAuthTokenRequestDTO } from '../../domain/ports/inbounds'
-import { logError, log } from '../../utils/log'
+import { type IAuthTokenUsecase } from '@/domain/contracts'
+import { UnauthorizedError } from '@/domain/errors'
+import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
 import {
   type IHttpResponse,
   type IMiddleware,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class AuthTokenMiddleware implements IMiddleware {
   constructor(private readonly authTokenUsecase: IAuthTokenUsecase) {}

@@ -1,8 +1,8 @@
 import config from 'config'
 import { type Redis } from 'ioredis'
 
-import { type ICacheService } from '../../application/contracts'
-import { type RedisConfig } from '../../main/interfaces'
+import { type ICacheService } from '@/application/contracts'
+import { type RedisConfig } from '@/main/interfaces'
 
 import { RedisHelper } from './redis-helper'
 

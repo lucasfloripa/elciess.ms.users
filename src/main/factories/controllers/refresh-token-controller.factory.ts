@@ -1,7 +1,7 @@
-import { RefreshTokenController } from '../../../presentation/controllers'
-import { type IController } from '../../../presentation/interfaces'
-import { makeRefreshTokenUsecase } from '../usecases'
-import { makeRefreshTokenValidator } from '../validators'
+import { makeRefreshTokenUsecase } from '@/main/factories/usecases'
+import { makeRefreshTokenValidator } from '@/main/factories/validators'
+import { RefreshTokenController } from '@/presentation/controllers'
+import { type IController } from '@/presentation/interfaces'
 
 export const makeRefreshTokenController = (): IController => {
   const usecase = makeRefreshTokenUsecase()

@@ -1,5 +1,5 @@
-import { CreateUserUsecase } from '../../../../src/application/usecases'
-import { UserMongodb } from '../../../../src/infra/mongo'
+import { CreateUserUsecase } from '@/application/usecases'
+import { UserMongodb } from '@/infra/mongo'
 
 export const makeCreateUserUsecase = (): CreateUserUsecase => {
   const userMongodb = new UserMongodb()

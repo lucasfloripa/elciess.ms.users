@@ -1,14 +1,14 @@
-import { type IRefreshTokenUsecase } from '../../domain/contracts'
-import { UnauthorizedError } from '../../domain/errors'
-import { type IRefreshTokenRequestDTO } from '../../domain/ports/inbounds'
-import { type IRefreshTokenResponseDTO } from '../../domain/ports/outbounds'
-import { logError, log } from '../../utils/log'
-import { type IValidation } from '../contracts'
+import { type IRefreshTokenUsecase } from '@/domain/contracts'
+import { UnauthorizedError } from '@/domain/errors'
+import { type IRefreshTokenRequestDTO } from '@/domain/ports/inbounds'
+import { type IRefreshTokenResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
 import {
   type IHttpResponse,
   type IController,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class RefreshTokenController implements IController {
   constructor(

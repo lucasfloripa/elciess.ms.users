@@ -1,8 +1,11 @@
-import { type IPasswordResetUsecase } from '../../domain/contracts'
-import { NotFoundError } from '../../domain/errors'
-import { type IUser } from '../../domain/interfaces'
-import { type IPasswordResetResponseDTO } from '../../domain/ports/outbounds'
-import { type IMessagerService, type IUserRepository } from '../contracts'
+import {
+  type IMessagerService,
+  type IUserRepository
+} from '@/application/contracts'
+import { type IPasswordResetUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type IUser } from '@/domain/interfaces'
+import { type IPasswordResetResponseDTO } from '@/domain/ports/outbounds'
 
 export class PasswordResetUsecase implements IPasswordResetUsecase {
   constructor(

@@ -1,8 +1,8 @@
 import { type Collection } from 'mongodb'
 
-import { type IUserRepository } from '../../application/contracts'
-import { UserEnums } from '../../domain/enums'
-import { type IUser } from '../../domain/interfaces'
+import { type IUserRepository } from '@/application/contracts'
+import { UserEnums } from '@/domain/enums'
+import { type IUser } from '@/domain/interfaces'
 
 import { MongoHelper } from './mongo-helper'
 

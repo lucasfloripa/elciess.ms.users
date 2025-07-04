@@ -1,6 +1,6 @@
-import { type IDeleteUserUsecase } from '../../domain/contracts'
-import { NotFoundError } from '../../domain/errors'
-import { type IUserRepository } from '../contracts'
+import { type IUserRepository } from '@/application/contracts'
+import { type IDeleteUserUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
 
 export class DeleteUserUsecase implements IDeleteUserUsecase {
   constructor(private readonly userRepository: IUserRepository) {}

@@ -1,4 +1,4 @@
-import { type ISanitezedUser } from '../../interfaces/user.interfaces'
+import { type ISanitezedUser } from '@/domain/interfaces/user.interfaces'
 
 export interface ICreateUserResponseDTO {
   user: ISanitezedUser

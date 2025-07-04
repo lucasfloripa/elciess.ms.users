@@ -1,7 +1,8 @@
 import { Router } from 'express'
 
-import { UserRoles } from '../../domain/enums'
-import { adaptExpressRoute, adaptExpressMiddlware } from '../adapters'
+import { UserRoles } from '@/domain/enums'
+import { adaptExpressRoute, adaptExpressMiddlware } from '@/main/adapters'
+
 import {
   makeGetUsersController,
   makeGetUserController,

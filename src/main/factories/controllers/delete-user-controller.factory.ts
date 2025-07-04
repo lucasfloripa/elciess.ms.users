@@ -1,7 +1,7 @@
-import { DeleteUserController } from '../../../presentation/controllers'
-import { type IController } from '../../../presentation/interfaces'
-import { makeDeleteUserUsecase } from '../usecases'
-import { makeDeleteUserValidator } from '../validators'
+import { makeDeleteUserUsecase } from '@/main/factories/usecases'
+import { makeDeleteUserValidator } from '@/main/factories/validators'
+import { DeleteUserController } from '@/presentation/controllers'
+import { type IController } from '@/presentation/interfaces'
 
 export const makeDeleteUserController = (): IController => {
   const usecase = makeDeleteUserUsecase()

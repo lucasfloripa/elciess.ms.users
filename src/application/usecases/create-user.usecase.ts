@@ -1,10 +1,10 @@
-import { type ICreateUserUsecase } from '../../domain/contracts'
-import { User } from '../../domain/entities'
-import { EmailInUseError } from '../../domain/errors'
-import { type IUser } from '../../domain/interfaces/user.interfaces'
-import { type ICreateUserRequestDTO } from '../../domain/ports/inbounds'
-import { type ICreateUserResponseDTO } from '../../domain/ports/outbounds'
-import { type IUserRepository } from '../contracts'
+import { type IUserRepository } from '@/application/contracts'
+import { type ICreateUserUsecase } from '@/domain/contracts'
+import { User } from '@/domain/entities'
+import { EmailInUseError } from '@/domain/errors'
+import { type IUser } from '@/domain/interfaces/user.interfaces'
+import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
+import { type ICreateUserResponseDTO } from '@/domain/ports/outbounds'
 
 export class CreateUserUsecase implements ICreateUserUsecase {
   constructor(private readonly userRepository: IUserRepository) {}

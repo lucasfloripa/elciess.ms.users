@@ -1,5 +1,5 @@
-import { type IAuthRoleUsecase } from '../../domain/contracts'
-import { ForbiddenError } from '../../domain/errors'
+import { type IAuthRoleUsecase } from '@/domain/contracts'
+import { ForbiddenError } from '@/domain/errors'
 
 export class AuthRoleUsecase implements IAuthRoleUsecase {
   async execute(role: string, requiredRole: string): Promise<void | Error> {

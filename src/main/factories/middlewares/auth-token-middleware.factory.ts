@@ -1,5 +1,5 @@
-import { AuthTokenMiddleware } from '../../../presentation/middlewares'
-import { makeAuthTokenUsecase } from '../usecases'
+import { makeAuthTokenUsecase } from '@/main/factories/usecases'
+import { AuthTokenMiddleware } from '@/presentation/middlewares'
 
 export const makeAuthTokenMiddleware = (): AuthTokenMiddleware => {
   const usecase = makeAuthTokenUsecase()

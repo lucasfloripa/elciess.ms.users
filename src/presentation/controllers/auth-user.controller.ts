@@ -1,14 +1,14 @@
-import { type IAuthUserUsecase } from '../../domain/contracts'
-import { UnauthorizedError, ForbiddenError } from '../../domain/errors'
-import { type IAuthUserRequestDTO } from '../../domain/ports/inbounds'
-import { type IAuthUserResponseDTO } from '../../domain/ports/outbounds'
-import { logError, log } from '../../utils/log'
-import { type IValidation } from '../contracts'
+import { type IAuthUserUsecase } from '@/domain/contracts'
+import { UnauthorizedError, ForbiddenError } from '@/domain/errors'
+import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
+import { type IAuthUserResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
 import {
   type IHttpResponse,
   type IController,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class AuthUserController implements IController {
   constructor(

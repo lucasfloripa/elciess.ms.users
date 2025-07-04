@@ -1,5 +1,5 @@
-import { AuthTokenUsecase } from '../../../../src/application/usecases'
-import { JwtService } from '../../../../src/infra/jwt'
+import { AuthTokenUsecase } from '@/application/usecases'
+import { JwtService } from '@/infra/jwt'
 
 export const makeAuthTokenUsecase = (): AuthTokenUsecase => {
   const jwtService = new JwtService()

@@ -1,14 +1,14 @@
-import { type ILogoutUsecase } from '../../domain/contracts'
-import { NotFoundError } from '../../domain/errors'
-import { type ILogoutRequestDTO } from '../../domain/ports/inbounds'
-import { type ILogoutResponseDTO } from '../../domain/ports/outbounds'
-import { logError, log } from '../../utils/log'
-import { type IValidation } from '../contracts'
+import { type ILogoutUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type ILogoutRequestDTO } from '@/domain/ports/inbounds'
+import { type ILogoutResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
 import {
   type IHttpResponse,
   type IController,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class LogoutController implements IController {
   constructor(

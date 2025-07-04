@@ -1,6 +1,6 @@
-import { GetMeUsecase } from '../../../../src/application/usecases'
-import { UserMongodb } from '../../../../src/infra/mongo'
-import { RedisService } from '../../../../src/infra/redis'
+import { GetMeUsecase } from '@/application/usecases'
+import { UserMongodb } from '@/infra/mongo'
+import { RedisService } from '@/infra/redis'
 
 export const makeGetMeUsecase = (): GetMeUsecase => {
   const userMongodb = new UserMongodb()

@@ -1,18 +1,17 @@
 import 'dotenv/config'
 import config from 'config'
 
-import { MongoHelper } from '../infra/mongo'
-import { RabbitMQHelper } from '../infra/rabbitmq'
-import { RedisHelper } from '../infra/redis'
-import { log, logError } from '../utils/log'
-
-import { createApp } from './app'
+import { MongoHelper } from '@/infra/mongo'
+import { RabbitMQHelper } from '@/infra/rabbitmq'
+import { RedisHelper } from '@/infra/redis'
+import { createApp } from '@/main/app'
 import {
   type DbConfig,
   type AppConfig,
   type RabbitMqConfig,
   type RedisConfig
-} from './interfaces'
+} from '@/main/interfaces'
+import { log, logError } from '@/utils/log'
 
 async function main(): Promise<void> {
   const { mongoUri, mongodbName } = config.get<DbConfig>('dbConfig')

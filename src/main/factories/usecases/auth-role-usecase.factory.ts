@@ -1,4 +1,4 @@
-import { AuthRoleUsecase } from '../../../../src/application/usecases'
+import { AuthRoleUsecase } from '@/application/usecases'
 
 export const makeAuthRoleUsecase = (): AuthRoleUsecase => {
   const usecase = new AuthRoleUsecase()

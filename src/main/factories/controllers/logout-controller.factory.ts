@@ -1,7 +1,7 @@
-import { LogoutController } from '../../../presentation/controllers'
-import { type IController } from '../../../presentation/interfaces'
-import { makeLogoutUsecase } from '../usecases'
-import { makeLogoutValidator } from '../validators'
+import { makeLogoutUsecase } from '@/main/factories/usecases'
+import { makeLogoutValidator } from '@/main/factories/validators'
+import { LogoutController } from '@/presentation/controllers'
+import { type IController } from '@/presentation/interfaces'
 
 export const makeLogoutController = (): IController => {
   const usecase = makeLogoutUsecase()

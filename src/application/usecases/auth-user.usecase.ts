@@ -1,10 +1,13 @@
-import { type IAuthUserUsecase } from '../../domain/contracts'
-import { ForbiddenError, UnauthorizedError } from '../../domain/errors'
-import { type IUser } from '../../domain/interfaces/user.interfaces'
-import { type IAuthUserRequestDTO } from '../../domain/ports/inbounds'
-import { type IAuthUserResponseDTO } from '../../domain/ports/outbounds'
-import { Password } from '../../domain/value-objects'
-import { type ITokenService, type IUserRepository } from '../contracts'
+import {
+  type ITokenService,
+  type IUserRepository
+} from '@/application/contracts'
+import { type IAuthUserUsecase } from '@/domain/contracts'
+import { ForbiddenError, UnauthorizedError } from '@/domain/errors'
+import { type IUser } from '@/domain/interfaces/user.interfaces'
+import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
+import { type IAuthUserResponseDTO } from '@/domain/ports/outbounds'
+import { Password } from '@/domain/value-objects'
 
 export class AuthUserUsecase implements IAuthUserUsecase {
   constructor(

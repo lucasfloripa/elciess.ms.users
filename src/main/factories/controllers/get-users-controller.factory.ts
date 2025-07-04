@@ -1,6 +1,6 @@
-import { GetUsersController } from '../../../presentation/controllers'
-import { type IController } from '../../../presentation/interfaces'
-import { makeGetUsersUsecase } from '../usecases'
+import { makeGetUsersUsecase } from '@/main/factories/usecases'
+import { GetUsersController } from '@/presentation/controllers'
+import { type IController } from '@/presentation/interfaces'
 
 export const makeGetUsersController = (): IController => {
   const usecase = makeGetUsersUsecase()

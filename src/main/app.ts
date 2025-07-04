@@ -1,10 +1,10 @@
-import express from 'express'
+import express, { json } from 'express'
 
-import { userRouter } from './routes'
+import { userRouter } from '@/main/routes'
 
 export function createApp(): express.Application {
   const app = express()
-  app.use(express.json())
+  app.use(json())
   app.use('/api/users', userRouter)
   app.use((err, req, res, next) => {
     console.error(err)

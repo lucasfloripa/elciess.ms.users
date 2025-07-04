@@ -1,4 +1,4 @@
-import { type IMessagerService } from '../../application/contracts/messager-service.contract'
+import { type IMessagerService } from '@/application/contracts/messager-service.contract'
 
 import { RabbitMQHelper } from './rabbitmq-helper'
 

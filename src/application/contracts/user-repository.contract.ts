@@ -1,5 +1,5 @@
-import { type UserEnums } from '../../domain/enums'
-import { type IUser } from '../../domain/interfaces'
+import { type UserEnums } from '@/domain/enums'
+import { type IUser } from '@/domain/interfaces'
 
 export interface IUserRepository {
   save: (user: IUser) => Promise<void>

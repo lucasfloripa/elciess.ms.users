@@ -1,4 +1,4 @@
-import { type IGetUsersResponseDTO } from '../ports/outbounds'
+import { type IGetUsersResponseDTO } from '@/domain/ports/outbounds'
 
 export interface IGetUsersUsecase {
   execute: () => Promise<IGetUsersResponseDTO | Error>

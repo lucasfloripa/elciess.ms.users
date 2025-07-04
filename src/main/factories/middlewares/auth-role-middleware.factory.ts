@@ -1,5 +1,5 @@
-import { AuthRoleMiddleware } from '../../../presentation/middlewares'
-import { makeAuthRoleUsecase } from '../usecases'
+import { makeAuthRoleUsecase } from '@/main/factories/usecases'
+import { AuthRoleMiddleware } from '@/presentation/middlewares'
 
 export const makeAuthRoleMiddleware = (
   requiredRole: string

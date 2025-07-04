@@ -1,12 +1,12 @@
-import { type IGetUsersUsecase } from '../../domain/contracts'
-import { NotFoundError } from '../../domain/errors'
-import { type IGetUsersResponseDTO } from '../../domain/ports/outbounds'
-import { logError, log } from '../../utils/log'
+import { type IGetUsersUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type IGetUsersResponseDTO } from '@/domain/ports/outbounds'
 import {
   type IHttpResponse,
   type IController,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class GetUsersController implements IController {
   constructor(private readonly getUsersUsecase: IGetUsersUsecase) {}

@@ -1,9 +1,12 @@
 import * as shortUuid from 'short-uuid'
 
-import { UserRoles } from '../enums'
-import { type ISanitezedUser, type IUser } from '../interfaces/user.interfaces'
-import { type ICreateUserRequestDTO } from '../ports/inbounds'
-import { Email, Password } from '../value-objects'
+import { UserRoles } from '@/domain/enums'
+import {
+  type ISanitezedUser,
+  type IUser
+} from '@/domain/interfaces/user.interfaces'
+import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
+import { Email, Password } from '@/domain/value-objects'
 
 export class User {
   static readonly SALT: number = 4

@@ -16,6 +16,13 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": ["./tsconfig.json", "./tsconfig-test.json"]
+      }
+    }
+  },
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/strict-boolean-expressions": "off",

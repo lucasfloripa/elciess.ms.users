@@ -1,8 +1,8 @@
-import { type ILogoutUsecase } from '../../domain/contracts'
-import { UserEnums } from '../../domain/enums'
-import { NotFoundError } from '../../domain/errors'
-import { type ILogoutResponseDTO } from '../../domain/ports/outbounds'
-import { type IUserRepository } from '../contracts'
+import { type IUserRepository } from '@/application/contracts'
+import { type ILogoutUsecase } from '@/domain/contracts'
+import { UserEnums } from '@/domain/enums'
+import { NotFoundError } from '@/domain/errors'
+import { type ILogoutResponseDTO } from '@/domain/ports/outbounds'
 
 export class LogoutUsecase implements ILogoutUsecase {
   constructor(private readonly userRepository: IUserRepository) {}

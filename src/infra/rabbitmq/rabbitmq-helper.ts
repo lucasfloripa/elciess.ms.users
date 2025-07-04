@@ -2,7 +2,7 @@ import * as amqp from 'amqplib'
 import { type Channel, type ChannelModel } from 'amqplib'
 import config from 'config'
 
-import { type RabbitMQConfig } from '../interfaces'
+import { type RabbitMQConfig } from '@/infra/interfaces'
 
 export class RabbitMQHelper {
   private static instance: RabbitMQHelper

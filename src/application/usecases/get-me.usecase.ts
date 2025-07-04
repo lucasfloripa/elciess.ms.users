@@ -1,11 +1,14 @@
-import { type IGetMeUsecase } from '../../domain/contracts'
-import { NotFoundError } from '../../domain/errors'
+import {
+  type ICacheService,
+  type IUserRepository
+} from '@/application/contracts'
+import { type IGetMeUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
 import {
   type ISanitezedUser,
   type IUser
-} from '../../domain/interfaces/user.interfaces'
-import { type IGetMeResponseDTO } from '../../domain/ports/outbounds'
-import { type ICacheService, type IUserRepository } from '../contracts'
+} from '@/domain/interfaces/user.interfaces'
+import { type IGetMeResponseDTO } from '@/domain/ports/outbounds'
 
 export class GetMeUsecase implements IGetMeUsecase {
   constructor(

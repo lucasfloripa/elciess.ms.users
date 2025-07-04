@@ -1,5 +1,5 @@
-import { DeleteUserUsecase } from '../../../../src/application/usecases'
-import { UserMongodb } from '../../../../src/infra/mongo'
+import { DeleteUserUsecase } from '@/application/usecases'
+import { UserMongodb } from '@/infra/mongo'
 
 export const makeDeleteUserUsecase = (): DeleteUserUsecase => {
   const userMongodb = new UserMongodb()

@@ -1,14 +1,14 @@
-import { type IUpdateUserPasswordUsecase } from '../../domain/contracts'
-import { ConflictError, NotFoundError } from '../../domain/errors'
-import { type IUpdateUserPasswordRequestDTO } from '../../domain/ports/inbounds'
-import { type IUpdateUserPasswordResponseDTO } from '../../domain/ports/outbounds'
-import { logError, log } from '../../utils/log'
-import { type IValidation } from '../contracts'
+import { type IUpdateUserPasswordUsecase } from '@/domain/contracts'
+import { ConflictError, NotFoundError } from '@/domain/errors'
+import { type IUpdateUserPasswordRequestDTO } from '@/domain/ports/inbounds'
+import { type IUpdateUserPasswordResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
 import {
   type IHttpResponse,
   type IController,
   htttpResponses
-} from '../interfaces'
+} from '@/presentation/interfaces'
+import { logError, log } from '@/utils/log'
 
 export class UpdateUserPasswordController implements IController {
   constructor(

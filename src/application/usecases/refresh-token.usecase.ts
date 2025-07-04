@@ -1,8 +1,8 @@
-import { type IRefreshTokenUsecase } from '../../domain/contracts'
-import { UnauthorizedError } from '../../domain/errors'
-import { type IUserTokenInfos } from '../../domain/interfaces'
-import { type IRefreshTokenResponseDTO } from '../../domain/ports/outbounds'
-import { type ITokenService } from '../contracts'
+import { type ITokenService } from '@/application/contracts'
+import { type IRefreshTokenUsecase } from '@/domain/contracts'
+import { UnauthorizedError } from '@/domain/errors'
+import { type IUserTokenInfos } from '@/domain/interfaces'
+import { type IRefreshTokenResponseDTO } from '@/domain/ports/outbounds'
 
 export class RefreshTokenUsecase implements IRefreshTokenUsecase {
   constructor(private readonly tokenService: ITokenService) {}

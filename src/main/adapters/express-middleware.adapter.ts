@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express'
 
-import { type IMiddleware } from '../../presentation/interfaces'
+import { type IMiddleware } from '@/presentation/interfaces'
 
 export const adaptExpressMiddlware = (middleware: IMiddleware) => {
   return async (req: Request, res: Response, next: NextFunction) => {
