@@ -1,10 +1,10 @@
-import { type IAuthUserUsecase } from '../../../src/domain/contracts'
-import { UnauthorizedError, ForbiddenError } from '../../../src/domain/errors'
-import { type IAuthUserRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type IAuthUserResponseDTO } from '../../../src/domain/ports/outbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { AuthUserController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type IAuthUserUsecase } from '@/domain/contracts'
+import { UnauthorizedError, ForbiddenError } from '@/domain/errors'
+import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
+import { type IAuthUserResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { AuthUserController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('AuthUserController', () => {
   let authUserUsecase: jest.Mocked<IAuthUserUsecase>

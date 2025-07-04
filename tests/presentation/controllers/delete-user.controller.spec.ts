@@ -1,9 +1,9 @@
-import { type IDeleteUserUsecase } from '../../../src/domain/contracts'
-import { NotFoundError } from '../../../src/domain/errors'
-import { type IDeleteUserRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { DeleteUserController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type IDeleteUserUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type IDeleteUserRequestDTO } from '@/domain/ports/inbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { DeleteUserController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('DeleteUserController', () => {
   let deleteUserUsecase: jest.Mocked<IDeleteUserUsecase>

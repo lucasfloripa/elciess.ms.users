@@ -1,18 +1,18 @@
-import * as bcrypt from 'bcryptjs'
-import * as jwt from 'jsonwebtoken'
 import * as shortUuid from 'short-uuid'
 
-import { User } from '../../../src/domain/entities'
-import { type ICreateUserRequestDTO } from '../../../src/domain/ports/inbounds'
+import { User } from '@/domain/entities'
+import { UserRoles } from '@/domain/enums'
+import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
+import { Email, Password } from '@/domain/value-objects'
 
-jest.mock('bcryptjs')
-jest.mock('jsonwebtoken')
 jest.mock('short-uuid')
+jest.mock('@/domain/value-objects/email.value-object')
+jest.mock('@/domain/value-objects/password.value-object')
 
 describe('User Entity', () => {
-  const mockBcrypt = bcrypt as jest.Mocked<typeof bcrypt>
-  const mockJwt = jwt as jest.Mocked<typeof jwt>
   const mockShortUuid = shortUuid as jest.Mocked<typeof shortUuid>
+  const mockEmail = Email as jest.Mocked<typeof Email>
+  const mockPassword = Password as jest.Mocked<typeof Password>
 
   beforeEach(() => {
     jest.clearAllMocks()
@@ -26,56 +26,68 @@ describe('User Entity', () => {
         confirmPassword: 'password123'
       }
       const generatedId = 'generated-id'
-      const hashedPassword = 'hashed-password'
+
+      const mockEmailInstance = {
+        value: jest.fn().mockReturnValue(input.email)
+      } as unknown as Email
+
+      const mockPasswordInstance = {
+        value: jest.fn().mockReturnValue('hashed-password')
+      } as unknown as Password
 
       mockShortUuid.generate.mockReturnValue(generatedId as shortUuid.SUUID)
-      mockBcrypt.hash.mockResolvedValue(hashedPassword as never)
+      mockEmail.create.mockReturnValue(mockEmailInstance)
+      mockPassword.create.mockResolvedValue(mockPasswordInstance)
 
       const user = await User.create(input)
 
       expect(mockShortUuid.generate).toHaveBeenCalled()
-      expect(mockBcrypt.hash).toHaveBeenCalledWith(input.password, User.SALT)
-      expect(user).toEqual(new User(generatedId, input.email, hashedPassword))
+      expect(mockEmail.create).toHaveBeenCalledWith(input.email)
+      expect(mockPassword.create).toHaveBeenCalledWith(input.password)
+
+      expect(user).toEqual(
+        new User(
+          generatedId,
+          mockEmailInstance,
+          mockPasswordInstance,
+          UserRoles.DEFAULT
+        )
+      )
     })
   })
 
-  describe('comparePassword', () => {
-    it('should return true if passwords match', async () => {
-      const password = 'password123'
-      const hashedPassword = 'hashed-password'
+  describe('toReturn', () => {
+    it('should return sanitized user data', () => {
+      const user = new User(
+        'user-id',
+        { value: () => 'email@example.com' } as unknown as Email,
+        { value: () => 'hashed-password' } as unknown as Password,
+        UserRoles.DEFAULT
+      )
 
-      mockBcrypt.compare.mockResolvedValue(true as never)
-
-      const result = await User.comparePassword(password, hashedPassword)
-
-      expect(mockBcrypt.compare).toHaveBeenCalledWith(password, hashedPassword)
-      expect(result).toBe(true)
-    })
-
-    it('should return false if passwords do not match', async () => {
-      const password = 'password123'
-      const hashedPassword = 'hashed-password'
-
-      mockBcrypt.compare.mockResolvedValue(false as never)
-
-      const result = await User.comparePassword(password, hashedPassword)
-
-      expect(mockBcrypt.compare).toHaveBeenCalledWith(password, hashedPassword)
-      expect(result).toBe(false)
+      expect(user.toReturn()).toEqual({
+        userId: 'user-id',
+        email: 'email@example.com',
+        role: UserRoles.DEFAULT
+      })
     })
   })
 
-  describe('generateToken', () => {
-    it('should generate a JWT token', async () => {
-      const userId = 'user-id'
-      const token = 'jwt-token'
+  describe('toPersistence', () => {
+    it('should return user data for persistence', () => {
+      const user = new User(
+        'user-id',
+        { value: () => 'email@example.com' } as unknown as Email,
+        { value: () => 'hashed-password' } as unknown as Password,
+        UserRoles.DEFAULT
+      )
 
-      mockJwt.sign.mockReturnValue(token as unknown as void)
-
-      const result = await User.generateToken(userId)
-
-      expect(mockJwt.sign).toHaveBeenCalledWith({ userId }, User.JWT_SECRET)
-      expect(result).toBe(token)
+      expect(user.toPersistence()).toEqual({
+        userId: 'user-id',
+        email: 'email@example.com',
+        password: 'hashed-password',
+        role: UserRoles.DEFAULT
+      })
     })
   })
 })

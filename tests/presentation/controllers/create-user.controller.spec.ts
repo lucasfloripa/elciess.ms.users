@@ -1,10 +1,10 @@
-import { type ICreateUserUsecase } from '../../../src/domain/contracts'
-import { EmailInUseError } from '../../../src/domain/errors'
-import { type ICreateUserRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type ICreateUserResponseDTO } from '../../../src/domain/ports/outbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { CreateUserController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type ICreateUserUsecase } from '@/domain/contracts'
+import { EmailInUseError } from '@/domain/errors'
+import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
+import { type ICreateUserResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { CreateUserController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('CreateUserController', () => {
   let createUserUsecase: jest.Mocked<ICreateUserUsecase>

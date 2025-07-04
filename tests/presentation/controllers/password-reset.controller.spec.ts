@@ -1,10 +1,10 @@
-import { type IPasswordResetUsecase } from '../../../src/domain/contracts'
-import { NotFoundError } from '../../../src/domain/errors'
-import { type IPasswordResetRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type IPasswordResetResponseDTO } from '../../../src/domain/ports/outbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { PasswordResetController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type IPasswordResetUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type IPasswordResetRequestDTO } from '@/domain/ports/inbounds'
+import { type IPasswordResetResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { PasswordResetController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('PasswordResetController', () => {
   let passwordResetUsecase: jest.Mocked<IPasswordResetUsecase>

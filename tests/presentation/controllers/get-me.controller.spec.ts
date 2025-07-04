@@ -1,10 +1,10 @@
-import { type IGetMeUsecase } from '../../../src/domain/contracts'
-import { NotFoundError } from '../../../src/domain/errors'
-import { type IGetMeRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type IGetMeResponseDTO } from '../../../src/domain/ports/outbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { GetMeController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type IGetMeUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type IGetMeRequestDTO } from '@/domain/ports/inbounds'
+import { type IGetMeResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { GetMeController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('GetMeController', () => {
   let getMeUsecase: jest.Mocked<IGetMeUsecase>

@@ -1,8 +1,12 @@
-import { type IUserRepository } from '../../../src/application/contracts'
-import { CreateUserUsecase } from '../../../src/application/usecases'
-import { User } from '../../../src/domain/entities'
-import { EmailInUseError } from '../../../src/domain/errors'
-import { type ICreateUserRequestDTO } from '../../../src/domain/ports/inbounds'
+import { type IUserRepository } from '@/application/contracts'
+import { CreateUserUsecase } from '@/application/usecases'
+import { User } from '@/domain/entities'
+import { UserRoles } from '@/domain/enums'
+import { EmailInUseError } from '@/domain/errors'
+import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
+import { Password, Email } from '@/domain/value-objects'
+
+jest.mock('@/domain/entities/user.entity')
 
 describe('CreateUserUsecase', () => {
   let createUserUsecase: CreateUserUsecase
@@ -10,9 +14,10 @@ describe('CreateUserUsecase', () => {
 
   beforeEach(() => {
     userRepository = {
-      loadByEmail: jest.fn(),
+      getUser: jest.fn(),
       save: jest.fn()
-    }
+    } as unknown as jest.Mocked<IUserRepository>
+
     createUserUsecase = new CreateUserUsecase(userRepository)
   })
 
@@ -23,22 +28,27 @@ describe('CreateUserUsecase', () => {
       confirmPassword: 'password123'
     }
 
-    userRepository.loadByEmail.mockResolvedValueOnce(null)
-    const user = new User(
-      'valid_userId',
-      createUserData.email,
-      'valid_hashed_password'
+    const mockEmail: Email = Email.create('test@example.com')
+    const mockPassword = await Password.create('hashed-password')
+
+    const mockUser = new User(
+      'user-id',
+      mockEmail,
+      mockPassword,
+      UserRoles.DEFAULT
     )
-    jest.spyOn(User, 'create').mockResolvedValueOnce(user)
+
+    jest.spyOn(User, 'create').mockResolvedValueOnce(mockUser)
+    userRepository.getUser.mockResolvedValueOnce(null)
 
     const result = await createUserUsecase.execute(createUserData)
 
-    expect(userRepository.loadByEmail).toHaveBeenCalledWith(
-      createUserData.email
-    )
+    expect(userRepository.getUser).toHaveBeenCalledWith({
+      email: createUserData.email
+    })
     expect(User.create).toHaveBeenCalledWith(createUserData)
-    expect(userRepository.save).toHaveBeenCalledWith(user)
-    expect(result).toEqual({ user: { ...user, password: undefined } })
+    expect(userRepository.save).toHaveBeenCalledWith(mockUser.toPersistence())
+    expect(result).toEqual({ user: mockUser.toReturn() })
   })
 
   it('should return EmailInUseError if email is already in use', async () => {
@@ -48,20 +58,21 @@ describe('CreateUserUsecase', () => {
       confirmPassword: 'password123'
     }
 
-    const user = new User(
-      'valid_userId',
-      createUserData.email,
-      'valid_hashed_password'
-    )
+    const existingUser = {
+      userId: 'existing-id',
+      email: 'test@example.com',
+      password: 'hashed',
+      role: 'DEFAULT'
+    }
 
-    userRepository.loadByEmail.mockResolvedValueOnce(user)
+    userRepository.getUser.mockResolvedValueOnce(existingUser)
 
     const result = await createUserUsecase.execute(createUserData)
 
+    expect(userRepository.getUser).toHaveBeenCalledWith({
+      email: createUserData.email
+    })
     expect(result).toEqual(new EmailInUseError())
-    expect(userRepository.loadByEmail).toHaveBeenCalledWith(
-      createUserData.email
-    )
     expect(userRepository.save).not.toHaveBeenCalled()
   })
 })

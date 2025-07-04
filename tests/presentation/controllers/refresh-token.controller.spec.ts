@@ -1,10 +1,10 @@
-import { type IRefreshTokenUsecase } from '../../../src/domain/contracts'
-import { UnauthorizedError } from '../../../src/domain/errors'
-import { type IRefreshTokenRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type IRefreshTokenResponseDTO } from '../../../src/domain/ports/outbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { RefreshTokenController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type IRefreshTokenUsecase } from '@/domain/contracts'
+import { UnauthorizedError } from '@/domain/errors'
+import { type IRefreshTokenRequestDTO } from '@/domain/ports/inbounds'
+import { type IRefreshTokenResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { RefreshTokenController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('RefreshTokenController', () => {
   let refreshTokenUsecase: jest.Mocked<IRefreshTokenUsecase>

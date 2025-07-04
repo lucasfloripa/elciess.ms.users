@@ -1,8 +1,8 @@
-import { type IGetUsersUsecase } from '../../../src/domain/contracts'
-import { NotFoundError } from '../../../src/domain/errors'
-import { type IGetUsersResponseDTO } from '../../../src/domain/ports/outbounds'
-import { GetUsersController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type IGetUsersUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type IGetUsersResponseDTO } from '@/domain/ports/outbounds'
+import { GetUsersController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('GetUsersController', () => {
   let getUsersUsecase: jest.Mocked<IGetUsersUsecase>

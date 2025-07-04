@@ -1,19 +1,28 @@
-import { type IUserRepository } from '../../../src/application/contracts'
-import { AuthUserUsecase } from '../../../src/application/usecases'
-import { User } from '../../../src/domain/entities'
-import { UnauthorizedError, ForbiddenError } from '../../../src/domain/errors'
-import { type IAuthUserRequestDTO } from '../../../src/domain/ports/inbounds'
+import {
+  type ITokenService,
+  type IUserRepository
+} from '@/application/contracts'
+import { AuthUserUsecase } from '@/application/usecases'
+import { UnauthorizedError, ForbiddenError } from '@/domain/errors'
+import { type IUser } from '@/domain/interfaces'
+import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
+import { Password } from '@/domain/value-objects'
 
 describe('AuthUserUsecase', () => {
   let authUserUsecase: AuthUserUsecase
   let userRepository: jest.Mocked<IUserRepository>
+  let tokenService: jest.Mocked<ITokenService>
 
   beforeEach(() => {
     userRepository = {
-      loadByEmail: jest.fn(),
-      save: jest.fn()
-    }
-    authUserUsecase = new AuthUserUsecase(userRepository)
+      getUser: jest.fn(),
+      saveRefreshToken: jest.fn()
+    } as unknown as jest.Mocked<IUserRepository>
+    tokenService = {
+      generateAccessToken: jest.fn(),
+      generateRefreshToken: jest.fn()
+    } as unknown as jest.Mocked<ITokenService>
+    authUserUsecase = new AuthUserUsecase(userRepository, tokenService)
   })
 
   it('should authenticate a user successfully', async () => {
@@ -22,25 +31,48 @@ describe('AuthUserUsecase', () => {
       password: 'password123'
     }
 
-    const user = new User(
-      'valid_userId',
-      credentials.email,
-      'valid_hashed_password'
-    )
+    const user: IUser = {
+      email: 'any_email',
+      password: 'any_password',
+      role: 'DEFAULT',
+      userId: 'any_id',
+      refreshToken: 'any_refreshToken'
+    }
 
-    userRepository.loadByEmail.mockResolvedValueOnce(user)
-    jest.spyOn(User, 'comparePassword').mockResolvedValueOnce(true)
-    jest.spyOn(User, 'generateToken').mockResolvedValueOnce('token')
+    userRepository.getUser.mockResolvedValueOnce(user)
+    jest.spyOn(Password, 'comparePassword').mockResolvedValueOnce(true)
+    jest
+      .spyOn(tokenService, 'generateAccessToken')
+      .mockResolvedValueOnce('accessToken')
+    jest
+      .spyOn(tokenService, 'generateRefreshToken')
+      .mockResolvedValueOnce('refreshToken')
 
     const result = await authUserUsecase.execute(credentials)
 
-    expect(userRepository.loadByEmail).toHaveBeenCalledWith(credentials.email)
-    expect(User.comparePassword).toHaveBeenCalledWith(
+    expect(userRepository.getUser).toHaveBeenCalledWith({
+      email: credentials.email
+    })
+    expect(Password.comparePassword).toHaveBeenCalledWith(
       credentials.password,
       user.password
     )
-    expect(User.generateToken).toHaveBeenCalledWith(user.userId)
-    expect(result).toEqual({ token: 'token' })
+    expect(tokenService.generateAccessToken).toHaveBeenCalledWith({
+      userId: user.userId,
+      role: user.role
+    })
+    expect(tokenService.generateRefreshToken).toHaveBeenCalledWith({
+      userId: user.userId,
+      role: user.role
+    })
+    expect(userRepository.saveRefreshToken).toHaveBeenCalledWith(
+      user.userId,
+      'refreshToken'
+    )
+    expect(result).toEqual({
+      accessToken: 'accessToken',
+      refreshToken: 'refreshToken'
+    })
   })
 
   it('should return UnauthorizedError if user does not exist', async () => {
@@ -49,12 +81,14 @@ describe('AuthUserUsecase', () => {
       password: 'password123'
     }
 
-    userRepository.loadByEmail.mockResolvedValueOnce(null)
+    userRepository.getUser.mockResolvedValueOnce(null)
 
     const result = await authUserUsecase.execute(credentials)
 
-    expect(result).toEqual(new UnauthorizedError())
-    expect(userRepository.loadByEmail).toHaveBeenCalledWith(credentials.email)
+    expect(userRepository.getUser).toHaveBeenCalledWith({
+      email: credentials.email
+    })
+    expect(result).toEqual(new UnauthorizedError('User not found'))
   })
 
   it('should return ForbiddenError if password is incorrect', async () => {
@@ -63,22 +97,26 @@ describe('AuthUserUsecase', () => {
       password: 'password123'
     }
 
-    const user = new User(
-      'valid_userId',
-      credentials.email,
-      'valid_hashed_password'
-    )
+    const user: IUser = {
+      email: 'any_email',
+      password: 'any_password',
+      role: 'DEFAULT',
+      userId: 'any_id',
+      refreshToken: 'any_refreshToken'
+    }
 
-    userRepository.loadByEmail.mockResolvedValueOnce(user)
-    jest.spyOn(User, 'comparePassword').mockResolvedValueOnce(false)
+    userRepository.getUser.mockResolvedValueOnce(user)
+    jest.spyOn(Password, 'comparePassword').mockResolvedValueOnce(false)
 
     const result = await authUserUsecase.execute(credentials)
 
-    expect(result).toEqual(new ForbiddenError())
-    expect(userRepository.loadByEmail).toHaveBeenCalledWith(credentials.email)
-    expect(User.comparePassword).toHaveBeenCalledWith(
+    expect(userRepository.getUser).toHaveBeenCalledWith({
+      email: credentials.email
+    })
+    expect(Password.comparePassword).toHaveBeenCalledWith(
       credentials.password,
       user.password
     )
+    expect(result).toEqual(new ForbiddenError('Invalid Password'))
   })
 })

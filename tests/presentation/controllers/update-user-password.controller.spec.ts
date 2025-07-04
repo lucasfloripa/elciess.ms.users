@@ -1,10 +1,10 @@
-import { type IUpdateUserPasswordUsecase } from '../../../src/domain/contracts'
-import { ConflictError, NotFoundError } from '../../../src/domain/errors'
-import { type IUpdateUserPasswordRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type IUpdateUserPasswordResponseDTO } from '../../../src/domain/ports/outbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { UpdateUserPasswordController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type IUpdateUserPasswordUsecase } from '@/domain/contracts'
+import { ConflictError, NotFoundError } from '@/domain/errors'
+import { type IUpdateUserPasswordRequestDTO } from '@/domain/ports/inbounds'
+import { type IUpdateUserPasswordResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { UpdateUserPasswordController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('UpdateUserPasswordController', () => {
   let updateUserPasswordUsecase: jest.Mocked<IUpdateUserPasswordUsecase>

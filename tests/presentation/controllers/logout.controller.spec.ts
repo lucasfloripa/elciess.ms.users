@@ -1,10 +1,10 @@
-import { type ILogoutUsecase } from '../../../src/domain/contracts'
-import { NotFoundError } from '../../../src/domain/errors'
-import { type ILogoutRequestDTO } from '../../../src/domain/ports/inbounds'
-import { type ILogoutResponseDTO } from '../../../src/domain/ports/outbounds'
-import { type IValidation } from '../../../src/presentation/contracts'
-import { LogoutController } from '../../../src/presentation/controllers'
-import { htttpResponses } from '../../../src/presentation/interfaces'
+import { type ILogoutUsecase } from '@/domain/contracts'
+import { NotFoundError } from '@/domain/errors'
+import { type ILogoutRequestDTO } from '@/domain/ports/inbounds'
+import { type ILogoutResponseDTO } from '@/domain/ports/outbounds'
+import { type IValidation } from '@/presentation/contracts'
+import { LogoutController } from '@/presentation/controllers'
+import { htttpResponses } from '@/presentation/interfaces'
 
 describe('LogoutController', () => {
   let logoutUsecase: jest.Mocked<ILogoutUsecase>
