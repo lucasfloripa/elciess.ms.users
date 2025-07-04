@@ -24,6 +24,29 @@ describe('CreateUserController', () => {
     )
   })
 
+  it('should return 201 if user is created successfully', async () => {
+    const createUserData: ICreateUserRequestDTO = {
+      email: 'valid_email@mail.com',
+      password: 'valid_password',
+      confirmPassword: 'valid_password'
+    }
+    const newUser: ICreateUserResponseDTO = {
+      user: {
+        email: createUserData.email,
+        userId: 'valid_id',
+        role: 'DEFAULT'
+      }
+    }
+    validator.validate.mockReturnValue(undefined)
+    createUserUsecase.execute.mockResolvedValue(newUser)
+
+    const response = await createUserController.handle(createUserData)
+
+    expect(response).toEqual(htttpResponses.http201(newUser))
+    expect(validator.validate).toHaveBeenCalledWith(createUserData)
+    expect(createUserUsecase.execute).toHaveBeenCalledWith(createUserData)
+  })
+
   it('should return 400 if validation fails', async () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'invalid_email',
@@ -38,28 +61,6 @@ describe('CreateUserController', () => {
     expect(response).toEqual(htttpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(createUserData)
     expect(createUserUsecase.execute).not.toHaveBeenCalled()
-  })
-
-  it('should return 200 if user is created successfully', async () => {
-    const createUserData: ICreateUserRequestDTO = {
-      email: 'valid_email@mail.com',
-      password: 'valid_password',
-      confirmPassword: 'valid_password'
-    }
-    const newUser: ICreateUserResponseDTO = {
-      user: {
-        email: createUserData.email,
-        userId: 'valid_id'
-      }
-    }
-    validator.validate.mockReturnValue(undefined)
-    createUserUsecase.execute.mockResolvedValue(newUser)
-
-    const response = await createUserController.handle(createUserData)
-
-    expect(response).toEqual(htttpResponses.http200(newUser))
-    expect(validator.validate).toHaveBeenCalledWith(createUserData)
-    expect(createUserUsecase.execute).toHaveBeenCalledWith(createUserData)
   })
 
   it('should return 400 if email is already in use', async () => {
@@ -79,7 +80,7 @@ describe('CreateUserController', () => {
     expect(createUserUsecase.execute).toHaveBeenCalledWith(createUserData)
   })
 
-  it('should handle errors and return appropriate response', async () => {
+  it('should return 500 if an unexpected error accurs', async () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password',

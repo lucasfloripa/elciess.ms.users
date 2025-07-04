@@ -21,6 +21,25 @@ describe('AuthUserController', () => {
     authUserController = new AuthUserController(authUserUsecase, validator)
   })
 
+  it('should return 200 if user is authenticated successfully', async () => {
+    const credentials: IAuthUserRequestDTO = {
+      email: 'valid_email@mail.com',
+      password: 'valid_password'
+    }
+    const tokens: IAuthUserResponseDTO = {
+      accessToken: 'valid_token',
+      refreshToken: 'refresh_token'
+    }
+    validator.validate.mockReturnValue(undefined)
+    authUserUsecase.execute.mockResolvedValue(tokens)
+
+    const response = await authUserController.handle(credentials)
+
+    expect(response).toEqual(htttpResponses.http200(tokens))
+    expect(validator.validate).toHaveBeenCalledWith(credentials)
+    expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
+  })
+
   it('should return 400 if validation fails', async () => {
     const credentials: IAuthUserRequestDTO = {
       email: 'invalid_email',
@@ -36,30 +55,12 @@ describe('AuthUserController', () => {
     expect(authUserUsecase.execute).not.toHaveBeenCalled()
   })
 
-  it('should return 200 if user is authenticated successfully', async () => {
-    const credentials: IAuthUserRequestDTO = {
-      email: 'valid_email@mail.com',
-      password: 'valid_password'
-    }
-    const token: IAuthUserResponseDTO = {
-      token: 'valid_token'
-    }
-    validator.validate.mockReturnValue(undefined)
-    authUserUsecase.execute.mockResolvedValue(token)
-
-    const response = await authUserController.handle(credentials)
-
-    expect(response).toEqual(htttpResponses.http200(token))
-    expect(validator.validate).toHaveBeenCalledWith(credentials)
-    expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
-  })
-
   it('should return 401 if user is not found', async () => {
     const credentials: IAuthUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
-    const error = new UnauthorizedError()
+    const error = new UnauthorizedError('User not found')
     validator.validate.mockReturnValue(undefined)
     authUserUsecase.execute.mockResolvedValue(error)
 
@@ -75,7 +76,7 @@ describe('AuthUserController', () => {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
-    const error = new ForbiddenError()
+    const error = new ForbiddenError('Invalid password')
     validator.validate.mockReturnValue(undefined)
     authUserUsecase.execute.mockResolvedValue(error)
 
@@ -86,7 +87,7 @@ describe('AuthUserController', () => {
     expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
   })
 
-  it('should handle errors and return appropriate response', async () => {
+  it('should return 500 if an unexpected error accurs', async () => {
     const credentials: IAuthUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
