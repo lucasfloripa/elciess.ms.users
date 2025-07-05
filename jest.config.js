@@ -14,7 +14,8 @@ module.exports = {
     '!tests/**',
     '!src/**/index.{js,jsx,ts,tsx}',
     '!src/main/**',
-    '!src/infra/**'
+    '!src/infra/**',
+    '!src/@types/**'
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['json', 'lcov', 'text', 'text-summary'],
