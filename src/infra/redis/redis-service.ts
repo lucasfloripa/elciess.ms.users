@@ -19,20 +19,16 @@ export class RedisService implements ICacheService {
   async get<T>(key: string): Promise<T | null> {
     try {
       const data = await this.client.get(key)
-      if (data === null) {
-        return null // Chave não encontrada
-      }
+      if (data === null) return null
       return JSON.parse(data) as T
     } catch (error) {
-      console.error(`[RedisCacheService] Error getting key "${key}":`, error)
-      return null // Retorna null em caso de erro para não quebrar a aplicação
+      return null
     }
   }
 
   async set<T>(key: string, value: T): Promise<boolean> {
     try {
       const stringValue = JSON.stringify(value)
-      // Usamos SETEX para definir a chave com um TTL (Time To Live)
       const result = await this.client.setex(
         key,
         this.DEFAULT_CACHE_TTL,
@@ -40,8 +36,7 @@ export class RedisService implements ICacheService {
       )
       return result === 'OK'
     } catch (error) {
-      console.error(`[RedisCacheService] Error setting key "${key}":`, error)
-      return false // Retorna false em caso de erro
+      return false
     }
   }
 
@@ -52,20 +47,11 @@ export class RedisService implements ICacheService {
     try {
       return await this.client.del(...keys)
     } catch (error) {
-      console.error(
-        `[RedisCacheService] Error deleting keys "${keys.join(', ')}":`,
-        error
-      )
-      return 0 // Retorna 0 em caso de erro
+      return 0
     }
   }
 
   async clear(): Promise<void> {
-    try {
-      await this.client.flushdb() // Cuidado! Isso apaga TODO o banco de dados Redis atual.
-      console.log('[RedisCacheService] All cache cleared.')
-    } catch (error) {
-      console.error('[RedisCacheService] Error clearing cache:', error)
-    }
+    await this.client.flushdb()
   }
 }

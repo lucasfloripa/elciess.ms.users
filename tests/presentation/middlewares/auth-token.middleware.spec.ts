@@ -1,8 +1,8 @@
-import { type IAuthTokenUsecase } from '../../../src/domain/contracts'
-import { UnauthorizedError } from '../../../src/domain/errors'
-import { type IAuthTokenRequestDTO } from '../../../src/domain/ports/inbounds'
-import { htttpResponses } from '../../../src/presentation/interfaces'
-import { AuthTokenMiddleware } from '../../../src/presentation/middlewares' // Ajuste o caminho do import do middleware
+import { type IAuthTokenUsecase } from '@/domain/contracts'
+import { UnauthorizedError } from '@/domain/errors'
+import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
+import { htttpResponses } from '@/presentation/interfaces'
+import { AuthTokenMiddleware } from '@/presentation/middlewares'
 
 describe('AuthTokenMiddleware', () => {
   let authTokenUsecase: jest.Mocked<IAuthTokenUsecase>

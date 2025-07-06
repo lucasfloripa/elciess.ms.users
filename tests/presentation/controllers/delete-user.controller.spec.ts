@@ -39,7 +39,7 @@ describe('DeleteUserController', () => {
 
   it('should return 400 if validation fails', async () => {
     const deleteUserData: IDeleteUserRequestDTO = {
-      id: '' // ID inválido para simular falha de validação
+      id: ''
     }
     const validationError = new Error('ID is required')
     validator.validate.mockReturnValue(validationError)

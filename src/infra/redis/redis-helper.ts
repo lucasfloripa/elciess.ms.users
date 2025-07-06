@@ -1,4 +1,3 @@
-// src/infra/redis/redis-helper.ts
 import config from 'config'
 import Redis, { type RedisOptions } from 'ioredis'
 

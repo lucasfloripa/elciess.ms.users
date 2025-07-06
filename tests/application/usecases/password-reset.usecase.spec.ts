@@ -46,7 +46,7 @@ describe('PasswordResetUsecase', () => {
       refreshToken: 'token'
     }
     userRepository.getUser.mockResolvedValueOnce(dbUser)
-    messagerService.sendMessage.mockResolvedValueOnce(undefined) // or Promise.resolve()
+    messagerService.sendMessage.mockResolvedValueOnce(undefined)
 
     const result = await passwordResetUsecase.execute(email)
 

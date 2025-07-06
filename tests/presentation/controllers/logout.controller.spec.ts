@@ -40,7 +40,7 @@ describe('LogoutController', () => {
 
   it('should return 400 if validation fails', async () => {
     const requestData: ILogoutRequestDTO = {
-      userId: '' // ID inválido para simular falha de validação
+      userId: ''
     }
     const validationError = new Error('User ID is required')
     validator.validate.mockReturnValue(validationError)

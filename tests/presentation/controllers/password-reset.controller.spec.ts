@@ -28,7 +28,6 @@ describe('PasswordResetController', () => {
     const requestData: IPasswordResetRequestDTO = {
       email: 'valid_email@mail.com'
     }
-    // A resposta do usecase para sucesso pode ser um objeto vazio ou com uma mensagem de sucesso
     const responseData: IPasswordResetResponseDTO = {
       message: 'Password reset email sent'
     }
@@ -44,7 +43,7 @@ describe('PasswordResetController', () => {
 
   it('should return 400 if validation fails', async () => {
     const requestData: IPasswordResetRequestDTO = {
-      email: 'invalid_email' // Simula email inválido para falha de validação
+      email: 'invalid_email'
     }
     const validationError = new Error('Invalid email format')
     validator.validate.mockReturnValue(validationError)

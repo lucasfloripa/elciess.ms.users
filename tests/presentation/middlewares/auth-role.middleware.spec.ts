@@ -1,8 +1,8 @@
-import { type IAuthRoleUsecase } from '../../../src/domain/contracts'
-import { ForbiddenError } from '../../../src/domain/errors'
-import { type IAuthRoleRequestDTO } from '../../../src/domain/ports/inbounds'
-import { htttpResponses } from '../../../src/presentation/interfaces'
-import { AuthRoleMiddleware } from '../../../src/presentation/middlewares'
+import { type IAuthRoleUsecase } from '@/domain/contracts'
+import { ForbiddenError } from '@/domain/errors'
+import { type IAuthRoleRequestDTO } from '@/domain/ports/inbounds'
+import { htttpResponses } from '@/presentation/interfaces'
+import { AuthRoleMiddleware } from '@/presentation/middlewares'
 
 describe('AuthRoleMiddleware', () => {
   let authRoleUsecase: jest.Mocked<IAuthRoleUsecase>

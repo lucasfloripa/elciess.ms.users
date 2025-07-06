@@ -1,5 +1,5 @@
-import { InvalidEmailFormatError } from '../../src/domain/errors'
-import { EmailValidation } from '../../src/utils/validators'
+import { InvalidEmailFormatError } from '@/domain/errors'
+import { EmailValidation } from '@/utils/validators'
 
 describe('EmailValidation', () => {
   let emailValidation: EmailValidation
