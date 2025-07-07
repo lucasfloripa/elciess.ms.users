@@ -1,24 +1,29 @@
-import { type IAuthTokenUsecase } from '@/domain/contracts'
+import { type ILogger, type IAuthTokenUsecase } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
 import {
   type IHttpResponse,
   type IMiddleware,
-  htttpResponses
+  httpResponses
 } from '@/presentation/interfaces'
-import { logError, log } from '@/utils/log'
 
 export class AuthTokenMiddleware implements IMiddleware {
-  constructor(private readonly authTokenUsecase: IAuthTokenUsecase) {}
+  constructor(
+    private readonly authTokenUsecase: IAuthTokenUsecase,
+    private readonly logger: ILogger
+  ) {}
 
   async handle(request: IAuthTokenRequestDTO): Promise<IHttpResponse> {
     try {
-      log('AuthTokenMiddleware request:', request)
+      this.logger.info('Init AuthTokenMiddleware')
+      this.logger.debug('AuthTokenMiddleware request:', request)
       const { accessToken } = request
 
       if (!accessToken) {
-        logError('AuthTokenMiddleware error:', 'Missing accessToken')
-        return htttpResponses.http401(
+        this.logger.warn('AuthTokenMiddleware error:', {
+          message: 'Missing accessToken'
+        })
+        return httpResponses.http401(
           new UnauthorizedError('Missing accessToken')
         )
       }
@@ -28,15 +33,16 @@ export class AuthTokenMiddleware implements IMiddleware {
       })
 
       if (ucResponse instanceof UnauthorizedError) {
-        logError('AuthTokenMiddleware error:', ucResponse.error)
-        return htttpResponses.http401(ucResponse)
+        this.logger.warn('AuthTokenMiddleware error:', ucResponse)
+        return httpResponses.http401(ucResponse)
       }
 
-      log('AuthTokenMiddleware response:', ucResponse)
-      return htttpResponses.http200(ucResponse)
+      this.logger.info('Completed AuthTokenMiddleware')
+      this.logger.debug('AuthTokenMiddleware response:', ucResponse)
+      return httpResponses.http200(ucResponse)
     } catch (error) {
-      logError('AuthTokenMiddleware error:', error)
-      return htttpResponses.http500(error)
+      this.logger.error('AuthTokenMiddleware error:', error)
+      return httpResponses.http500(error)
     }
   }
 }

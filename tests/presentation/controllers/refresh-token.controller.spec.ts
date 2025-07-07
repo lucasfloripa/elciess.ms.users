@@ -4,7 +4,7 @@ import { type IRefreshTokenRequestDTO } from '@/domain/ports/inbounds'
 import { type IRefreshTokenResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { RefreshTokenController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('RefreshTokenController', () => {
   let refreshTokenUsecase: jest.Mocked<IRefreshTokenUsecase>
@@ -37,7 +37,7 @@ describe('RefreshTokenController', () => {
 
     const response = await refreshTokenController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http200(responseData))
+    expect(response).toEqual(httpResponses.http200(responseData))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(refreshTokenUsecase.execute).toHaveBeenCalledWith(
       requestData.refreshToken
@@ -53,7 +53,7 @@ describe('RefreshTokenController', () => {
 
     const response = await refreshTokenController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(refreshTokenUsecase.execute).not.toHaveBeenCalled()
   })
@@ -70,7 +70,7 @@ describe('RefreshTokenController', () => {
 
     const response = await refreshTokenController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http401(unauthorizedError))
+    expect(response).toEqual(httpResponses.http401(unauthorizedError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(refreshTokenUsecase.execute).toHaveBeenCalledWith(
       requestData.refreshToken
@@ -87,7 +87,7 @@ describe('RefreshTokenController', () => {
 
     const response = await refreshTokenController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(refreshTokenUsecase.execute).toHaveBeenCalledWith(
       requestData.refreshToken

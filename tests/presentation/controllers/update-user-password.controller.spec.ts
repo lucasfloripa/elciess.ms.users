@@ -4,7 +4,7 @@ import { type IUpdateUserPasswordRequestDTO } from '@/domain/ports/inbounds'
 import { type IUpdateUserPasswordResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { UpdateUserPasswordController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('UpdateUserPasswordController', () => {
   let updateUserPasswordUsecase: jest.Mocked<IUpdateUserPasswordUsecase>
@@ -39,7 +39,7 @@ describe('UpdateUserPasswordController', () => {
 
     const response = await updateUserPasswordController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http200(responseData))
+    expect(response).toEqual(httpResponses.http200(responseData))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(updateUserPasswordUsecase.execute).toHaveBeenCalledWith(requestData)
   })
@@ -58,7 +58,7 @@ describe('UpdateUserPasswordController', () => {
 
     const response = await updateUserPasswordController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(updateUserPasswordUsecase.execute).not.toHaveBeenCalled()
   })
@@ -76,7 +76,7 @@ describe('UpdateUserPasswordController', () => {
 
     const response = await updateUserPasswordController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http404(notFoundError))
+    expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(updateUserPasswordUsecase.execute).toHaveBeenCalledWith(requestData)
   })
@@ -94,7 +94,7 @@ describe('UpdateUserPasswordController', () => {
 
     const response = await updateUserPasswordController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http409(conflictError))
+    expect(response).toEqual(httpResponses.http409(conflictError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(updateUserPasswordUsecase.execute).toHaveBeenCalledWith(requestData)
   })
@@ -112,7 +112,7 @@ describe('UpdateUserPasswordController', () => {
 
     const response = await updateUserPasswordController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(updateUserPasswordUsecase.execute).toHaveBeenCalledWith(requestData)
   })

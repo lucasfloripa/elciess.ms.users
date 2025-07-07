@@ -1,31 +1,35 @@
-import { type IGetUsersUsecase } from '@/domain/contracts'
+import { type ILogger, type IGetUsersUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IGetUsersResponseDTO } from '@/domain/ports/outbounds'
 import {
   type IHttpResponse,
   type IController,
-  htttpResponses
+  httpResponses
 } from '@/presentation/interfaces'
-import { logError, log } from '@/utils/log'
 
 export class GetUsersController implements IController {
-  constructor(private readonly getUsersUsecase: IGetUsersUsecase) {}
+  constructor(
+    private readonly getUsersUsecase: IGetUsersUsecase,
+    private readonly logger: ILogger
+  ) {}
 
   async handle(): Promise<IHttpResponse<IGetUsersResponseDTO>> {
     try {
-      log('GetUsersController request:', '')
+      this.logger.info('Init GetUsersController')
+      this.logger.debug('GetUsersController request:', { message: '' })
       const ucResponse = await this.getUsersUsecase.execute()
 
       if (ucResponse instanceof NotFoundError) {
-        logError('GetUsersController error:', ucResponse.error)
-        return htttpResponses.http404(ucResponse)
+        this.logger.warn('GetUsersController error:', ucResponse)
+        return httpResponses.http404(ucResponse)
       }
 
-      log('GetUsersController response:', ucResponse)
-      return htttpResponses.http200(ucResponse)
+      this.logger.info('Completed GetUsersController')
+      this.logger.debug('GetUsersController response:', ucResponse)
+      return httpResponses.http200(ucResponse)
     } catch (error) {
-      logError('GetUsersController error:', error)
-      return htttpResponses.http500(error)
+      this.logger.error('GetUsersController error:', error)
+      return httpResponses.http500(error)
     }
   }
 }

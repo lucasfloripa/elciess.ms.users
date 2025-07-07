@@ -10,10 +10,8 @@ import {
 
 export const authRouter = Router()
 
-authRouter.post('/auth', adaptExpressRoute(makeAuthUserController()))
+authRouter.post('/login', adaptExpressRoute(makeAuthUserController()))
 
-authRouter.post(
-  '/auth/refresh',
-  adaptExpressRoute(makeRefreshTokenController())
-)
 authRouter.post('/logout', adaptExpressRoute(makeLogoutController()))
+
+authRouter.post('/refresh', adaptExpressRoute(makeRefreshTokenController()))

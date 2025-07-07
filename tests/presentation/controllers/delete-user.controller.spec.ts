@@ -3,7 +3,7 @@ import { NotFoundError } from '@/domain/errors'
 import { type IDeleteUserRequestDTO } from '@/domain/ports/inbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { DeleteUserController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('DeleteUserController', () => {
   let deleteUserUsecase: jest.Mocked<IDeleteUserUsecase>
@@ -32,7 +32,7 @@ describe('DeleteUserController', () => {
 
     const response = await deleteUserController.handle(deleteUserData)
 
-    expect(response).toEqual(htttpResponses.http204())
+    expect(response).toEqual(httpResponses.http204())
     expect(validator.validate).toHaveBeenCalledWith(deleteUserData)
     expect(deleteUserUsecase.execute).toHaveBeenCalledWith(deleteUserData.id)
   })
@@ -46,7 +46,7 @@ describe('DeleteUserController', () => {
 
     const response = await deleteUserController.handle(deleteUserData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(deleteUserData)
     expect(deleteUserUsecase.execute).not.toHaveBeenCalled()
   })
@@ -61,7 +61,7 @@ describe('DeleteUserController', () => {
 
     const response = await deleteUserController.handle(deleteUserData)
 
-    expect(response).toEqual(htttpResponses.http404(notFoundError))
+    expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(deleteUserData)
     expect(deleteUserUsecase.execute).toHaveBeenCalledWith(deleteUserData.id)
   })
@@ -76,7 +76,7 @@ describe('DeleteUserController', () => {
 
     const response = await deleteUserController.handle(deleteUserData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(deleteUserData)
     expect(deleteUserUsecase.execute).toHaveBeenCalledWith(deleteUserData.id)
   })

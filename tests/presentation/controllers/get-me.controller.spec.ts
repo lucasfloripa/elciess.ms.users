@@ -4,7 +4,7 @@ import { type IGetMeRequestDTO } from '@/domain/ports/inbounds'
 import { type IGetMeResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { GetMeController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('GetMeController', () => {
   let getMeUsecase: jest.Mocked<IGetMeUsecase>
@@ -37,7 +37,7 @@ describe('GetMeController', () => {
 
     const response = await getMeController.handle(getMeData)
 
-    expect(response).toEqual(htttpResponses.http200(userResponse))
+    expect(response).toEqual(httpResponses.http200(userResponse))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
     expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
   })
@@ -51,7 +51,7 @@ describe('GetMeController', () => {
 
     const response = await getMeController.handle(getMeData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
     expect(getMeUsecase.execute).not.toHaveBeenCalled()
   })
@@ -66,7 +66,7 @@ describe('GetMeController', () => {
 
     const response = await getMeController.handle(getMeData)
 
-    expect(response).toEqual(htttpResponses.http404(notFoundError))
+    expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
     expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
   })
@@ -81,7 +81,7 @@ describe('GetMeController', () => {
 
     const response = await getMeController.handle(getMeData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
     expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
   })

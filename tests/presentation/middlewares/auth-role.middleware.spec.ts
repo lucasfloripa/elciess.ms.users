@@ -1,7 +1,7 @@
 import { type IAuthRoleUsecase } from '@/domain/contracts'
 import { ForbiddenError } from '@/domain/errors'
 import { type IAuthRoleRequestDTO } from '@/domain/ports/inbounds'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 import { AuthRoleMiddleware } from '@/presentation/middlewares'
 
 describe('AuthRoleMiddleware', () => {
@@ -24,7 +24,7 @@ describe('AuthRoleMiddleware', () => {
 
     const response = await authRoleMiddleware.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http200({}))
+    expect(response).toEqual(httpResponses.http200({}))
     expect(authRoleUsecase.execute).toHaveBeenCalledWith(
       requestData.role,
       requiredRole
@@ -42,7 +42,7 @@ describe('AuthRoleMiddleware', () => {
 
     const response = await authRoleMiddleware.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http401(forbiddenError))
+    expect(response).toEqual(httpResponses.http401(forbiddenError))
     expect(authRoleUsecase.execute).toHaveBeenCalledWith(
       requestData.role,
       requiredRole
@@ -58,7 +58,7 @@ describe('AuthRoleMiddleware', () => {
 
     const response = await authRoleMiddleware.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(authRoleUsecase.execute).toHaveBeenCalledWith(
       requestData.role,
       requiredRole

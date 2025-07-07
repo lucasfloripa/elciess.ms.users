@@ -4,7 +4,7 @@ import { type IPasswordResetRequestDTO } from '@/domain/ports/inbounds'
 import { type IPasswordResetResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { PasswordResetController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('PasswordResetController', () => {
   let passwordResetUsecase: jest.Mocked<IPasswordResetUsecase>
@@ -36,7 +36,7 @@ describe('PasswordResetController', () => {
 
     const response = await passwordResetController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http200(responseData))
+    expect(response).toEqual(httpResponses.http200(responseData))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(passwordResetUsecase.execute).toHaveBeenCalledWith(requestData.email)
   })
@@ -50,7 +50,7 @@ describe('PasswordResetController', () => {
 
     const response = await passwordResetController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(passwordResetUsecase.execute).not.toHaveBeenCalled()
   })
@@ -65,7 +65,7 @@ describe('PasswordResetController', () => {
 
     const response = await passwordResetController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http404(notFoundError))
+    expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(passwordResetUsecase.execute).toHaveBeenCalledWith(requestData.email)
   })
@@ -80,7 +80,7 @@ describe('PasswordResetController', () => {
 
     const response = await passwordResetController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(passwordResetUsecase.execute).toHaveBeenCalledWith(requestData.email)
   })

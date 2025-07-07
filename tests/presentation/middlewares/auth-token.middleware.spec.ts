@@ -1,7 +1,7 @@
 import { type IAuthTokenUsecase } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 import { AuthTokenMiddleware } from '@/presentation/middlewares'
 
 describe('AuthTokenMiddleware', () => {
@@ -27,7 +27,7 @@ describe('AuthTokenMiddleware', () => {
 
     const response = await authTokenMiddleware.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http200(usecaseResponse))
+    expect(response).toEqual(httpResponses.http200(usecaseResponse))
     expect(authTokenUsecase.execute).toHaveBeenCalledWith({
       accessToken: requestData.accessToken
     })
@@ -41,7 +41,7 @@ describe('AuthTokenMiddleware', () => {
 
     const response = await authTokenMiddleware.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http401(unauthorizedError))
+    expect(response).toEqual(httpResponses.http401(unauthorizedError))
     expect(authTokenUsecase.execute).not.toHaveBeenCalled()
   })
 
@@ -56,7 +56,7 @@ describe('AuthTokenMiddleware', () => {
 
     const response = await authTokenMiddleware.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http401(unauthorizedError))
+    expect(response).toEqual(httpResponses.http401(unauthorizedError))
     expect(authTokenUsecase.execute).toHaveBeenCalledWith({
       accessToken: requestData.accessToken
     })
@@ -71,7 +71,7 @@ describe('AuthTokenMiddleware', () => {
 
     const response = await authTokenMiddleware.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(authTokenUsecase.execute).toHaveBeenCalledWith({
       accessToken: requestData.accessToken
     })

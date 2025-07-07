@@ -4,7 +4,7 @@ import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
 import { type IAuthUserResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { AuthUserController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('AuthUserController', () => {
   let authUserUsecase: jest.Mocked<IAuthUserUsecase>
@@ -35,7 +35,7 @@ describe('AuthUserController', () => {
 
     const response = await authUserController.handle(credentials)
 
-    expect(response).toEqual(htttpResponses.http200(tokens))
+    expect(response).toEqual(httpResponses.http200(tokens))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
     expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
   })
@@ -50,7 +50,7 @@ describe('AuthUserController', () => {
 
     const response = await authUserController.handle(credentials)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
     expect(authUserUsecase.execute).not.toHaveBeenCalled()
   })
@@ -66,7 +66,7 @@ describe('AuthUserController', () => {
 
     const response = await authUserController.handle(credentials)
 
-    expect(response).toEqual(htttpResponses.http401(error))
+    expect(response).toEqual(httpResponses.http401(error))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
     expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
   })
@@ -82,7 +82,7 @@ describe('AuthUserController', () => {
 
     const response = await authUserController.handle(credentials)
 
-    expect(response).toEqual(htttpResponses.http403(error))
+    expect(response).toEqual(httpResponses.http403(error))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
     expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
   })
@@ -98,7 +98,7 @@ describe('AuthUserController', () => {
 
     const response = await authUserController.handle(credentials)
 
-    expect(response).toEqual(htttpResponses.http500(error))
+    expect(response).toEqual(httpResponses.http500(error))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
     expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
   })

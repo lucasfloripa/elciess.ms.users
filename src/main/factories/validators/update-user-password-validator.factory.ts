@@ -3,7 +3,7 @@ import {
   ValidationComposite,
   RequiredFieldValidation,
   ConfirmPasswordValidation
-} from '@/utils/validators'
+} from '@/presentation/validators'
 
 export const makeUpdateUserPasswordUserValidator = (): ValidationComposite => {
   const validations: IValidation[] = []

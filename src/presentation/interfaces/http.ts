@@ -3,7 +3,7 @@ export interface IHttpResponse<T = any> {
   body?: T
 }
 
-export const htttpResponses = {
+export const httpResponses = {
   http200: <T>(data: T): IHttpResponse => ({
     statusCode: 200,
     body: data

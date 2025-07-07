@@ -4,7 +4,7 @@ import { type IGetUserRequestDTO } from '@/domain/ports/inbounds'
 import { type IGetUserResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { GetUserController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('GetUserController', () => {
   let getUserUsecase: jest.Mocked<IGetUserUsecase>
@@ -37,7 +37,7 @@ describe('GetUserController', () => {
 
     const response = await getUserController.handle(getUserData)
 
-    expect(response).toEqual(htttpResponses.http200(userResponse))
+    expect(response).toEqual(httpResponses.http200(userResponse))
     expect(validator.validate).toHaveBeenCalledWith(getUserData)
     expect(getUserUsecase.execute).toHaveBeenCalledWith(getUserData)
   })
@@ -51,7 +51,7 @@ describe('GetUserController', () => {
 
     const response = await getUserController.handle(getUserData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(getUserData)
     expect(getUserUsecase.execute).not.toHaveBeenCalled()
   })
@@ -66,7 +66,7 @@ describe('GetUserController', () => {
 
     const response = await getUserController.handle(getUserData)
 
-    expect(response).toEqual(htttpResponses.http404(notFoundError))
+    expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(getUserData)
     expect(getUserUsecase.execute).toHaveBeenCalledWith(getUserData)
   })
@@ -81,7 +81,7 @@ describe('GetUserController', () => {
 
     const response = await getUserController.handle(getUserData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(getUserData)
     expect(getUserUsecase.execute).toHaveBeenCalledWith(getUserData)
   })

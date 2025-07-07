@@ -1,4 +1,4 @@
-import { type IGetUserUsecase } from '@/domain/contracts'
+import { type ILogger, type IGetUserUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IGetUserRequestDTO } from '@/domain/ports/inbounds'
 import { type IGetUserResponseDTO } from '@/domain/ports/outbounds'
@@ -6,40 +6,42 @@ import { type IValidation } from '@/presentation/contracts'
 import {
   type IHttpResponse,
   type IController,
-  htttpResponses
+  httpResponses
 } from '@/presentation/interfaces'
-import { logError, log } from '@/utils/log'
 
 export class GetUserController implements IController {
   constructor(
     private readonly getUserUsecase: IGetUserUsecase,
-    private readonly validator: IValidation
+    private readonly validator: IValidation,
+    private readonly logger: ILogger
   ) {}
 
   async handle(
     request: IGetUserRequestDTO
   ): Promise<IHttpResponse<IGetUserResponseDTO>> {
     try {
-      log('GetUserController request:', request)
+      this.logger.info('Init GetUserController')
+      this.logger.debug('GetUserController request:', request)
       const hasInputError = this.validator.validate(request)
 
       if (hasInputError) {
-        logError('GetUserController error:', hasInputError)
-        return htttpResponses.http400(hasInputError)
+        this.logger.warn('GetUserController error:', hasInputError)
+        return httpResponses.http400(hasInputError)
       }
 
       const ucResponse = await this.getUserUsecase.execute(request)
 
       if (ucResponse instanceof NotFoundError) {
-        logError('GetUserController error:', ucResponse.error)
-        return htttpResponses.http404(ucResponse)
+        this.logger.warn('GetUserController error:', ucResponse)
+        return httpResponses.http404(ucResponse)
       }
 
-      log('GetUserController response:', ucResponse)
-      return htttpResponses.http200(ucResponse)
+      this.logger.info('Completed GetUserController')
+      this.logger.debug('GetUserController response:', ucResponse)
+      return httpResponses.http200(ucResponse)
     } catch (error) {
-      logError('GetUserController error:', error)
-      return htttpResponses.http500(error)
+      this.logger.error('GetUserController error:', error)
+      return httpResponses.http500(error)
     }
   }
 }

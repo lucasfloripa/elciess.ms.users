@@ -1,5 +1,5 @@
 import { InvalidPasswordMatchError } from '@/domain/errors'
-import { ConfirmPasswordValidation } from '@/utils/validators'
+import { ConfirmPasswordValidation } from '@/presentation/validators'
 
 describe('ConfirmPasswordValidation', () => {
   let confirmPasswordValidation: ConfirmPasswordValidation

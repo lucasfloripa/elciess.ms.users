@@ -4,7 +4,7 @@ import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
 import { type ICreateUserResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { CreateUserController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('CreateUserController', () => {
   let createUserUsecase: jest.Mocked<ICreateUserUsecase>
@@ -42,7 +42,7 @@ describe('CreateUserController', () => {
 
     const response = await createUserController.handle(createUserData)
 
-    expect(response).toEqual(htttpResponses.http201(newUser))
+    expect(response).toEqual(httpResponses.http201(newUser))
     expect(validator.validate).toHaveBeenCalledWith(createUserData)
     expect(createUserUsecase.execute).toHaveBeenCalledWith(createUserData)
   })
@@ -58,7 +58,7 @@ describe('CreateUserController', () => {
 
     const response = await createUserController.handle(createUserData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(createUserData)
     expect(createUserUsecase.execute).not.toHaveBeenCalled()
   })
@@ -75,7 +75,7 @@ describe('CreateUserController', () => {
 
     const response = await createUserController.handle(createUserData)
 
-    expect(response).toEqual(htttpResponses.http400(emailInUseError))
+    expect(response).toEqual(httpResponses.http400(emailInUseError))
     expect(validator.validate).toHaveBeenCalledWith(createUserData)
     expect(createUserUsecase.execute).toHaveBeenCalledWith(createUserData)
   })
@@ -92,7 +92,7 @@ describe('CreateUserController', () => {
 
     const response = await createUserController.handle(createUserData)
 
-    expect(response).toEqual(htttpResponses.http500(error))
+    expect(response).toEqual(httpResponses.http500(error))
     expect(validator.validate).toHaveBeenCalledWith(createUserData)
     expect(createUserUsecase.execute).toHaveBeenCalledWith(createUserData)
   })

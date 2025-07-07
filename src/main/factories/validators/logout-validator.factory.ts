@@ -2,7 +2,7 @@ import { type IValidation } from '@/presentation/contracts'
 import {
   ValidationComposite,
   RequiredFieldValidation
-} from '@/utils/validators'
+} from '@/presentation/validators'
 
 export const makeLogoutValidator = (): ValidationComposite => {
   const validations: IValidation[] = []

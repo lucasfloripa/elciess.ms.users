@@ -8,7 +8,6 @@ import {
   type RabbitMqConfig,
   type RedisConfig
 } from '@/main/interfaces'
-import { log, logError } from '@/utils/log'
 
 export async function initializeInfrastructure(): Promise<void> {
   const { mongoUri, mongodbName } = config.get<DbConfig>('dbConfig')
@@ -17,15 +16,15 @@ export async function initializeInfrastructure(): Promise<void> {
 
   try {
     await MongoHelper.getInstance().connect(mongoUri, mongodbName)
-    log(`Mongo running on ${mongoUri}`)
+    console.log(`Mongo running on ${mongoUri}`)
 
     await RabbitMQHelper.getInstance().connect(rabbitMqUri)
-    log(`RabbitMQ running on ${rabbitMqUri}`)
+    console.log(`RabbitMQ running on ${rabbitMqUri}`)
 
     RedisHelper.getInstance()
-    log(`Redis running on port ${redisPort} host ${redisHost}`)
+    console.log(`Redis running on port ${redisPort} host ${redisHost}`)
   } catch (error) {
-    logError('Failed to connect to infrastructure services:', error)
+    console.error('Failed to connect to infrastructure services:', error)
     throw error
   }
 }
@@ -35,7 +34,7 @@ export async function disconnectInfrastructure(): Promise<void> {
     await MongoHelper.getInstance().disconnect()
     await RabbitMQHelper.getInstance().disconnect()
     await RedisHelper.getInstance().disconnect()
-    log('All infrastructure services disconnected.')
+    console.log('All infrastructure services disconnected.')
   } catch (error) {
     console.error('Error during infrastructure shutdown:', error)
   }

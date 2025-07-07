@@ -1,22 +1,23 @@
-import { type IAuthRoleUsecase } from '@/domain/contracts'
+import { type ILogger, type IAuthRoleUsecase } from '@/domain/contracts'
 import { ForbiddenError } from '@/domain/errors'
 import { type IAuthRoleRequestDTO } from '@/domain/ports/inbounds'
 import {
   type IHttpResponse,
   type IMiddleware,
-  htttpResponses
+  httpResponses
 } from '@/presentation/interfaces'
-import { logError, log } from '@/utils/log'
 
 export class AuthRoleMiddleware implements IMiddleware {
   constructor(
     private readonly authRoleUsecase: IAuthRoleUsecase,
-    private readonly requiredRole: string
+    private readonly requiredRole: string,
+    private readonly logger: ILogger
   ) {}
 
   async handle(request: IAuthRoleRequestDTO): Promise<IHttpResponse> {
     try {
-      log('AuthRoleMiddleware request:', request)
+      this.logger.info('Init AuthRoleMiddleware')
+      this.logger.debug('AuthRoleMiddleware request:', request)
 
       const ucResponse = await this.authRoleUsecase.execute(
         request.role,
@@ -24,15 +25,18 @@ export class AuthRoleMiddleware implements IMiddleware {
       )
 
       if (ucResponse instanceof ForbiddenError) {
-        logError('AuthRoleMiddleware error:', ucResponse.error)
-        return htttpResponses.http401(ucResponse)
+        this.logger.warn('AuthRoleMiddleware error:', ucResponse)
+        return httpResponses.http401(ucResponse)
       }
 
-      log('AuthRoleMiddleware response:', 'Access acepted')
-      return htttpResponses.http200({})
+      this.logger.info('Completed AuthRoleMiddleware')
+      this.logger.debug('AuthRoleMiddleware response:', {
+        message: 'Access acepted'
+      })
+      return httpResponses.http200({})
     } catch (error) {
-      logError('AuthRoleMiddleware error:', error)
-      return htttpResponses.http500(error)
+      this.logger.error('AuthRoleMiddleware error:', error)
+      return httpResponses.http500(error)
     }
   }
 }

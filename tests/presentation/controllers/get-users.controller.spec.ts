@@ -2,7 +2,7 @@ import { type IGetUsersUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IGetUsersResponseDTO } from '@/domain/ports/outbounds'
 import { GetUsersController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('GetUsersController', () => {
   let getUsersUsecase: jest.Mocked<IGetUsersUsecase>
@@ -34,7 +34,7 @@ describe('GetUsersController', () => {
 
     const response = await getUsersController.handle()
 
-    expect(response).toEqual(htttpResponses.http200(usersResponse))
+    expect(response).toEqual(httpResponses.http200(usersResponse))
     expect(getUsersUsecase.execute).toHaveBeenCalledTimes(1)
   })
 
@@ -44,7 +44,7 @@ describe('GetUsersController', () => {
 
     const response = await getUsersController.handle()
 
-    expect(response).toEqual(htttpResponses.http404(notFoundError))
+    expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(getUsersUsecase.execute).toHaveBeenCalledTimes(1)
   })
 
@@ -54,7 +54,7 @@ describe('GetUsersController', () => {
 
     const response = await getUsersController.handle()
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(getUsersUsecase.execute).toHaveBeenCalledTimes(1)
   })
 })

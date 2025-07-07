@@ -37,6 +37,5 @@ export class RedisHelper {
 
   public async disconnect(): Promise<void> {
     await this.client.quit()
-    console.log('🛑 Redis disconnected')
   }
 }

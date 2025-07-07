@@ -1,5 +1,5 @@
 import { type IValidation } from '@/presentation/contracts'
-import { ValidationComposite } from '@/utils/validators/validation-composite'
+import { ValidationComposite } from '@/presentation/validators/validation-composite'
 
 describe('ValidationComposite', () => {
   let validationComposite: ValidationComposite

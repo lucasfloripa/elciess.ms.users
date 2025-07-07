@@ -4,7 +4,7 @@ import { type ILogoutRequestDTO } from '@/domain/ports/inbounds'
 import { type ILogoutResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
 import { LogoutController } from '@/presentation/controllers'
-import { htttpResponses } from '@/presentation/interfaces'
+import { httpResponses } from '@/presentation/interfaces'
 
 describe('LogoutController', () => {
   let logoutUsecase: jest.Mocked<ILogoutUsecase>
@@ -33,7 +33,7 @@ describe('LogoutController', () => {
 
     const response = await logoutController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http200(responseData))
+    expect(response).toEqual(httpResponses.http200(responseData))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(logoutUsecase.execute).toHaveBeenCalledWith(requestData.userId)
   })
@@ -47,7 +47,7 @@ describe('LogoutController', () => {
 
     const response = await logoutController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http400(validationError))
+    expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(logoutUsecase.execute).not.toHaveBeenCalled()
   })
@@ -62,7 +62,7 @@ describe('LogoutController', () => {
 
     const response = await logoutController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http404(notFoundError))
+    expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(logoutUsecase.execute).toHaveBeenCalledWith(requestData.userId)
   })
@@ -77,7 +77,7 @@ describe('LogoutController', () => {
 
     const response = await logoutController.handle(requestData)
 
-    expect(response).toEqual(htttpResponses.http500(unexpectedError))
+    expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(requestData)
     expect(logoutUsecase.execute).toHaveBeenCalledWith(requestData.userId)
   })

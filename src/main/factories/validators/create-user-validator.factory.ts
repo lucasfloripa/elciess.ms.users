@@ -4,7 +4,7 @@ import {
   RequiredFieldValidation,
   ConfirmPasswordValidation,
   EmailValidation
-} from '@/utils/validators'
+} from '@/presentation/validators'
 
 export const makeCreateUserValidator = (): ValidationComposite => {
   const validations: IValidation[] = []
