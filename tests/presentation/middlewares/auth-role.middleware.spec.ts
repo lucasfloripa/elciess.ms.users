@@ -1,4 +1,4 @@
-import { type IAuthRoleUsecase } from '@/domain/contracts'
+import { type ILogger, type IAuthRoleUsecase } from '@/domain/contracts'
 import { ForbiddenError } from '@/domain/errors'
 import { type IAuthRoleRequestDTO } from '@/domain/ports/inbounds'
 import { httpResponses } from '@/presentation/interfaces'
@@ -7,13 +7,25 @@ import { AuthRoleMiddleware } from '@/presentation/middlewares'
 describe('AuthRoleMiddleware', () => {
   let authRoleUsecase: jest.Mocked<IAuthRoleUsecase>
   let authRoleMiddleware: AuthRoleMiddleware
+  let logger: ILogger
+
   const requiredRole = 'ADMIN'
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     authRoleUsecase = {
       execute: jest.fn()
     }
-    authRoleMiddleware = new AuthRoleMiddleware(authRoleUsecase, requiredRole)
+    authRoleMiddleware = new AuthRoleMiddleware(
+      authRoleUsecase,
+      requiredRole,
+      logger
+    )
   })
 
   it('should return 200 if the user has the required role', async () => {

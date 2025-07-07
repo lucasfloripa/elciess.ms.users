@@ -1,4 +1,4 @@
-import { type IAuthTokenUsecase } from '@/domain/contracts'
+import { type ILogger, type IAuthTokenUsecase } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
 import { httpResponses } from '@/presentation/interfaces'
@@ -7,12 +7,19 @@ import { AuthTokenMiddleware } from '@/presentation/middlewares'
 describe('AuthTokenMiddleware', () => {
   let authTokenUsecase: jest.Mocked<IAuthTokenUsecase>
   let authTokenMiddleware: AuthTokenMiddleware
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     authTokenUsecase = {
       execute: jest.fn()
     }
-    authTokenMiddleware = new AuthTokenMiddleware(authTokenUsecase)
+    authTokenMiddleware = new AuthTokenMiddleware(authTokenUsecase, logger)
   })
 
   it('should return 200 with user data if accessToken is valid', async () => {
