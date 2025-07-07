@@ -1,17 +1,25 @@
 import { type IUserRepository } from '@/application/contracts'
 import { DeleteUserUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 
 describe('DeleteUserUsecase', () => {
   let deleteUserUsecase: DeleteUserUsecase
   let userRepository: jest.Mocked<IUserRepository>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       deleteUser: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>
 
-    deleteUserUsecase = new DeleteUserUsecase(userRepository)
+    deleteUserUsecase = new DeleteUserUsecase(userRepository, logger)
   })
 
   it('should delete user successfully', async () => {

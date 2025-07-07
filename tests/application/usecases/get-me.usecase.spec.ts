@@ -3,6 +3,7 @@ import {
   type ICacheService
 } from '@/application/contracts'
 import { GetMeUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IUser } from '@/domain/interfaces'
 
@@ -10,8 +11,15 @@ describe('GetMeUsecase', () => {
   let getMeUsecase: GetMeUsecase
   let userRepository: jest.Mocked<IUserRepository>
   let cacheService: jest.Mocked<ICacheService>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       getUser: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>
@@ -21,7 +29,7 @@ describe('GetMeUsecase', () => {
       set: jest.fn()
     } as unknown as jest.Mocked<ICacheService>
 
-    getMeUsecase = new GetMeUsecase(userRepository, cacheService)
+    getMeUsecase = new GetMeUsecase(userRepository, cacheService, logger)
   })
 
   it('should return user from cache if exists', async () => {

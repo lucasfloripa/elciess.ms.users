@@ -1,17 +1,25 @@
 import { type ITokenService } from '@/application/contracts'
 import { AuthTokenUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 
 describe('AuthTokenUsecase', () => {
   let authTokenUsecase: AuthTokenUsecase
   let tokenService: jest.Mocked<ITokenService>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     tokenService = {
       verifyAccessToken: jest.fn()
     } as unknown as jest.Mocked<ITokenService>
 
-    authTokenUsecase = new AuthTokenUsecase(tokenService)
+    authTokenUsecase = new AuthTokenUsecase(tokenService, logger)
   })
 
   it('should return userId and role when accessToken is valid', async () => {

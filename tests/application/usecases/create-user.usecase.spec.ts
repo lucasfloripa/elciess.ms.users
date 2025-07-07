@@ -1,5 +1,6 @@
 import { type IUserRepository } from '@/application/contracts'
 import { CreateUserUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { User } from '@/domain/entities'
 import { UserRoles } from '@/domain/enums'
 import { EmailInUseError } from '@/domain/errors'
@@ -11,14 +12,21 @@ jest.mock('@/domain/entities/user.entity')
 describe('CreateUserUsecase', () => {
   let createUserUsecase: CreateUserUsecase
   let userRepository: jest.Mocked<IUserRepository>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       getUser: jest.fn(),
       save: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>
 
-    createUserUsecase = new CreateUserUsecase(userRepository)
+    createUserUsecase = new CreateUserUsecase(userRepository, logger)
   })
 
   it('should create a user successfully', async () => {

@@ -3,6 +3,7 @@ import {
   type IMessagerService
 } from '@/application/contracts'
 import { PasswordResetUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IUser } from '@/domain/interfaces'
 
@@ -10,8 +11,15 @@ describe('PasswordResetUsecase', () => {
   let passwordResetUsecase: PasswordResetUsecase
   let userRepository: jest.Mocked<IUserRepository>
   let messagerService: jest.Mocked<IMessagerService>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       getUser: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>
@@ -21,7 +29,8 @@ describe('PasswordResetUsecase', () => {
 
     passwordResetUsecase = new PasswordResetUsecase(
       userRepository,
-      messagerService
+      messagerService,
+      logger
     )
   })
 

@@ -3,6 +3,7 @@ import {
   type IUserRepository
 } from '@/application/contracts'
 import { AuthUserUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { UnauthorizedError, ForbiddenError } from '@/domain/errors'
 import { type IUser } from '@/domain/interfaces'
 import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
@@ -12,8 +13,15 @@ describe('AuthUserUsecase', () => {
   let authUserUsecase: AuthUserUsecase
   let userRepository: jest.Mocked<IUserRepository>
   let tokenService: jest.Mocked<ITokenService>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       getUser: jest.fn(),
       saveRefreshToken: jest.fn()
@@ -22,7 +30,7 @@ describe('AuthUserUsecase', () => {
       generateAccessToken: jest.fn(),
       generateRefreshToken: jest.fn()
     } as unknown as jest.Mocked<ITokenService>
-    authUserUsecase = new AuthUserUsecase(userRepository, tokenService)
+    authUserUsecase = new AuthUserUsecase(userRepository, tokenService, logger)
   })
 
   it('should authenticate a user successfully', async () => {

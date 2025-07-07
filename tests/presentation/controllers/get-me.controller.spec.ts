@@ -1,4 +1,4 @@
-import { type IGetMeUsecase } from '@/domain/contracts'
+import { type ILogger, type IGetMeUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IGetMeRequestDTO } from '@/domain/ports/inbounds'
 import { type IGetMeResponseDTO } from '@/domain/ports/outbounds'
@@ -10,15 +10,22 @@ describe('GetMeController', () => {
   let getMeUsecase: jest.Mocked<IGetMeUsecase>
   let validator: jest.Mocked<IValidation>
   let getMeController: GetMeController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     getMeUsecase = {
       execute: jest.fn()
     }
     validator = {
       validate: jest.fn()
     }
-    getMeController = new GetMeController(getMeUsecase, validator)
+    getMeController = new GetMeController(getMeUsecase, validator, logger)
   })
 
   it('should return 200 if user data is retrieved successfully', async () => {

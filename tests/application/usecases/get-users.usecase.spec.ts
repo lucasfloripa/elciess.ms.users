@@ -1,13 +1,21 @@
 import { type IUserRepository } from '@/application/contracts'
 import { GetUsersUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IUser } from '@/domain/interfaces'
 
 describe('GetUsersUsecase', () => {
   let getUsersUsecase: GetUsersUsecase
   let userRepository: jest.Mocked<IUserRepository>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       getUser: jest.fn(),
       getUsers: jest.fn(),
@@ -18,7 +26,7 @@ describe('GetUsersUsecase', () => {
       updateUserPassword: jest.fn()
     }
 
-    getUsersUsecase = new GetUsersUsecase(userRepository)
+    getUsersUsecase = new GetUsersUsecase(userRepository, logger)
   })
 
   it('should return list of sanitized users when users exist', async () => {

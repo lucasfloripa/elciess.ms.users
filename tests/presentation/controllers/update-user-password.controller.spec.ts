@@ -1,4 +1,7 @@
-import { type IUpdateUserPasswordUsecase } from '@/domain/contracts'
+import {
+  type ILogger,
+  type IUpdateUserPasswordUsecase
+} from '@/domain/contracts'
 import { ConflictError, NotFoundError } from '@/domain/errors'
 import { type IUpdateUserPasswordRequestDTO } from '@/domain/ports/inbounds'
 import { type IUpdateUserPasswordResponseDTO } from '@/domain/ports/outbounds'
@@ -10,8 +13,15 @@ describe('UpdateUserPasswordController', () => {
   let updateUserPasswordUsecase: jest.Mocked<IUpdateUserPasswordUsecase>
   let validator: jest.Mocked<IValidation>
   let updateUserPasswordController: UpdateUserPasswordController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     updateUserPasswordUsecase = {
       execute: jest.fn()
     }
@@ -20,7 +30,8 @@ describe('UpdateUserPasswordController', () => {
     }
     updateUserPasswordController = new UpdateUserPasswordController(
       updateUserPasswordUsecase,
-      validator
+      validator,
+      logger
     )
   })
 

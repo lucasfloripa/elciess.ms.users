@@ -35,3 +35,7 @@
 {"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
 {"level":"info","message":"Completed AuthUserController"}
 {"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NTE5MDk2MDUsImV4cCI6MTc1MTkxMDUwNX0.oLz9wEExeqNAMu8GXwdgb8KjhQsChR2-iJSiX_mTgB0","level":"debug","message":"AuthUserController response","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NTE5MDk2MDUsImV4cCI6MTc1MjUxNDQwNX0.Id6m1PzvIDwUyHN2WNu6zXo29IizkwL3tWwmZKt2TmQ"}
+{"level":"info","message":"Init AuthRoleUsecase"}
+{"level":"info","message":"Completed AuthRoleUsecase"}
+{"level":"info","message":"Init AuthRoleUsecase"}
+{"level":"warn","message":"AuthRoleUsecase: Access denied. Role 'DEFAULT' does not match required role 'ADMIN'","requiredRole":"ADMIN","role":"DEFAULT"}

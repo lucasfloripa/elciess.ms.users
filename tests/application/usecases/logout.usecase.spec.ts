@@ -1,13 +1,21 @@
 import { type IUserRepository } from '@/application/contracts'
 import { LogoutUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { UserEnums } from '@/domain/enums'
 import { NotFoundError } from '@/domain/errors'
 
 describe('LogoutUsecase', () => {
   let logoutUsecase: LogoutUsecase
   let userRepository: jest.Mocked<IUserRepository>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       getUser: jest.fn(),
       getUsers: jest.fn(),
@@ -18,7 +26,7 @@ describe('LogoutUsecase', () => {
       updateUserPassword: jest.fn()
     }
 
-    logoutUsecase = new LogoutUsecase(userRepository)
+    logoutUsecase = new LogoutUsecase(userRepository, logger)
   })
 
   it('should return NotFoundError if user does not exist', async () => {

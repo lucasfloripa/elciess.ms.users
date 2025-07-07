@@ -1,4 +1,4 @@
-import { type ICreateUserUsecase } from '@/domain/contracts'
+import { type ILogger, type ICreateUserUsecase } from '@/domain/contracts'
 import { EmailInUseError } from '@/domain/errors'
 import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
 import { type ICreateUserResponseDTO } from '@/domain/ports/outbounds'
@@ -10,8 +10,15 @@ describe('CreateUserController', () => {
   let createUserUsecase: jest.Mocked<ICreateUserUsecase>
   let validator: jest.Mocked<IValidation>
   let createUserController: CreateUserController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     createUserUsecase = {
       execute: jest.fn()
     }
@@ -20,7 +27,8 @@ describe('CreateUserController', () => {
     }
     createUserController = new CreateUserController(
       createUserUsecase,
-      validator
+      validator,
+      logger
     )
   })
 

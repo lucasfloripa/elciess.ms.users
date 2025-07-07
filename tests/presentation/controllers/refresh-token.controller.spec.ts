@@ -1,4 +1,4 @@
-import { type IRefreshTokenUsecase } from '@/domain/contracts'
+import { type ILogger, type IRefreshTokenUsecase } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 import { type IRefreshTokenRequestDTO } from '@/domain/ports/inbounds'
 import { type IRefreshTokenResponseDTO } from '@/domain/ports/outbounds'
@@ -10,8 +10,15 @@ describe('RefreshTokenController', () => {
   let refreshTokenUsecase: jest.Mocked<IRefreshTokenUsecase>
   let validator: jest.Mocked<IValidation>
   let refreshTokenController: RefreshTokenController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     refreshTokenUsecase = {
       execute: jest.fn()
     }
@@ -20,7 +27,8 @@ describe('RefreshTokenController', () => {
     }
     refreshTokenController = new RefreshTokenController(
       refreshTokenUsecase,
-      validator
+      validator,
+      logger
     )
   })
 

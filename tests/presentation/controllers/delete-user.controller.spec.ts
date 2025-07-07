@@ -1,4 +1,4 @@
-import { type IDeleteUserUsecase } from '@/domain/contracts'
+import { type ILogger, type IDeleteUserUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IDeleteUserRequestDTO } from '@/domain/ports/inbounds'
 import { type IValidation } from '@/presentation/contracts'
@@ -9,8 +9,15 @@ describe('DeleteUserController', () => {
   let deleteUserUsecase: jest.Mocked<IDeleteUserUsecase>
   let validator: jest.Mocked<IValidation>
   let deleteUserController: DeleteUserController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     deleteUserUsecase = {
       execute: jest.fn()
     }
@@ -19,7 +26,8 @@ describe('DeleteUserController', () => {
     }
     deleteUserController = new DeleteUserController(
       deleteUserUsecase,
-      validator
+      validator,
+      logger
     )
   })
 

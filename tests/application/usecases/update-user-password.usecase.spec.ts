@@ -1,5 +1,6 @@
 import { type IUserRepository } from '@/application/contracts'
 import { UpdateUserPasswordUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { UserEnums } from '@/domain/enums'
 import { ConflictError, NotFoundError } from '@/domain/errors'
 import { Password } from '@/domain/value-objects'
@@ -7,13 +8,23 @@ import { Password } from '@/domain/value-objects'
 describe('UpdateUserPasswordUsecase', () => {
   let updateUserPasswordUsecase: UpdateUserPasswordUsecase
   let userRepository: jest.Mocked<IUserRepository>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     userRepository = {
       updateUserPassword: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>
 
-    updateUserPasswordUsecase = new UpdateUserPasswordUsecase(userRepository)
+    updateUserPasswordUsecase = new UpdateUserPasswordUsecase(
+      userRepository,
+      logger
+    )
   })
 
   it('should return ConflictError if actual password equals new password', async () => {

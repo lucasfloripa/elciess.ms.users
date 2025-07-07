@@ -1,11 +1,19 @@
 import { AuthRoleUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { ForbiddenError } from '@/domain/errors'
 
 describe('AuthRoleUsecase', () => {
   let authRoleUsecase: AuthRoleUsecase
+  let logger: ILogger
 
   beforeEach(() => {
-    authRoleUsecase = new AuthRoleUsecase()
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
+    authRoleUsecase = new AuthRoleUsecase(logger)
   })
 
   it('should authorize when roles match', async () => {

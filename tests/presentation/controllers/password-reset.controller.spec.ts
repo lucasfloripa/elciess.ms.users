@@ -1,4 +1,4 @@
-import { type IPasswordResetUsecase } from '@/domain/contracts'
+import { type ILogger, type IPasswordResetUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IPasswordResetRequestDTO } from '@/domain/ports/inbounds'
 import { type IPasswordResetResponseDTO } from '@/domain/ports/outbounds'
@@ -10,8 +10,15 @@ describe('PasswordResetController', () => {
   let passwordResetUsecase: jest.Mocked<IPasswordResetUsecase>
   let validator: jest.Mocked<IValidation>
   let passwordResetController: PasswordResetController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     passwordResetUsecase = {
       execute: jest.fn()
     }
@@ -20,7 +27,8 @@ describe('PasswordResetController', () => {
     }
     passwordResetController = new PasswordResetController(
       passwordResetUsecase,
-      validator
+      validator,
+      logger
     )
   })
 

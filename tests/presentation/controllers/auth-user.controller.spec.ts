@@ -1,4 +1,4 @@
-import { type IAuthUserUsecase } from '@/domain/contracts'
+import { type ILogger, type IAuthUserUsecase } from '@/domain/contracts'
 import { UnauthorizedError, ForbiddenError } from '@/domain/errors'
 import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
 import { type IAuthUserResponseDTO } from '@/domain/ports/outbounds'
@@ -10,15 +10,26 @@ describe('AuthUserController', () => {
   let authUserUsecase: jest.Mocked<IAuthUserUsecase>
   let validator: jest.Mocked<IValidation>
   let authUserController: AuthUserController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     authUserUsecase = {
       execute: jest.fn()
     }
     validator = {
       validate: jest.fn()
     }
-    authUserController = new AuthUserController(authUserUsecase, validator)
+    authUserController = new AuthUserController(
+      authUserUsecase,
+      validator,
+      logger
+    )
   })
 
   it('should return 200 if user is authenticated successfully', async () => {

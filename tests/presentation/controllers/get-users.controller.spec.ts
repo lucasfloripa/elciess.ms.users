@@ -1,4 +1,4 @@
-import { type IGetUsersUsecase } from '@/domain/contracts'
+import { type ILogger, type IGetUsersUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IGetUsersResponseDTO } from '@/domain/ports/outbounds'
 import { GetUsersController } from '@/presentation/controllers'
@@ -7,12 +7,19 @@ import { httpResponses } from '@/presentation/interfaces'
 describe('GetUsersController', () => {
   let getUsersUsecase: jest.Mocked<IGetUsersUsecase>
   let getUsersController: GetUsersController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     getUsersUsecase = {
       execute: jest.fn()
     }
-    getUsersController = new GetUsersController(getUsersUsecase)
+    getUsersController = new GetUsersController(getUsersUsecase, logger)
   })
 
   it('should return 200 with a list of users if successful', async () => {

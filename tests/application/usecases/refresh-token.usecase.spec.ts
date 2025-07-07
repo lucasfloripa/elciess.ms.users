@@ -1,20 +1,28 @@
 import { type ITokenService } from '@/application/contracts'
 import { RefreshTokenUsecase } from '@/application/usecases'
+import { type ILogger } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 import { type IUserTokenInfos } from '@/domain/interfaces'
 
 describe('RefreshTokenUsecase', () => {
   let refreshTokenUsecase: RefreshTokenUsecase
   let tokenService: jest.Mocked<ITokenService>
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     tokenService = {
       verifyRefreshToken: jest.fn(),
       generateAccessToken: jest.fn(),
       generateRefreshToken: jest.fn()
     } as unknown as jest.Mocked<ITokenService>
 
-    refreshTokenUsecase = new RefreshTokenUsecase(tokenService)
+    refreshTokenUsecase = new RefreshTokenUsecase(tokenService, logger)
   })
 
   it('should return UnauthorizedError if token format is invalid', async () => {

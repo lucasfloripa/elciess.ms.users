@@ -1,4 +1,4 @@
-import { type ILogoutUsecase } from '@/domain/contracts'
+import { type ILogger, type ILogoutUsecase } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type ILogoutRequestDTO } from '@/domain/ports/inbounds'
 import { type ILogoutResponseDTO } from '@/domain/ports/outbounds'
@@ -10,15 +10,22 @@ describe('LogoutController', () => {
   let logoutUsecase: jest.Mocked<ILogoutUsecase>
   let validator: jest.Mocked<IValidation>
   let logoutController: LogoutController
+  let logger: ILogger
 
   beforeEach(() => {
+    logger = {
+      debug: jest.fn(),
+      error: jest.fn(),
+      info: jest.fn(),
+      warn: jest.fn()
+    } as unknown as jest.Mocked<ILogger>
     logoutUsecase = {
       execute: jest.fn()
     }
     validator = {
       validate: jest.fn()
     }
-    logoutController = new LogoutController(logoutUsecase, validator)
+    logoutController = new LogoutController(logoutUsecase, validator, logger)
   })
 
   it('should return 200 if logout is successful', async () => {
