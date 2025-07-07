@@ -7,11 +7,8 @@ import {
   makeGetUsersController,
   makeGetUserController,
   makeCreateUserController,
-  makeAuthUserController,
-  makeRefreshTokenController,
   makeUpdateUserPasswordController,
   makeDeleteUserController,
-  makeLogoutController,
   makeGetMeController,
   makePasswordResetController
 } from '../factories/controllers'
@@ -20,15 +17,7 @@ import {
   makeAuthRoleMiddleware
 } from '../factories/middlewares'
 
-const userRouter = Router()
-
-userRouter.post('/auth', adaptExpressRoute(makeAuthUserController()))
-
-userRouter.post(
-  '/auth/refresh',
-  adaptExpressRoute(makeRefreshTokenController())
-)
-userRouter.post('/logout', adaptExpressRoute(makeLogoutController()))
+export const userRouter = Router()
 
 userRouter.post('/', adaptExpressRoute(makeCreateUserController()))
 
@@ -68,5 +57,3 @@ userRouter.delete(
   adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
   adaptExpressRoute(makeDeleteUserController())
 )
-
-export { userRouter }

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@types/debug": "^4.1.12",
+    "@types/supertest": "^6.0.3",
     "amqplib": "^0.10.8",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.10",
@@ -30,7 +31,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.9.0",
     "nodemon": "^3.1.7",
-    "short-uuid": "^4.2.2"
+    "short-uuid": "^4.2.2",
+    "supertest": "^7.1.1"
   },
   "devDependencies": {
     "@types/amqplib": "^0.10.7",
