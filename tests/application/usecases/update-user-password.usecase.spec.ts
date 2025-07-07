@@ -61,7 +61,7 @@ describe('UpdateUserPasswordUsecase', () => {
 
     const result = await updateUserPasswordUsecase.execute(request)
 
-    expect(Password.create).toHaveBeenCalledWith(request.password)
+    expect(Password.create).toHaveBeenCalledWith(request.newPassword)
     expect(userRepository.updateUserPassword).toHaveBeenCalledWith(
       request.userId,
       'hashed-old-password'
@@ -85,7 +85,7 @@ describe('UpdateUserPasswordUsecase', () => {
 
     const result = await updateUserPasswordUsecase.execute(request)
 
-    expect(Password.create).toHaveBeenCalledWith(request.password)
+    expect(Password.create).toHaveBeenCalledWith(request.newPassword)
     expect(userRepository.updateUserPassword).toHaveBeenCalledWith(
       request.userId,
       'hashed-old-password'
