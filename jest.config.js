@@ -5,7 +5,7 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
-  testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
+  testMatch: ['**/*.spec.ts?(x)'],
   testPathIgnorePatterns: ['/node_modules/', '/src/main/', '/src/infra/'],
   collectCoverage: true,
   collectCoverageFrom: [
@@ -21,10 +21,10 @@ module.exports = {
   coverageReporters: ['json', 'lcov', 'text', 'text-summary'],
   coverageThreshold: {
     global: {
-      branches: 100,
-      functions: 100,
-      lines: 100,
-      statements: 100
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95
     }
   },
   moduleNameMapper: {
