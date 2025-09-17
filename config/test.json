@@ -1,7 +1,7 @@
 {
   "dbConfig": {
     "mongoUri": "mongodb://elciess:elciessPass@localhost:27017/",
-    "mongodbName": "development"
+    "mongodbName": "test"
   },
   "jwtConfig": {
     "jwtSecret": "elciess",
