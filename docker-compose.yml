@@ -47,21 +47,20 @@ services:
       timeout: 3s
       retries: 30
 
-  redis-commander: # NOVO SERVIÇO
+  redis-commander:
     image: rediscommander/redis-commander:latest
-    container_name: localRedisCommander
+    container_name: localRedisCommanderl
     restart: always
     environment:
-      # Conecta ao serviço 'redis' na rede Docker
       REDIS_HOSTS: "local:redis:6379"
-      # Se você tivesse senha: REDIS_PASSWORD: "sua_senha"
     ports:
-      - "8081:8081" # Porta externa 8081, porta interna 8081
+      - "8081:8081"
     networks:
       - meu-local-network
     depends_on:
       redis:
         condition: service_healthy
+
 networks:
   meu-local-network:
     driver: bridge
