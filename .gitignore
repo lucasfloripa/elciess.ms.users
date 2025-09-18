@@ -4,7 +4,8 @@
 .env
 .husky
 data
-logs
+.logs
+.logstash
 rabbitmq_data
 redis_data
 redisinsight_data
