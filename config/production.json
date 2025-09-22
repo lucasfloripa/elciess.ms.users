@@ -1,0 +1,28 @@
+{
+  "dbConfig": {
+    "mongoUri": "mongodb://elciess:elciessPass@localhost:27017/",
+    "mongodbName": "test"
+  },
+  "jwtConfig": {
+    "jwtSecret": "elciess",
+    "jwtRefreshSecret": "elciess123",
+    "accessTokenExp": "15m",
+    "refreshTokenExp": "7d"
+  },
+  "appConfig": {
+    "appPort": "APP_PORT"
+  },
+  "rabbitMqConfig": {
+    "rabbitMqUri": "amqp://guest:guest@localhost:5672/",
+    "exchangeEmailPasswordReset": "user.notifications",
+    "queueEmailPasswordReset": "email.password_reset",
+    "routingEmailPasswordReset": "user.password_reset"
+  },
+  "redisConfig": {
+    "redisHost": "localhost",
+    "redisPort": "6379",
+    "redisPassword": "",
+    "redisDb": "0",
+    "redisTtl": "300"
+  }
+}

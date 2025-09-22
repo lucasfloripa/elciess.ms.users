@@ -10,7 +10,6 @@ import { Email, Password } from '@/domain/value-objects'
 
 export class User {
   static readonly SALT: number = 4
-  static readonly JWT_SECRET: string = String(process.env.JWT_SECRET)
 
   constructor(
     readonly userId: string,

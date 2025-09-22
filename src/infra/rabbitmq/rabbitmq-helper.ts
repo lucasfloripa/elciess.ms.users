@@ -2,7 +2,7 @@ import * as amqp from 'amqplib'
 import { type Channel, type ChannelModel } from 'amqplib'
 import config from 'config'
 
-import { type RabbitMQConfig } from '@/infra/interfaces'
+import { type RabbitMqConfig } from '@/main/interfaces'
 
 export class RabbitMQHelper {
   private static instance: RabbitMQHelper
@@ -15,7 +15,7 @@ export class RabbitMQHelper {
   private readonly ROUTING_EMAIL_PASSWORD_RESET: string
 
   private constructor() {
-    const rabbiMqConfig = config.get<RabbitMQConfig>('rabbitMqConfig')
+    const rabbiMqConfig = config.get<RabbitMqConfig>('rabbitMqConfig')
     this.EXCHANGE_EMAIL_PASSWORD_RESET =
       rabbiMqConfig.exchangeEmailPasswordReset
     this.QUEUE_EMAIL_PASSWORD_RESET = rabbiMqConfig.queueEmailPasswordReset
