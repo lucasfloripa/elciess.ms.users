@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ['main']
+    branches: [ "main" ]
   pull_request:
-    branches: ['main']
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
@@ -12,49 +12,39 @@ jobs:
 
     strategy:
       matrix:
-        node: [18, 20, 21] # roda em várias versões do Node
+        node: [21] 
 
     steps:
-      # 1. Checkout do repositório
       - name: Checkout código
         uses: actions/checkout@v4
 
-      # 2. Setup Node.js
       - name: Setup Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: 'npm' # cache automático do npm
+          cache: "npm"
 
-      # 3. Instalar dependências
       - name: Instalar dependências
         run: npm ci
 
-      # 4. Verificar lint
       - name: Rodar ESLint
         run: npm run lint
 
-      # 5. Verificar formatação (Prettier)
       - name: Verificar formatação
         run: npm run format:check
 
-      # 6. Rodar testes com cobertura
-      - name: Rodar testes
+      - name: Rodar testes com coverage
         run: npm run test:ci
 
-      # 7. Build da aplicação (se tiver build)
       - name: Build da aplicação
         run: npm run build
 
-      # 8. Salvar artifacts (build, coverage, etc.)
-      - name: Upload build
-        uses: actions/upload-artifact@v4
+      # ---- SonarCloud ----
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
         with:
-          name: build-${{ matrix.node }}
-          path: dist/
-
-      - name: Upload coverage
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-${{ matrix.node }}
-          path: coverage/
+          organization: "lucasfloripa"
+          projectKey: "lucasfloripa_elciess.ms.users"
+          projectName: "elciess.ms.users"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
