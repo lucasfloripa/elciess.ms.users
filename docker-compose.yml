@@ -7,7 +7,7 @@ services:
     container_name: localMongoDb
     restart: always
     ports:
-      - "27017:27017"
+      - '27017:27017'
     environment:
       MONGO_INITDB_ROOT_USERNAME: elciess
       MONGO_INITDB_ROOT_PASSWORD: elciessPass
@@ -21,8 +21,8 @@ services:
     container_name: localRabbitMQ
     restart: always
     ports:
-      - "5672:5672"     # porta padrão do protocolo AMQP
-      - "15672:15672"   # porta da interface de gerenciamento (UI)
+      - '5672:5672' # porta padrão do protocolo AMQP
+      - '15672:15672' # porta da interface de gerenciamento (UI)
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
@@ -36,13 +36,13 @@ services:
     container_name: localRedis
     restart: always
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       - ./redis_data:/data
     networks:
       - meu-local-network
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ['CMD', 'redis-cli', 'ping']
       interval: 1s
       timeout: 3s
       retries: 30
@@ -52,9 +52,9 @@ services:
     container_name: localRedisCommanderl
     restart: always
     environment:
-      REDIS_HOSTS: "local:redis:6379"
+      REDIS_HOSTS: 'local:redis:6379'
     ports:
-      - "8081:8081"
+      - '8081:8081'
     networks:
       - meu-local-network
     depends_on:
