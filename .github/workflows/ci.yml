@@ -42,9 +42,5 @@ jobs:
       # ---- SonarCloud ----
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
-        with:
-          organization: 'lucasfloripa'
-          projectKey: 'lucasfloripa_elciess.ms.users'
-          projectName: 'elciess.ms.users'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
