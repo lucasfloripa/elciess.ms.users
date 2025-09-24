@@ -5,8 +5,8 @@
     "node": ">=21.5.0"
   },
   "scripts": {
-    "start:dev": "NODE_ENV=development LOG_LEVEL=debug nodemon --watch './**/*.ts' --exec ts-node -r tsconfig-paths/register ./src/main/server.ts",
-    "start:prod": "NODE_ENV=production LOG_LEVEL=production node dist/src/main/server.js",
+    "start:dev": "dotenv -e .env.development -- ts-node -r tsconfig-paths/register ./src/main/server.ts",
+    "start:prod": "dotenv -e .env.production -- node dist/src/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json && tsc-alias -p tsconfig-build.json",
     "test": "NODE_ENV=test jest --config=jest.config.js --passWithNoTests --runInBand --no-cache",
     "test:full": "jest --config=jest.config.js --passWithNoTests --runInBand --coverage",
@@ -49,6 +49,7 @@
     "@types/node": "^20.10.0",
     "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "dotenv-cli": "^10.0.0",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^40.0.0",

@@ -1,0 +1,7 @@
+{
+  "dbConfig": {},
+  "jwtConfig": {},
+  "appConfig": {},
+  "rabbitMqConfig": {},
+  "redisConfig": {}
+}
