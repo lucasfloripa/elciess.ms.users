@@ -1,7 +1,7 @@
+.env.*
 .build
 .serverless
 .vscode
-.env
 .husky
 data
 .logs
