@@ -47,6 +47,7 @@ export class RabbitMQHelper {
         })
       }
     } catch (err) {
+      console.error('Erro ao connectar no rabbitmq', err)
       this.connection = this.channel = null
       setTimeout(() => {
         this.connect(uri).catch((err) => {

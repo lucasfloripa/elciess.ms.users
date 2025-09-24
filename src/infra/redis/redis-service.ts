@@ -22,6 +22,7 @@ export class RedisService implements ICacheService {
       if (data === null) return null
       return JSON.parse(data) as T
     } catch (error) {
+      console.error('Erro no get do redis rabbitmq', error)
       return null
     }
   }
@@ -36,6 +37,7 @@ export class RedisService implements ICacheService {
       )
       return result === 'OK'
     } catch (error) {
+      console.error('Erro no set do redis rabbitmq', error)
       return false
     }
   }
@@ -47,6 +49,7 @@ export class RedisService implements ICacheService {
     try {
       return await this.client.del(...keys)
     } catch (error) {
+      console.error('Erro no delete do redis rabbitmq', error)
       return 0
     }
   }

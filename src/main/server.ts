@@ -1,4 +1,3 @@
-// src/main/server.ts (o arquivo que era seu main.ts)
 import 'dotenv/config'
 import config from 'config'
 
@@ -10,9 +9,10 @@ import {
 import { type AppConfig } from '@/main/interfaces'
 
 async function startServer(): Promise<void> {
-  const { appPort } = config.get<AppConfig>('appConfig')
-  console.log('App listening on port ' + appPort)
   try {
+    const { appPort } = config.get<AppConfig>('appConfig')
+    console.log('App listening on port ' + appPort)
+
     await initializeInfrastructure()
     const app = createApp()
     const server = app.listen(appPort, () => {})
@@ -25,6 +25,7 @@ async function startServer(): Promise<void> {
       })
     })
   } catch (err) {
+    console.error('Error ao startar o servidor', err)
     process.exit(1)
   }
 }

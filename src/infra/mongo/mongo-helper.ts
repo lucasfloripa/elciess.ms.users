@@ -27,6 +27,7 @@ export class MongoHelper {
         this.db = this.client.db(dbName)
       }
     } catch (error) {
+      console.error('Erro ao connectar no mongodb', error)
       setTimeout(() => {
         this.connect(uri, dbName).catch(console.error)
       }, 5000)

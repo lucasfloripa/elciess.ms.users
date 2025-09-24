@@ -12,8 +12,7 @@ export const makeCreateUserValidator = (): ValidationComposite => {
   for (const field of ['email', 'password', 'confirmPassword']) {
     validations.push(new RequiredFieldValidation(field))
   }
-  validations.push(new EmailValidation())
-  validations.push(new ConfirmPasswordValidation())
+  validations.push(new EmailValidation(), new ConfirmPasswordValidation())
 
   return new ValidationComposite(validations)
 }

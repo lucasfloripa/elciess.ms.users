@@ -23,7 +23,7 @@ export class WinstonLogger implements ILogger {
     logger.warn(message, context)
   }
 
-  error(message: string, error?: Error | unknown, context?: object): void {
+  error(message: string, error?: Error, context?: object): void {
     // Formata o erro para ser incluído no JSON do log
     const errorDetails =
       error instanceof Error
