@@ -2,7 +2,7 @@
   "name": "elciess.ms.entry",
   "main": "index.js",
   "engines": {
-    "node": ">=21.5.0"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "start:dev": "dotenv -e .env.development -- ts-node -r tsconfig-paths/register ./src/main/server.ts",
