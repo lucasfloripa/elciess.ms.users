@@ -39,4 +39,4 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2.1.1
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_SCANNER_OPTS: "-Dsonar.nodejs.executable=node"
+          SONAR_SCANNER_OPTS: '-Dsonar.nodejs.executable=node'
