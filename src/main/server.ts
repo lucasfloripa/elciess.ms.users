@@ -11,11 +11,11 @@ import { type AppConfig } from '@/main/interfaces'
 async function startServer(): Promise<void> {
   try {
     const { appPort } = config.get<AppConfig>('appConfig')
-    console.log('App listening on port ' + appPort)
-
     await initializeInfrastructure()
     const app = createApp()
-    const server = app.listen(appPort, () => {})
+    const server = app.listen(appPort, () => {
+      console.log('App listening on port ' + appPort)
+    })
 
     process.on('SIGINT', () => {
       // eslint-disable-next-line @typescript-eslint/no-misused-promises

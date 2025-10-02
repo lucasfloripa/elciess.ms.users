@@ -1,41 +1,41 @@
-name: CI
+  name: CI
 
-on:
-  push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
+  on:
+    push:
+      branches: ['main']
+    pull_request:
+      branches: ['main']
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  jobs:
+    build-and-test:
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
+      steps:
+        - name: Checkout código
+          uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
 
-      - name: Instalar dependências
-        run: npm ci
+        - name: Instalar dependências
+          run: npm ci
 
-      - name: Rodar ESLint
-        run: npm run lint
+        - name: Rodar ESLint
+          run: npm run lint
 
-      - name: Verificar formatação
-        run: npm run format:check
+        - name: Verificar formatação
+          run: npm run format:check
 
-      - name: Rodar testes com coverage
-        run: npm run test:ci
+        - name: Rodar testes com coverage
+          run: npm run test:ci
 
-      - name: Build da aplicação
-        run: npm run build
+        - name: Build da aplicação
+          run: npm run build
 
-      # ---- SonarCloud ----
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.1.1
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        # ---- SonarCloud ----
+        - name: SonarCloud Scan
+          uses: SonarSource/sonarcloud-github-action@v2.1.1
+          env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
