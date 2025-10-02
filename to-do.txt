@@ -1,5 +1,0 @@
-jenkins
-sonar
-docker
-husky
-deployar em algum lugar
