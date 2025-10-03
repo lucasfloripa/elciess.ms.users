@@ -1,9 +1,10 @@
 {
-  "name": "elciess.ms.entry",
-  "main": "index.js",
+  "name": "elciess.ms.users",
+  "version": "1.0.0",
   "engines": {
     "node": ">=20.19.0"
   },
+  "main": "index.js",
   "scripts": {
     "start:dev": "dotenv -e .env.development -- ts-node -r tsconfig-paths/register ./src/main/server.ts",
     "start:prod": "dotenv -e .env.production -- node dist/src/main/server.js",
