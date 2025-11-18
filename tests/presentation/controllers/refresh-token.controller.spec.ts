@@ -37,8 +37,7 @@ describe('RefreshTokenController', () => {
       refreshToken: 'valid_refresh_token'
     }
     const responseData: IRefreshTokenResponseDTO = {
-      accessToken: 'new_access_token',
-      refreshToken: 'new_refresh_token'
+      accessToken: 'new_access_token'
     }
     validator.validate.mockReturnValue(undefined)
     refreshTokenUsecase.execute.mockResolvedValue(responseData)

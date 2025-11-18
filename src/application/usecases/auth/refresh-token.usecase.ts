@@ -39,19 +39,13 @@ export class RefreshTokenUsecase implements IRefreshTokenUsecase {
     const newAccessToken =
       await this.tokenService.generateAccessToken<IUserTokenInfos>(payload)
 
-    this.logger.debug('RefreshTokenUsecase: Generating new refresh token')
-    const newRefreshToken =
-      await this.tokenService.generateRefreshToken<IUserTokenInfos>(payload)
-
     this.logger.info('Completed RefreshTokenUsecase')
     this.logger.debug('RefreshTokenUsecase response', {
       userId: payload.userId,
-      hasNewAccessToken: !!newAccessToken,
-      hasNewRefreshToken: !!newRefreshToken
+      hasNewAccessToken: !!newAccessToken
     })
     return {
-      accessToken: newAccessToken,
-      refreshToken: newRefreshToken
+      accessToken: newAccessToken
     }
   }
 }

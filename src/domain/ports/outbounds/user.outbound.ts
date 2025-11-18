@@ -22,7 +22,6 @@ export interface IGetMeResponseDTO {
 
 export interface IRefreshTokenResponseDTO {
   accessToken: string
-  refreshToken: string
 }
 
 export interface IAuthUserResponseDTO {

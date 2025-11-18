@@ -56,16 +56,13 @@ describe('RefreshTokenUsecase', () => {
 
     tokenService.verifyRefreshToken.mockResolvedValueOnce(payload)
     tokenService.generateAccessToken.mockResolvedValueOnce('new-access-token')
-    tokenService.generateRefreshToken.mockResolvedValueOnce('new-refresh-token')
 
     const result = await refreshTokenUsecase.execute(refreshToken)
 
     expect(tokenService.verifyRefreshToken).toHaveBeenCalledWith(refreshToken)
     expect(tokenService.generateAccessToken).toHaveBeenCalledWith(payload)
-    expect(tokenService.generateRefreshToken).toHaveBeenCalledWith(payload)
     expect(result).toEqual({
-      accessToken: 'new-access-token',
-      refreshToken: 'new-refresh-token'
+      accessToken: 'new-access-token'
     })
   })
 })
