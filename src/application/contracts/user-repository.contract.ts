@@ -10,6 +10,5 @@ export interface IUserRepository {
     userId: string,
     newPassword: string
   ) => Promise<UserEnums>
-  logout: (userId: string) => Promise<UserEnums>
   saveRefreshToken: (userId: string, token: string) => Promise<void>
 }

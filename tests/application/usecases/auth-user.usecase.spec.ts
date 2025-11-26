@@ -1,4 +1,5 @@
 import {
+  type ICacheService,
   type ITokenService,
   type IUserRepository
 } from '@/application/contracts'
@@ -13,6 +14,7 @@ describe('AuthUserUsecase', () => {
   let authUserUsecase: AuthUserUsecase
   let userRepository: jest.Mocked<IUserRepository>
   let tokenService: jest.Mocked<ITokenService>
+  let cacheService: jest.Mocked<ICacheService>
   let logger: ILogger
 
   beforeEach(() => {
@@ -30,7 +32,17 @@ describe('AuthUserUsecase', () => {
       generateAccessToken: jest.fn(),
       generateRefreshToken: jest.fn()
     } as unknown as jest.Mocked<ITokenService>
-    authUserUsecase = new AuthUserUsecase(userRepository, tokenService, logger)
+    cacheService = {
+      set: jest.fn(),
+      get: jest.fn(),
+      delete: jest.fn()
+    } as unknown as jest.Mocked<ICacheService>
+    authUserUsecase = new AuthUserUsecase(
+      userRepository,
+      tokenService,
+      cacheService,
+      logger
+    )
   })
 
   it('should authenticate a user successfully', async () => {
@@ -73,13 +85,17 @@ describe('AuthUserUsecase', () => {
       userId: user.userId,
       role: user.role
     })
-    expect(userRepository.saveRefreshToken).toHaveBeenCalledWith(
-      user.userId,
-      'refreshToken'
+    expect(cacheService.set).toHaveBeenCalledWith(
+      `refreshToken:${user.userId}`,
+      'refreshToken',
+      604800
     )
     expect(result).toEqual({
       accessToken: 'accessToken',
-      refreshToken: 'refreshToken'
+      refreshTokenCookie: {
+        maxAge: 604800,
+        value: 'refreshToken'
+      }
     })
   })
 

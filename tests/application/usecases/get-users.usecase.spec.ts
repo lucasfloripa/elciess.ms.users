@@ -21,7 +21,6 @@ describe('GetUsersUsecase', () => {
       getUsers: jest.fn(),
       save: jest.fn(),
       deleteUser: jest.fn(),
-      logout: jest.fn(),
       saveRefreshToken: jest.fn(),
       updateUserPassword: jest.fn()
     }

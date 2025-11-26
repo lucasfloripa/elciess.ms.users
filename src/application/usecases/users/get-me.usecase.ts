@@ -1,10 +1,11 @@
 import {
-  type ICacheService,
+  type ITokenService,
   type IUserRepository
 } from '@/application/contracts'
 import { type IGetMeUsecase, type ILogger } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import {
+  type IUserTokenInfos,
   type ISanitezedUser,
   type IUser
 } from '@/domain/interfaces/user.interfaces'
@@ -13,23 +14,26 @@ import { type IGetMeResponseDTO } from '@/domain/ports/outbounds'
 export class GetMeUsecase implements IGetMeUsecase {
   constructor(
     private readonly userRepository: IUserRepository,
-    private readonly cacheService: ICacheService,
+    private readonly tokenService: ITokenService,
     private readonly logger: ILogger
   ) {}
 
-  async execute(userId: string): Promise<IGetMeResponseDTO | Error> {
+  async execute(accessToken: string): Promise<IGetMeResponseDTO | Error> {
     this.logger.info('Init GetMeUsecase')
-    this.logger.debug('GetMeUsecase: Checking cache for user', { userId })
-    const cachedUser = await this.cacheService.get<IGetMeResponseDTO>(userId)
-    if (cachedUser) {
-      this.logger.info('Completed GetMeUsecase')
-      this.logger.debug('GetMeUsecase: User found in cache')
-      return cachedUser
-    }
 
-    this.logger.debug('GetMeUsecase: User not in cache, fetching from DB')
-    const dbUser: IUser | null = await this.userRepository.getUser({ userId })
+    const userTokenInfos: IUserTokenInfos | string =
+      await this.tokenService.verifyAccessToken(accessToken)
 
+    const payload = userTokenInfos as IUserTokenInfos
+    this.logger.debug('GetMeUsecase: Token payload extracted', {
+      userId: payload.userId,
+      role: payload.role
+    })
+
+    this.logger.debug('GetMeUsecase: Fetching user from DB')
+    const dbUser: IUser | null = await this.userRepository.getUser({
+      userId: payload.userId
+    })
     if (!dbUser) {
       this.logger.warn('GetMeUsecase: User not found in DB')
       return new NotFoundError('User not found')
@@ -38,8 +42,9 @@ export class GetMeUsecase implements IGetMeUsecase {
     const { password, ...sanitezedUser } = dbUser
     const user: ISanitezedUser = sanitezedUser
 
-    this.logger.debug('GetMeUsecase: Caching user data', { userId })
-    await this.cacheService.set(userId, { user: sanitezedUser })
+    this.logger.debug('GetMeUsecase: Caching user data', {
+      userId: payload.userId
+    })
 
     this.logger.info('Completed GetMeUsecase')
     this.logger.debug('GetMeUsecase response', { user })

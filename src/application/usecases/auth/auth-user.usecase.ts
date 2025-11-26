@@ -1,4 +1,5 @@
 import {
+  type ICacheService,
   type ITokenService,
   type IUserRepository
 } from '@/application/contracts'
@@ -13,14 +14,16 @@ export class AuthUserUsecase implements IAuthUserUsecase {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly tokenService: ITokenService,
+    private readonly cacheService: ICacheService,
     private readonly logger: ILogger
   ) {}
+
+  SEVEN_DAYS_IN_SECONDS = 7 * 24 * 60 * 60
 
   async execute(
     request: IAuthUserRequestDTO
   ): Promise<IAuthUserResponseDTO | Error> {
     this.logger.info('Init AuthUserUsecase')
-    this.logger.debug('AuthUserUsecase request', { email: request.email })
 
     const { email, password } = request
 
@@ -64,10 +67,15 @@ export class AuthUserUsecase implements IAuthUserUsecase {
       role: userExists.role
     })
 
-    this.logger.debug('AuthUserUsecase: Saving refresh token', {
+    this.logger.debug('AuthUserUsecase: Caching refresh token', {
+      userId: userExists.userId,
       refreshToken
     })
-    await this.userRepository.saveRefreshToken(userExists.userId, refreshToken)
+    await this.cacheService.set(
+      `refreshToken:${userExists.userId}`,
+      refreshToken,
+      this.SEVEN_DAYS_IN_SECONDS
+    )
 
     this.logger.info('Completed AuthUserUsecase')
     this.logger.debug('AuthUserUsecase response', {
@@ -75,6 +83,12 @@ export class AuthUserUsecase implements IAuthUserUsecase {
       hasAccessToken: !!accessToken,
       hasRefreshToken: !!refreshToken
     })
-    return { accessToken, refreshToken }
+    return {
+      accessToken,
+      refreshTokenCookie: {
+        value: refreshToken,
+        maxAge: this.SEVEN_DAYS_IN_SECONDS
+      }
+    }
   }
 }

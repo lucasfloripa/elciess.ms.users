@@ -9,15 +9,11 @@ export interface IGetUserRequestDTO {
 }
 
 export interface IGetMeRequestDTO {
-  userId: string
+  accessToken: string
 }
 
 export interface IDeleteUserRequestDTO {
   id: string
-}
-
-export interface ILogoutRequestDTO {
-  userId: string
 }
 
 export interface IUpdateUserRequestDTO {

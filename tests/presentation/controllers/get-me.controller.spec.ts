@@ -30,7 +30,7 @@ describe('GetMeController', () => {
 
   it('should return 200 if user data is retrieved successfully', async () => {
     const getMeData: IGetMeRequestDTO = {
-      userId: 'valid_user_id'
+      accessToken: 'valid_access_token'
     }
     const userResponse: IGetMeResponseDTO = {
       user: {
@@ -46,12 +46,12 @@ describe('GetMeController', () => {
 
     expect(response).toEqual(httpResponses.http200(userResponse))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
-    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
+    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.accessToken)
   })
 
   it('should return 400 if validation fails', async () => {
     const getMeData: IGetMeRequestDTO = {
-      userId: ''
+      accessToken: ''
     }
     const validationError = new Error('User ID is required')
     validator.validate.mockReturnValue(validationError)
@@ -65,7 +65,7 @@ describe('GetMeController', () => {
 
   it('should return 404 if user is not found', async () => {
     const getMeData: IGetMeRequestDTO = {
-      userId: 'non_existent_user_id'
+      accessToken: 'non_existent_user_id'
     }
     const notFoundError = new NotFoundError('User not found')
     validator.validate.mockReturnValue(undefined)
@@ -75,12 +75,12 @@ describe('GetMeController', () => {
 
     expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
-    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
+    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.accessToken)
   })
 
   it('should return 500 if an unexpected error occurs', async () => {
     const getMeData: IGetMeRequestDTO = {
-      userId: 'any_user_id'
+      accessToken: 'any_access_token'
     }
     const unexpectedError = new Error('Internal server error')
     validator.validate.mockReturnValue(undefined)
@@ -90,6 +90,6 @@ describe('GetMeController', () => {
 
     expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
-    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
+    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.accessToken)
   })
 })

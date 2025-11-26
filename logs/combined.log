@@ -195,3 +195,553 @@
 {"level":"info","message":"Init AuthUserUsecase"}
 {"level":"info","message":"Completed AuthUserUsecase"}
 {"level":"info","message":"Completed AuthUserController"}
+{"level":"info","message":"Init AuthUserController"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"level":"info","message":"Completed AuthUserController"}
+{"level":"info","message":"Init AuthUserController"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"level":"info","message":"Completed AuthUserController"}
+{"level":"info","message":"Init RefreshTokenController"}
+{"level":"info","message":"Init RefreshTokenUsecase"}
+{"level":"info","message":"Completed RefreshTokenUsecase"}
+{"level":"info","message":"Completed RefreshTokenController"}
+{"level":"info","message":"Init AuthUserController"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"level":"info","message":"Completed AuthUserController"}
+{"level":"info","message":"Init AuthTokenMiddleware"}
+{"level":"info","message":"Init AuthTokenUsecase"}
+{"level":"info","message":"Completed AuthTokenUsecase"}
+{"level":"info","message":"Completed AuthTokenMiddleware"}
+{"level":"info","message":"Init GetMeController"}
+{"level":"info","message":"Init GetMeUsecase"}
+{"level":"warn","message":"GetMeUsecase: User not found in DB"}
+{"error":"User not found","level":"warn","message":"GetMeController error: NotFoundError","stack":"Error: NotFoundError\n    at GetMeUsecase.execute (/Users/lucasfloripa/projects/elciess.ms.users/src/application/usecases/users/get-me.usecase.ts:52:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async GetMeController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/users/get-me.controller.ts:32:26)\n    at async /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:15:26"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3MzIwMjcsImV4cCI6MTc2NDMzNjgyN30.nVMkv8r5olOAxHAV-6GB0npOr_-4R2EiItx5301PlZA"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase request"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3MzIwNDIsImV4cCI6MTc2NDMzNjg0Mn0.TmdRFXR-m3J0s808-hxE4IicGSR8P7FSjXY7FqSoR-8","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3MzIwNDIsImV4cCI6MTc2MzczMjk0Mn0.CGUIEWEpyegV80eyrVZNspTIW1w9NPr88O-tPn3OlQQ","level":"debug","message":"AuthUserController response","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3MzIwNDIsImV4cCI6MTc2NDMzNjg0Mn0.TmdRFXR-m3J0s808-hxE4IicGSR8P7FSjXY7FqSoR-8"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3MzIwNDIsImV4cCI6MTc2NDMzNjg0Mn0.TmdRFXR-m3J0s808-hxE4IicGSR8P7FSjXY7FqSoR-8"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase request"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2NDM1Mzg0OX0.uKndeZaEo_Mbbl4ucOibeQfNOjzRCPt8ibcKzT1vljI","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthUserController response","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2NDM1Mzg0OX0.uKndeZaEo_Mbbl4ucOibeQfNOjzRCPt8ibcKzT1vljI"}
+{"level":"info","message":"Init AuthTokenMiddleware"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenMiddleware request:"}
+{"level":"info","message":"Init AuthTokenUsecase"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenUsecase: Attempting to authenticate access token"}
+{"level":"debug","message":"AuthTokenUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenUsecase"}
+{"level":"debug","message":"AuthTokenUsecase response","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenMiddleware"}
+{"level":"debug","message":"AuthTokenMiddleware response:","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeController"}
+{"level":"debug","message":"GetMeController request:","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2NDM1Mzg0OX0.uKndeZaEo_Mbbl4ucOibeQfNOjzRCPt8ibcKzT1vljI","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeUsecase"}
+{"level":"debug","message":"AuthTokenUsecase: Token payload extracted"}
+{"level":"debug","message":"GetMeUsecase: Checking cache for user"}
+{"level":"debug","message":"GetMeUsecase: User not in cache, fetching from DB"}
+{"level":"warn","message":"GetMeUsecase: User not found in DB"}
+{"error":"User not found","level":"warn","message":"GetMeController error: NotFoundError","stack":"Error: NotFoundError\n    at GetMeUsecase.execute (/Users/lucasfloripa/projects/elciess.ms.users/src/application/usecases/users/get-me.usecase.ts:52:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async GetMeController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/users/get-me.controller.ts:32:26)\n    at async /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:15:26"}
+{"level":"info","message":"Init AuthTokenMiddleware"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenMiddleware request:"}
+{"level":"info","message":"Init AuthTokenUsecase"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenUsecase: Attempting to authenticate access token"}
+{"level":"debug","message":"AuthTokenUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenUsecase"}
+{"level":"debug","message":"AuthTokenUsecase response","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenMiddleware"}
+{"level":"debug","message":"AuthTokenMiddleware response:","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeController"}
+{"level":"debug","message":"GetMeController request:","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2NDM1Mzg0OX0.uKndeZaEo_Mbbl4ucOibeQfNOjzRCPt8ibcKzT1vljI","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeUsecase"}
+{"level":"debug","message":"AuthTokenUsecase: Token payload extracted"}
+{"level":"debug","message":"GetMeUsecase: Fetching user from DB"}
+{"level":"warn","message":"GetMeUsecase: User not found in DB"}
+{"error":"User not found","level":"warn","message":"GetMeController error: NotFoundError","stack":"Error: NotFoundError\n    at GetMeUsecase.execute (/Users/lucasfloripa/projects/elciess.ms.users/src/application/usecases/users/get-me.usecase.ts:39:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async GetMeController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/users/get-me.controller.ts:32:26)\n    at async /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:15:26"}
+{"level":"info","message":"Init AuthTokenMiddleware"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenMiddleware request:"}
+{"level":"info","message":"Init AuthTokenUsecase"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenUsecase: Attempting to authenticate access token"}
+{"level":"debug","message":"AuthTokenUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenUsecase"}
+{"level":"debug","message":"AuthTokenUsecase response","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenMiddleware"}
+{"level":"debug","message":"AuthTokenMiddleware response:","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeController"}
+{"level":"debug","message":"GetMeController request:","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2NDM1Mzg0OX0.uKndeZaEo_Mbbl4ucOibeQfNOjzRCPt8ibcKzT1vljI","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeUsecase"}
+{"level":"debug","message":"GetMeUsecase: Token payload extracted"}
+{"level":"debug","message":"GetMeUsecase: Fetching user from DB"}
+{"level":"warn","message":"GetMeUsecase: User not found in DB"}
+{"error":"User not found","level":"warn","message":"GetMeController error: NotFoundError","stack":"Error: NotFoundError\n    at GetMeUsecase.execute (/Users/lucasfloripa/projects/elciess.ms.users/src/application/usecases/users/get-me.usecase.ts:39:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async GetMeController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/users/get-me.controller.ts:32:26)\n    at async /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:15:26"}
+{"level":"info","message":"Init AuthTokenMiddleware"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenMiddleware request:"}
+{"level":"info","message":"Init AuthTokenUsecase"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2Mzc0OTk0OX0.BrzIvog87y7N1QDCdK5RmtInQ38h6D1-NerBCalr_tk","level":"debug","message":"AuthTokenUsecase: Attempting to authenticate access token"}
+{"level":"warn","message":"AuthTokenUsecase: Expired access token"}
+{"error":"Expired token","level":"warn","message":"AuthTokenMiddleware error: UnauthorizedError","stack":"Error: UnauthorizedError\n    at AuthTokenUsecase.execute (/Users/lucasfloripa/projects/elciess.ms.users/src/application/usecases/auth/auth-token.usecase.ts:35:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuthTokenMiddleware.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/middlewares/auth-token.middleware.ts:31:26)\n    at async /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-middleware.adapter.ts:16:32"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NDkwNDksImV4cCI6MTc2NDM1Mzg0OX0.uKndeZaEo_Mbbl4ucOibeQfNOjzRCPt8ibcKzT1vljI"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NTc2NTEsImV4cCI6MTc2NDM2MjQ1MX0.qmXu6iOg6T4Z29MrBz7Da34rR5Yqd56F-valSR_ekFk","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NTc2NTEsImV4cCI6MTc2Mzc1ODU1MX0.Uea2yiIfaSNFKb1RohCRHw-Kga3rCLoJ55rBsj4Yyuc","level":"debug","message":"AuthUserController response","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NTc2NTEsImV4cCI6MTc2NDM2MjQ1MX0.qmXu6iOg6T4Z29MrBz7Da34rR5Yqd56F-valSR_ekFk"}
+{"level":"info","message":"Init AuthTokenMiddleware"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NTc2NTEsImV4cCI6MTc2Mzc1ODU1MX0.Uea2yiIfaSNFKb1RohCRHw-Kga3rCLoJ55rBsj4Yyuc","level":"debug","message":"AuthTokenMiddleware request:"}
+{"level":"info","message":"Init AuthTokenUsecase"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NTc2NTEsImV4cCI6MTc2Mzc1ODU1MX0.Uea2yiIfaSNFKb1RohCRHw-Kga3rCLoJ55rBsj4Yyuc","level":"debug","message":"AuthTokenUsecase: Attempting to authenticate access token"}
+{"level":"debug","message":"AuthTokenUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenUsecase"}
+{"level":"debug","message":"AuthTokenUsecase response","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthTokenMiddleware"}
+{"level":"debug","message":"AuthTokenMiddleware response:","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NTc2NTEsImV4cCI6MTc2Mzc1ODU1MX0.Uea2yiIfaSNFKb1RohCRHw-Kga3rCLoJ55rBsj4Yyuc","level":"debug","message":"GetMeController request:","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM3NTc2NTEsImV4cCI6MTc2NDM2MjQ1MX0.qmXu6iOg6T4Z29MrBz7Da34rR5Yqd56F-valSR_ekFk","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Init GetMeUsecase"}
+{"level":"debug","message":"GetMeUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"GetMeUsecase: Fetching user from DB"}
+{"level":"debug","message":"GetMeUsecase: Caching user data","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed GetMeUsecase"}
+{"level":"debug","message":"GetMeUsecase response","user":{"_id":"68668768d816072a560df3a3","email":"test@mail.com","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM0ODYzMjcsImV4cCI6MTc2NDA5MTEyN30.6J0tCdC1EDV3pbp0VH5w1bepqlDnimhLseTVw5At9JI","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}}
+{"level":"info","message":"Completed GetMeController"}
+{"level":"debug","message":"GetMeController response:","user":{"_id":"68668768d816072a560df3a3","email":"test@mail.com","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjM0ODYzMjcsImV4cCI6MTc2NDA5MTEyN30.6J0tCdC1EDV3pbp0VH5w1bepqlDnimhLseTVw5At9JI","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDI3MzAsImV4cCI6MTc2NDYwNzUzMH0.XXKLNitU8dmnefqcxCnUas9CV57Jgy6jGvNkc2IWyH0","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDI3MzAsImV4cCI6MTc2NDAwMzYzMH0.jsEyZnTz8EbRhvZptkGwSKHlSek17p6hmKgSfUj8gRc","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDI3MzAsImV4cCI6MTc2NDYwNzUzMH0.XXKLNitU8dmnefqcxCnUas9CV57Jgy6jGvNkc2IWyH0"}}
+{"level":"info","message":"Init RefreshTokenController"}
+{"level":"debug","message":"RefreshTokenController request:"}
+{"error":"Missing param: refreshToken","level":"warn","message":"RefreshTokenController error: MissingParamError","stack":"Error: MissingParamError\n    at RequiredFieldValidation.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/required-field-validation.ts:9:14)\n    at ValidationComposite.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/validation-composite.ts:8:32)\n    at RefreshTokenController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/auth/refresh-token.controller.ts:25:44)\n    at /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:18:43\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:149:13)\n    at /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-refresh-token-extractor.adapter.ts:6:5\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:149:13)\n    at Route.dispatch (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:119:3)"}
+{"level":"info","message":"Init RefreshTokenController"}
+{"level":"debug","message":"RefreshTokenController request:","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDI3MzAsImV4cCI6MTc2NDYwNzUzMH0.XXKLNitU8dmnefqcxCnUas9CV57Jgy6jGvNkc2IWyH0"}
+{"level":"info","message":"Init RefreshTokenUsecase"}
+{"level":"debug","message":"RefreshTokenUsecase: Attempting to refresh token"}
+{"level":"debug","message":"RefreshTokenUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"RefreshTokenUsecase: Checking stored session in Redis"}
+{"level":"debug","message":"RefreshTokenUsecase: Generating new access token"}
+{"level":"info","message":"Completed RefreshTokenUsecase"}
+{"hasNewAccessToken":true,"level":"debug","message":"RefreshTokenUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed RefreshTokenController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDMwMDEsImV4cCI6MTc2NDAwMzkwMX0.aCURKPvagBNDpp0SxpjaazEdvVSoq9c6negvIKK4Ae0","level":"debug","message":"RefreshTokenController response:"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM2MzksImV4cCI6MTc2NDYwODQzOX0.t-7x0EJfmg5m299tDJGMHiPxWVEm7OSBRaJIMfq2dTs","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM2MzksImV4cCI6MTc2NDAwNDUzOX0.Fmx2Z4qPBolDriR1sC47K4ReDd9d91vaX8a3X_ilkmE","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM2MzksImV4cCI6MTc2NDYwODQzOX0.t-7x0EJfmg5m299tDJGMHiPxWVEm7OSBRaJIMfq2dTs"}}
+{"level":"info","message":"Init RefreshTokenController"}
+{"level":"debug","message":"RefreshTokenController request:","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM2MzksImV4cCI6MTc2NDYwODQzOX0.t-7x0EJfmg5m299tDJGMHiPxWVEm7OSBRaJIMfq2dTs"}
+{"level":"info","message":"Init RefreshTokenUsecase"}
+{"level":"debug","message":"RefreshTokenUsecase: Attempting to refresh token"}
+{"level":"debug","message":"RefreshTokenUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"RefreshTokenUsecase: Checking stored session in Redis"}
+{"level":"debug","message":"RefreshTokenUsecase: Generating new access token"}
+{"level":"info","message":"Completed RefreshTokenUsecase"}
+{"hasNewAccessToken":true,"level":"debug","message":"RefreshTokenUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed RefreshTokenController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM2NDUsImV4cCI6MTc2NDAwNDU0NX0.-C8BhJHrA4Ynx90BFGtFLIzA6_CAW7jKhpVf-O6dhLw","level":"debug","message":"RefreshTokenController response:"}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init RefreshTokenController"}
+{"level":"debug","message":"RefreshTokenController request:"}
+{"error":"Missing param: refreshToken","level":"warn","message":"RefreshTokenController error: MissingParamError","stack":"Error: MissingParamError\n    at RequiredFieldValidation.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/required-field-validation.ts:9:14)\n    at ValidationComposite.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/validation-composite.ts:8:32)\n    at RefreshTokenController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/auth/refresh-token.controller.ts:25:44)\n    at /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:19:43\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:149:13)\n    at /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-refresh-token-extractor.adapter.ts:6:5\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:149:13)\n    at Route.dispatch (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:119:3)"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM3MDQsImV4cCI6MTc2NDYwODUwNH0.Q_TfFZNhTvf6R9bOfenv5436QSiydOm48hz-Q0TDvDI","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM3MDQsImV4cCI6MTc2NDAwNDYwNH0.53fgfLyEBT24jsXE-LZ0egsFsgVLgXMElxG-ieJzlOE","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM3MDQsImV4cCI6MTc2NDYwODUwNH0.Q_TfFZNhTvf6R9bOfenv5436QSiydOm48hz-Q0TDvDI"}}
+{"level":"info","message":"Init RefreshTokenController"}
+{"level":"debug","message":"RefreshTokenController request:","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM3MDQsImV4cCI6MTc2NDYwODUwNH0.Q_TfFZNhTvf6R9bOfenv5436QSiydOm48hz-Q0TDvDI"}
+{"level":"info","message":"Init RefreshTokenUsecase"}
+{"level":"debug","message":"RefreshTokenUsecase: Attempting to refresh token"}
+{"level":"debug","message":"RefreshTokenUsecase: Token payload extracted","role":"DEFAULT","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"RefreshTokenUsecase: Checking stored session in Redis"}
+{"level":"debug","message":"RefreshTokenUsecase: Generating new access token"}
+{"level":"info","message":"Completed RefreshTokenUsecase"}
+{"hasNewAccessToken":true,"level":"debug","message":"RefreshTokenUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed RefreshTokenController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDM3MDcsImV4cCI6MTc2NDAwNDYwN30.WiqIKsBRJNpXqVpI0r446zFsoMV2EF0KduYwswOWFG4","level":"debug","message":"RefreshTokenController response:"}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init RefreshTokenController"}
+{"level":"debug","message":"RefreshTokenController request:"}
+{"error":"Missing param: refreshToken","level":"warn","message":"RefreshTokenController error: MissingParamError","stack":"Error: MissingParamError\n    at RequiredFieldValidation.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/required-field-validation.ts:9:14)\n    at ValidationComposite.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/validation-composite.ts:8:32)\n    at RefreshTokenController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/auth/refresh-token.controller.ts:25:44)\n    at /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:19:43\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:149:13)\n    at /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-refresh-token-extractor.adapter.ts:6:5\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:149:13)\n    at Route.dispatch (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:119:3)"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDQ1MzcsImV4cCI6MTc2NDYwOTMzN30.9gjXxXd5pEYpF3FmQOEv_ayafJ-dIG08iOPqetlhg9I","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDQ1MzcsImV4cCI6MTc2NDAwNTQzN30.Uq-FmzR9V9o094zSXGYUReD7h7ceDg5sH6CQmJDJL70","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwMDQ1MzcsImV4cCI6MTc2NDYwOTMzN30.9gjXxXd5pEYpF3FmQOEv_ayafJ-dIG08iOPqetlhg9I"}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test123@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test123@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"level":"warn","message":"AuthUserUsecase: User not found"}
+{"error":"User not found","level":"warn","message":"AuthUserController error: UnauthorizedError","stack":"Error: UnauthorizedError\n    at AuthUserUsecase.execute (/Users/lucasfloripa/projects/elciess.ms.users/src/application/usecases/auth/auth-user.usecase.ts:38:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuthUserController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/auth/auth-user.controller.ts:32:26)\n    at async /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:19:26"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test123@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test123@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"level":"warn","message":"AuthUserUsecase: User not found"}
+{"error":"User not found","level":"warn","message":"AuthUserController error: UnauthorizedError","stack":"Error: UnauthorizedError\n    at AuthUserUsecase.execute (/Users/lucasfloripa/projects/elciess.ms.users/src/application/usecases/auth/auth-user.usecase.ts:38:14)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async AuthUserController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/auth/auth-user.controller.ts:32:26)\n    at async /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:19:26"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODM3NDgsImV4cCI6MTc2NDY4ODU0OH0.liTl3bhOoFvxKjkQZSO9mEd2jrzf_qCWadOZFuOH5jY","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODM3NDgsImV4cCI6MTc2NDA4NDY0OH0.l_yP3vXLa2EIZh2WMqTLGHGB2mfK105ruYonK-SG19A","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODM3NDgsImV4cCI6MTc2NDY4ODU0OH0.liTl3bhOoFvxKjkQZSO9mEd2jrzf_qCWadOZFuOH5jY"}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODQwNTYsImV4cCI6MTc2NDY4ODg1Nn0.aUyngl8cR7ienYy49QjMqJUdw124IHqMT-ovaLzPzxc","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODQwNTYsImV4cCI6MTc2NDA4NDk1Nn0.t_Fx5SdyyXksQwUk8MFGBMzwWu-3l2kunV-R9TQ5se8","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODQwNTYsImV4cCI6MTc2NDY4ODg1Nn0.aUyngl8cR7ienYy49QjMqJUdw124IHqMT-ovaLzPzxc"}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODQyNDEsImV4cCI6MTc2NDY4OTA0MX0.cRr8Exq3Xuwx6w_Hmzas13p4ptKoEiTG2uR29lGMQGY","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODQyNDEsImV4cCI6MTc2NDA4NTE0MX0.wK4HrBn_b402J4vtFXVrnF2UhUGj4I4xfwQMWf7v5AE","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODQyNDEsImV4cCI6MTc2NDY4OTA0MX0.cRr8Exq3Xuwx6w_Hmzas13p4ptKoEiTG2uR29lGMQGY"}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODk2MDMsImV4cCI6MTc2NDY5NDQwM30.vJXrM7vbo882oN73XCn9Go-whpND4rugiTCZJmLRIQ8","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODk2MDMsImV4cCI6MTc2NDA5MDUwM30.G2rbgrgPPOpxI9HkRARCm5Wzd2OU5Ip-r9zvj-1163k","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwODk2MDMsImV4cCI6MTc2NDY5NDQwM30.vJXrM7vbo882oN73XCn9Go-whpND4rugiTCZJmLRIQ8"}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcwMjksImV4cCI6MTc2NDcwMTgyOX0.hYqdvmx_YRxptkP91Q3yBT7ASI2Yi_pJG2fL1wtp8VI","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcwMjksImV4cCI6MTc2NDA5NzkyOX0.JEqUDC1ektC0u76HPVCgnVk731pVy6WggbijXsJTO_M","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcwMjksImV4cCI6MTc2NDcwMTgyOX0.hYqdvmx_YRxptkP91Q3yBT7ASI2Yi_pJG2fL1wtp8VI"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcxNTQsImV4cCI6MTc2NDcwMTk1NH0.0_n7IEYLBDjwATdDlZnGq1JFeCfYVSqEee3s31USv0M","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcxNTQsImV4cCI6MTc2NDA5ODA1NH0.TEmiIAF7ebONVRLEnT3r8vQAGSqRd35rGu4Sqvlrouo","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcxNTQsImV4cCI6MTc2NDcwMTk1NH0.0_n7IEYLBDjwATdDlZnGq1JFeCfYVSqEee3s31USv0M"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"","level":"debug","message":"AuthUserController request","password":""}
+{"error":"Missing param: email","level":"warn","message":"AuthUserController error: MissingParamError","stack":"Error: MissingParamError\n    at RequiredFieldValidation.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/required-field-validation.ts:9:14)\n    at ValidationComposite.validate (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/validators/validation-composite.ts:8:32)\n    at AuthUserController.handle (/Users/lucasfloripa/projects/elciess.ms.users/src/presentation/controllers/auth/auth-user.controller.ts:25:44)\n    at /Users/lucasfloripa/projects/elciess.ms.users/src/main/adapters/express-router.adapter.ts:19:43\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:149:13)\n    at Route.dispatch (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/route.js:119:3)\n    at Layer.handle [as handle_request] (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/layer.js:95:5)\n    at /Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/index.js:284:15\n    at Function.process_params (/Users/lucasfloripa/projects/elciess.ms.users/node_modules/express/lib/router/index.js:346:12)"}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcyMzIsImV4cCI6MTc2NDcwMjAzMn0.lihgR7fYYYEEuEuluD_B9G9kO6RnumLiT43Vc-t6Wmc","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcyMzIsImV4cCI6MTc2NDA5ODEzMn0.yQcOOmLp818SexO8CGyxXZJ9YpP9lUoujgl-6veaaBc","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcyMzIsImV4cCI6MTc2NDcwMjAzMn0.lihgR7fYYYEEuEuluD_B9G9kO6RnumLiT43Vc-t6Wmc"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcyODgsImV4cCI6MTc2NDcwMjA4OH0.Ct6XkDM5tRl8JpDr6DEyHrk2un-pcWaSDIeWCxv_uRg","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcyODgsImV4cCI6MTc2NDA5ODE4OH0.fpMKC74lkFw4g3fBsXp25hQpu3eJ3B09_DH6nbUzdyw","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTcyODgsImV4cCI6MTc2NDcwMjA4OH0.Ct6XkDM5tRl8JpDr6DEyHrk2un-pcWaSDIeWCxv_uRg"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTc5NTAsImV4cCI6MTc2NDcwMjc1MH0.jnAx6R1tQQCCkW1KWOdpFJ0NJpEkyWGJVYGICWOFDN0","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTc5NTAsImV4cCI6MTc2NDA5ODg1MH0.9Srz7lMbRCRkJNEKKtn5sJwvqhoiTJKO0mZC-POyfSY","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQwOTc5NTAsImV4cCI6MTc2NDcwMjc1MH0.jnAx6R1tQQCCkW1KWOdpFJ0NJpEkyWGJVYGICWOFDN0"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDAzNTgsImV4cCI6MTc2NDcwNTE1OH0.orGad00z3DhUlvqzOEUosyNLA8zL2kNFWzQ_5cOPQ14","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDAzNTgsImV4cCI6MTc2NDEwMTI1OH0.QlRqnVIrWJIG8V_ORfHwb8_m43rc3CVdk9LAhayXX3o","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDAzNTgsImV4cCI6MTc2NDcwNTE1OH0.orGad00z3DhUlvqzOEUosyNLA8zL2kNFWzQ_5cOPQ14"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDA0MzgsImV4cCI6MTc2NDcwNTIzOH0.NW5572XOckYlIA2h1TctnGQFNPgLWXf55QzwLyizvH0","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDA0MzgsImV4cCI6MTc2NDEwMTMzOH0.4kpTYVwQo1OXr_ij4JqpGTYfy_sJ51BbntlYauMFmL0","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDA0MzgsImV4cCI6MTc2NDcwNTIzOH0.NW5572XOckYlIA2h1TctnGQFNPgLWXf55QzwLyizvH0"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE1OTQsImV4cCI6MTc2NDcwNjM5NH0.0BU6U2J9FW1w_qKt2hrxjbZrYYdXbutGgzBFT_IPTso","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE1OTQsImV4cCI6MTc2NDEwMjQ5NH0.CepbbFRu8tRsBuKIKeAaDrnbv16GOowWibz-0-etyqk","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE1OTQsImV4cCI6MTc2NDcwNjM5NH0.0BU6U2J9FW1w_qKt2hrxjbZrYYdXbutGgzBFT_IPTso"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE2NzYsImV4cCI6MTc2NDcwNjQ3Nn0.AlDjKo9VeABmUSeYK9qBu_hAvtrhaTc6t5EpXxaqjAc","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE2NzYsImV4cCI6MTc2NDEwMjU3Nn0.Aw1Y4nqm_Dpg6cIzYr2dNWJw58IQFXJmWAK244cilGQ","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE2NzYsImV4cCI6MTc2NDcwNjQ3Nn0.AlDjKo9VeABmUSeYK9qBu_hAvtrhaTc6t5EpXxaqjAc"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE5MjEsImV4cCI6MTc2NDcwNjcyMX0.s9vOBU4n9XoONUKUqyOn9WqQ2BQ2BbNkHCLeQjM5_KA","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE5MjEsImV4cCI6MTc2NDEwMjgyMX0.qxfDW-3oGxeS8PQOjySJ94fIFJzpP_8H71Do0Osn_WE","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxMDE5MjEsImV4cCI6MTc2NDcwNjcyMX0.s9vOBU4n9XoONUKUqyOn9WqQ2BQ2BbNkHCLeQjM5_KA"}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjUwNjYsImV4cCI6MTc2NDc2OTg2Nn0.5Qyb7iYNRd0T6282-YSIddgEGimes4ZDfVE4Fu1wv6g","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjUwNjYsImV4cCI6MTc2NDE2NTk2Nn0.pX0fq1KJoRQJ6JvC26xAVaRVhQXVIMcTmKA4x4bnEDw","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjUwNjYsImV4cCI6MTc2NDc2OTg2Nn0.5Qyb7iYNRd0T6282-YSIddgEGimes4ZDfVE4Fu1wv6g"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjU3NTEsImV4cCI6MTc2NDc3MDU1MX0.Aq4x7Zln_tD_Q3d_S2IXVeXpYKTg-dEgN3tPp36L2GI","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjU3NTEsImV4cCI6MTc2NDE2NjY1MX0.6o33F8pqBhIrcNYuIZiSO6Hd8yaLWpvjNmnRsuA569k","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjU3NTEsImV4cCI6MTc2NDc3MDU1MX0.Aq4x7Zln_tD_Q3d_S2IXVeXpYKTg-dEgN3tPp36L2GI"}}
+{"level":"info","message":"Init LogoutController"}
+{"level":"info","message":"Init LogoutUsecase"}
+{"level":"info","message":"Completed LogoutUsecase"}
+{"level":"info","message":"Completed LogoutController"}
+{"level":"debug","message":"LogoutController response: User logged out","refreshTokenCookie":{"maxAge":0,"value":""}}
+{"level":"info","message":"Init AuthUserController"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserController request","password":"123"}
+{"level":"info","message":"Init AuthUserUsecase"}
+{"email":"test@mail.com","level":"debug","message":"AuthUserUsecase: Checking if user exists"}
+{"confirmPassword":"$2a$04$LN4HA1Pnj576ejK5juXdXeTOJYD3A5Z6tEAX3TJ2sv24E23y/4Ajq","level":"debug","message":"AuthUserUsecase: Comparing passwords","password":"123"}
+{"level":"debug","message":"AuthUserUsecase: Generating access token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Generating refresh token","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"debug","message":"AuthUserUsecase: Caching refresh token","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjczMzYsImV4cCI6MTc2NDc3MjEzNn0.2DJQ7AjZl--d8B_WM-EQOMFEUP87jrPNscSSbN-BqFk","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserUsecase"}
+{"hasAccessToken":true,"hasRefreshToken":true,"level":"debug","message":"AuthUserUsecase response","userId":"2XiugeNphFKw1WpduCqUZd"}
+{"level":"info","message":"Completed AuthUserController"}
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjczMzYsImV4cCI6MTc2NDE2ODIzNn0.C_vq44wMUiI2ypixef58nvovqb1_7YQPTazC20ps1_Q","level":"debug","message":"AuthUserController response","refreshTokenCookie":{"maxAge":604800,"value":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyWGl1Z2VOcGhGS3cxV3BkdUNxVVpkIiwicm9sZSI6IkRFRkFVTFQiLCJpYXQiOjE3NjQxNjczMzYsImV4cCI6MTc2NDc3MjEzNn0.2DJQ7AjZl--d8B_WM-EQOMFEUP87jrPNscSSbN-BqFk"}}

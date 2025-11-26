@@ -29,7 +29,7 @@ export class GetMeController implements IController {
         return httpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.getMeUsecase.execute(request.userId)
+      const ucResponse = await this.getMeUsecase.execute(request.accessToken)
 
       if (ucResponse instanceof NotFoundError) {
         this.logger.warn('GetMeController error:', ucResponse)

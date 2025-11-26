@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { adaptExpressRoute } from '@/main/adapters'
+import { adaptExpressRoute, refreshTokenExtractor } from '@/main/adapters'
 
 import {
   makeAuthUserController,
@@ -14,4 +14,8 @@ authRouter.post('/login', adaptExpressRoute(makeAuthUserController()))
 
 authRouter.post('/logout', adaptExpressRoute(makeLogoutController()))
 
-authRouter.post('/refresh', adaptExpressRoute(makeRefreshTokenController()))
+authRouter.get(
+  '/refresh',
+  refreshTokenExtractor(),
+  adaptExpressRoute(makeRefreshTokenController())
+)

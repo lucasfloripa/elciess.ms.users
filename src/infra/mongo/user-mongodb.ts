@@ -64,17 +64,4 @@ export class UserMongodb implements IUserRepository {
       { upsert: false }
     )
   }
-
-  async logout(userId: string): Promise<UserEnums> {
-    const userCollection = await this._getCollection()
-    const result = await userCollection.updateOne(
-      { userId },
-      { $unset: { refreshToken: '' } }
-    )
-    if (result.matchedCount === 0) return UserEnums.USER_NOT_FOUND
-
-    if (result.modifiedCount === 0) return UserEnums.ALREADY_LOGGED_OUT
-
-    return UserEnums.SUCCESS
-  }
 }

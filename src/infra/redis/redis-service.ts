@@ -27,14 +27,14 @@ export class RedisService implements ICacheService {
     }
   }
 
-  async set<T>(key: string, value: T): Promise<boolean> {
+  async set<T>(
+    key: string,
+    value: T,
+    ttl: number = this.DEFAULT_CACHE_TTL
+  ): Promise<boolean> {
     try {
       const stringValue = JSON.stringify(value)
-      const result = await this.client.setex(
-        key,
-        this.DEFAULT_CACHE_TTL,
-        stringValue
-      )
+      const result = await this.client.setex(key, ttl, stringValue)
       return result === 'OK'
     } catch (error) {
       console.error('Erro no set do redis rabbitmq', error)

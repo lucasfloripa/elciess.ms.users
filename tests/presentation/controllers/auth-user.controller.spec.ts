@@ -39,7 +39,10 @@ describe('AuthUserController', () => {
     }
     const tokens: IAuthUserResponseDTO = {
       accessToken: 'valid_token',
-      refreshToken: 'refresh_token'
+      refreshTokenCookie: {
+        maxAge: 3600,
+        value: 'valid_refresh_token'
+      }
     }
     validator.validate.mockReturnValue(undefined)
     authUserUsecase.execute.mockResolvedValue(tokens)

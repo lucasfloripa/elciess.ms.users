@@ -4,7 +4,7 @@ import { createLogger, format, transports } from 'winston'
 import { type ILogger } from '@/domain/contracts'
 
 const logger = createLogger({
-  level: process.env.LOG_LEVEL ?? 'info', // Nível mínimo para logar
+  level: 'silly', // process.env.LOG_LEVEL ?? 'info', // Nível mínimo para logar
   format: format.json(), // Logs em formato JSON (ideal para ELK)
   transports: [
     new transports.Console(), // Log para o console (durante o desenvolvimento)

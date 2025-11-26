@@ -26,7 +26,7 @@ export interface IRefreshTokenResponseDTO {
 
 export interface IAuthUserResponseDTO {
   accessToken: string
-  refreshToken: string
+  refreshTokenCookie: IRefreshTokenCookie
 }
 
 export interface IAuthTokenResponseDTO {
@@ -36,6 +36,7 @@ export interface IAuthTokenResponseDTO {
 
 export interface ILogoutResponseDTO {
   message: string
+  refreshTokenCookie?: IRefreshTokenCookie
 }
 
 export interface IUpdateUserPasswordResponseDTO {
@@ -44,4 +45,9 @@ export interface IUpdateUserPasswordResponseDTO {
 
 export interface IPasswordResetResponseDTO {
   message: string
+}
+
+export interface IRefreshTokenCookie {
+  value: string
+  maxAge: number
 }
