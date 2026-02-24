@@ -20,7 +20,9 @@ export class UserMongodb implements IUserRepository {
 
   async getUser(filter: Partial<IUser>): Promise<IUser | null> {
     const userCollection = await this._getCollection()
-    const user = await userCollection.findOne<IUser>(filter)
+    const user = await userCollection.findOne<IUser>(filter, {
+      projection: { _id: 0 }
+    })
     return user
   }
 
@@ -53,7 +55,9 @@ export class UserMongodb implements IUserRepository {
 
   async getUsers(): Promise<IUser[] | null> {
     const userCollection = await this._getCollection()
-    return await userCollection.find<IUser>({}).toArray()
+    return await userCollection
+      .find<IUser>({}, { projection: { _id: 0 } })
+      .toArray()
   }
 
   async saveRefreshToken(userId: string, token: string): Promise<void> {

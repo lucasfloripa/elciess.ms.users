@@ -1,2 +1,3 @@
-export * from './auth-token-middleware.factory'
-export * from './auth-role-middleware.factory'
+export * from './authentication-middleware.factory'
+export * from './role-guard-middleware.factory'
+export * from './authorization-middleware.factory'

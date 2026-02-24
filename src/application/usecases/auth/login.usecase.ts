@@ -3,14 +3,14 @@ import {
   type ITokenService,
   type IUserRepository
 } from '@/application/contracts'
-import { type ILogger, type IAuthUserUsecase } from '@/domain/contracts'
+import { type ILogger, type ILoginUsecase } from '@/domain/contracts'
 import { ForbiddenError, UnauthorizedError } from '@/domain/errors'
 import { type IUser } from '@/domain/interfaces/user.interfaces'
-import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
-import { type IAuthUserResponseDTO } from '@/domain/ports/outbounds'
+import { type ILoginRequestDTO } from '@/domain/ports/inbounds'
+import { type ILoginResponseDTO } from '@/domain/ports/outbounds'
 import { Password } from '@/domain/value-objects'
 
-export class AuthUserUsecase implements IAuthUserUsecase {
+export class LoginUsecase implements ILoginUsecase {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly tokenService: ITokenService,
@@ -21,24 +21,24 @@ export class AuthUserUsecase implements IAuthUserUsecase {
   SEVEN_DAYS_IN_SECONDS = 7 * 24 * 60 * 60
 
   async execute(
-    request: IAuthUserRequestDTO
-  ): Promise<IAuthUserResponseDTO | Error> {
-    this.logger.info('Init AuthUserUsecase')
+    requestDTO: ILoginRequestDTO
+  ): Promise<ILoginResponseDTO | Error> {
+    this.logger.info('Init LoginUsecase')
 
-    const { email, password } = request
+    const { email, password } = requestDTO
 
-    this.logger.debug('AuthUserUsecase: Checking if user exists', {
+    this.logger.debug('LoginUsecase: Checking if user exists', {
       email
     })
     const userExists: IUser | null = await this.userRepository.getUser({
       email
     })
     if (!userExists) {
-      this.logger.warn('AuthUserUsecase: User not found')
+      this.logger.warn('LoginUsecase: User not found')
       return new UnauthorizedError('User not found')
     }
 
-    this.logger.debug('AuthUserUsecase: Comparing passwords', {
+    this.logger.debug('LoginUsecase: Comparing passwords', {
       password,
       confirmPassword: userExists.password
     })
@@ -47,11 +47,11 @@ export class AuthUserUsecase implements IAuthUserUsecase {
       userExists.password
     )
     if (!passwordMatch) {
-      this.logger.warn('AuthUserUsecase: Invalid password provided')
+      this.logger.warn('LoginUsecase: Invalid password provided')
       return new ForbiddenError('Invalid password')
     }
 
-    this.logger.debug('AuthUserUsecase: Generating access token', {
+    this.logger.debug('LoginUsecase: Generating access token', {
       userId: userExists.userId
     })
     const accessToken: string = await this.tokenService.generateAccessToken({
@@ -59,7 +59,7 @@ export class AuthUserUsecase implements IAuthUserUsecase {
       role: userExists.role
     })
 
-    this.logger.debug('AuthUserUsecase: Generating refresh token', {
+    this.logger.debug('LoginUsecase: Generating refresh token', {
       userId: userExists.userId
     })
     const refreshToken: string = await this.tokenService.generateRefreshToken({
@@ -67,7 +67,7 @@ export class AuthUserUsecase implements IAuthUserUsecase {
       role: userExists.role
     })
 
-    this.logger.debug('AuthUserUsecase: Caching refresh token', {
+    this.logger.debug('LoginUsecase: Caching refresh token', {
       userId: userExists.userId,
       refreshToken
     })
@@ -77,8 +77,8 @@ export class AuthUserUsecase implements IAuthUserUsecase {
       this.SEVEN_DAYS_IN_SECONDS
     )
 
-    this.logger.info('Completed AuthUserUsecase')
-    this.logger.debug('AuthUserUsecase response', {
+    this.logger.info('Completed LoginUsecase')
+    this.logger.debug('LoginUsecase response', {
       userId: userExists.userId,
       hasAccessToken: !!accessToken,
       hasRefreshToken: !!refreshToken

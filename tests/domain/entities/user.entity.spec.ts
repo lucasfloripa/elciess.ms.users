@@ -50,7 +50,7 @@ describe('User Entity', () => {
           generatedId,
           mockEmailInstance,
           mockPasswordInstance,
-          UserRoles.DEFAULT
+          UserRoles.USER
         )
       )
     })
@@ -62,13 +62,13 @@ describe('User Entity', () => {
         'user-id',
         { value: () => 'email@example.com' } as unknown as Email,
         { value: () => 'hashed-password' } as unknown as Password,
-        UserRoles.DEFAULT
+        UserRoles.USER
       )
 
       expect(user.toReturn()).toEqual({
         userId: 'user-id',
         email: 'email@example.com',
-        role: UserRoles.DEFAULT
+        role: UserRoles.USER
       })
     })
   })
@@ -79,14 +79,14 @@ describe('User Entity', () => {
         'user-id',
         { value: () => 'email@example.com' } as unknown as Email,
         { value: () => 'hashed-password' } as unknown as Password,
-        UserRoles.DEFAULT
+        UserRoles.USER
       )
 
       expect(user.toPersistence()).toEqual({
         userId: 'user-id',
         email: 'email@example.com',
         password: 'hashed-password',
-        role: UserRoles.DEFAULT
+        role: UserRoles.USER
       })
     })
   })

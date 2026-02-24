@@ -1,15 +1,15 @@
-import { type ILogger, type IAuthUserUsecase } from '@/domain/contracts'
+import { type ILogger, type ILoginUsecase } from '@/domain/contracts'
 import { UnauthorizedError, ForbiddenError } from '@/domain/errors'
-import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
-import { type IAuthUserResponseDTO } from '@/domain/ports/outbounds'
+import { type ILoginRequestDTO } from '@/domain/ports/inbounds'
+import { type ILoginResponseDTO } from '@/domain/ports/outbounds'
 import { type IValidation } from '@/presentation/contracts'
-import { AuthUserController } from '@/presentation/controllers'
+import { LoginController } from '@/presentation/controllers'
 import { httpResponses } from '@/presentation/interfaces'
 
-describe('AuthUserController', () => {
-  let authUserUsecase: jest.Mocked<IAuthUserUsecase>
+describe('LoginController', () => {
+  let loginUsecase: jest.Mocked<ILoginUsecase>
   let validator: jest.Mocked<IValidation>
-  let authUserController: AuthUserController
+  let authUserController: LoginController
   let logger: ILogger
 
   beforeEach(() => {
@@ -19,25 +19,21 @@ describe('AuthUserController', () => {
       info: jest.fn(),
       warn: jest.fn()
     } as unknown as jest.Mocked<ILogger>
-    authUserUsecase = {
+    loginUsecase = {
       execute: jest.fn()
     }
     validator = {
       validate: jest.fn()
     }
-    authUserController = new AuthUserController(
-      authUserUsecase,
-      validator,
-      logger
-    )
+    authUserController = new LoginController(loginUsecase, validator, logger)
   })
 
   it('should return 200 if user is authenticated successfully', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
-    const tokens: IAuthUserResponseDTO = {
+    const tokens: ILoginResponseDTO = {
       accessToken: 'valid_token',
       refreshTokenCookie: {
         maxAge: 3600,
@@ -45,17 +41,17 @@ describe('AuthUserController', () => {
       }
     }
     validator.validate.mockReturnValue(undefined)
-    authUserUsecase.execute.mockResolvedValue(tokens)
+    loginUsecase.execute.mockResolvedValue(tokens)
 
     const response = await authUserController.handle(credentials)
 
     expect(response).toEqual(httpResponses.http200(tokens))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
-    expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
+    expect(loginUsecase.execute).toHaveBeenCalledWith(credentials)
   })
 
   it('should return 400 if validation fails', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'invalid_email',
       password: 'valid_password'
     }
@@ -66,54 +62,54 @@ describe('AuthUserController', () => {
 
     expect(response).toEqual(httpResponses.http400(validationError))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
-    expect(authUserUsecase.execute).not.toHaveBeenCalled()
+    expect(loginUsecase.execute).not.toHaveBeenCalled()
   })
 
   it('should return 401 if user is not found', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
     const error = new UnauthorizedError('User not found')
     validator.validate.mockReturnValue(undefined)
-    authUserUsecase.execute.mockResolvedValue(error)
+    loginUsecase.execute.mockResolvedValue(error)
 
     const response = await authUserController.handle(credentials)
 
     expect(response).toEqual(httpResponses.http401(error))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
-    expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
+    expect(loginUsecase.execute).toHaveBeenCalledWith(credentials)
   })
 
   it('should return 403 if invalid password is provided', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
     const error = new ForbiddenError('Invalid password')
     validator.validate.mockReturnValue(undefined)
-    authUserUsecase.execute.mockResolvedValue(error)
+    loginUsecase.execute.mockResolvedValue(error)
 
     const response = await authUserController.handle(credentials)
 
     expect(response).toEqual(httpResponses.http403(error))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
-    expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
+    expect(loginUsecase.execute).toHaveBeenCalledWith(credentials)
   })
 
   it('should return 500 if an unexpected error accurs', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password'
     }
     const error = new Error('Some error')
     validator.validate.mockReturnValue(undefined)
-    authUserUsecase.execute.mockRejectedValue(error)
+    loginUsecase.execute.mockRejectedValue(error)
 
     const response = await authUserController.handle(credentials)
 
     expect(response).toEqual(httpResponses.http500(error))
     expect(validator.validate).toHaveBeenCalledWith(credentials)
-    expect(authUserUsecase.execute).toHaveBeenCalledWith(credentials)
+    expect(loginUsecase.execute).toHaveBeenCalledWith(credentials)
   })
 })

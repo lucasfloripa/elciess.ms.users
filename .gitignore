@@ -3,9 +3,9 @@
 .serverless
 .vscode
 .husky
+logs
+logstash
 data
-.logs
-.logstash
 rabbitmq_data
 redis_data
 redisinsight_data

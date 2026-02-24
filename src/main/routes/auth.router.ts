@@ -1,16 +1,22 @@
 import { Router } from 'express'
 
-import { adaptExpressRoute, refreshTokenExtractor } from '@/main/adapters'
+import {
+  adaptExpressAuthenticationMiddleware,
+  adaptExpressRoute,
+  refreshTokenExtractor
+} from '@/main/adapters'
 
 import {
-  makeAuthUserController,
+  makeLoginController,
   makeRefreshTokenController,
-  makeLogoutController
+  makeLogoutController,
+  makeGetMeController
 } from '../factories/controllers'
+import { makeAuthenticationMiddleware } from '../factories/middlewares'
 
 export const authRouter = Router()
 
-authRouter.post('/login', adaptExpressRoute(makeAuthUserController()))
+authRouter.post('/login', adaptExpressRoute(makeLoginController()))
 
 authRouter.post('/logout', adaptExpressRoute(makeLogoutController()))
 
@@ -18,4 +24,10 @@ authRouter.get(
   '/refresh',
   refreshTokenExtractor(),
   adaptExpressRoute(makeRefreshTokenController())
+)
+
+authRouter.get(
+  '/me',
+  adaptExpressAuthenticationMiddleware(makeAuthenticationMiddleware()),
+  adaptExpressRoute(makeGetMeController())
 )

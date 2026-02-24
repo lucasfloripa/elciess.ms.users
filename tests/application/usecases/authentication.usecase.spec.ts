@@ -1,10 +1,10 @@
 import { type ITokenService } from '@/application/contracts'
-import { AuthTokenUsecase } from '@/application/usecases'
+import { AuthenticationUsecase } from '@/application/usecases'
 import { type ILogger } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 
-describe('AuthTokenUsecase', () => {
-  let authTokenUsecase: AuthTokenUsecase
+describe('AuthenticationUsecase', () => {
+  let authenticationUsecase: AuthenticationUsecase
   let tokenService: jest.Mocked<ITokenService>
   let logger: ILogger
 
@@ -19,7 +19,7 @@ describe('AuthTokenUsecase', () => {
       verifyAccessToken: jest.fn()
     } as unknown as jest.Mocked<ITokenService>
 
-    authTokenUsecase = new AuthTokenUsecase(tokenService, logger)
+    authenticationUsecase = new AuthenticationUsecase(tokenService, logger)
   })
 
   it('should return userId and role when accessToken is valid', async () => {
@@ -31,7 +31,7 @@ describe('AuthTokenUsecase', () => {
 
     tokenService.verifyAccessToken.mockResolvedValueOnce(userTokenInfos)
 
-    const result = await authTokenUsecase.execute({ accessToken })
+    const result = await authenticationUsecase.execute({ accessToken })
 
     expect(tokenService.verifyAccessToken).toHaveBeenCalledWith(accessToken)
     expect(result).toEqual(userTokenInfos)
@@ -41,7 +41,7 @@ describe('AuthTokenUsecase', () => {
     const accessToken = 'invalid.token'
     tokenService.verifyAccessToken.mockResolvedValueOnce('JsonWebTokenError')
 
-    const result = await authTokenUsecase.execute({ accessToken })
+    const result = await authenticationUsecase.execute({ accessToken })
 
     expect(tokenService.verifyAccessToken).toHaveBeenCalledWith(accessToken)
     expect(result).toEqual(new UnauthorizedError('Invalid format token'))
@@ -51,7 +51,7 @@ describe('AuthTokenUsecase', () => {
     const accessToken = 'expired.token'
     tokenService.verifyAccessToken.mockResolvedValueOnce('TokenExpiredError')
 
-    const result = await authTokenUsecase.execute({ accessToken })
+    const result = await authenticationUsecase.execute({ accessToken })
 
     expect(tokenService.verifyAccessToken).toHaveBeenCalledWith(accessToken)
     expect(result).toEqual(new UnauthorizedError('Expired token'))

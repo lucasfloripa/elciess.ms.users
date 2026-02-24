@@ -51,7 +51,7 @@ describe('PasswordResetUsecase', () => {
       userId: 'user-id',
       email,
       password: 'hashed-password',
-      role: 'DEFAULT',
+      role: 'USER',
       refreshToken: 'token'
     }
     userRepository.getUser.mockResolvedValueOnce(dbUser)

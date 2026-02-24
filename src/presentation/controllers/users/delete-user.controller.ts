@@ -26,7 +26,11 @@ export class DeleteUserController implements IController {
         return httpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.deleteUserUsecase.execute(request.id)
+      const requestDTO: IDeleteUserRequestDTO = {
+        id: request.id
+      }
+
+      const ucResponse = await this.deleteUserUsecase.execute(requestDTO.id)
 
       if (ucResponse instanceof NotFoundError) {
         this.logger.warn('DeleteUserController error:', ucResponse)

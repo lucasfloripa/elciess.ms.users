@@ -1,22 +1,22 @@
 import { type ITokenService } from '@/application/contracts'
-import { type IAuthTokenUsecase, type ILogger } from '@/domain/contracts'
+import { type IAuthenticationUsecase, type ILogger } from '@/domain/contracts'
 import { UnauthorizedError } from '@/domain/errors'
 import { type IUserTokenInfos } from '@/domain/interfaces'
-import { type IAuthTokenRequestDTO } from '@/domain/ports/inbounds'
-import { type IAuthTokenResponseDTO } from '@/domain/ports/outbounds'
+import { type IAuthenticationRequestDTO } from '@/domain/ports/inbounds'
+import { type IAuthenticationResponseDTO } from '@/domain/ports/outbounds'
 
-export class AuthTokenUsecase implements IAuthTokenUsecase {
+export class AuthenticationUsecase implements IAuthenticationUsecase {
   constructor(
     private readonly tokenService: ITokenService,
     private readonly logger: ILogger
   ) {}
 
   async execute(
-    request: IAuthTokenRequestDTO
-  ): Promise<IAuthTokenResponseDTO | Error> {
-    this.logger.info('Init AuthTokenUsecase')
+    request: IAuthenticationRequestDTO
+  ): Promise<IAuthenticationResponseDTO | Error> {
+    this.logger.info('Init AuthenticationUsecase')
     this.logger.debug(
-      'AuthTokenUsecase: Attempting to authenticate access token',
+      'AuthenticationUsecase: Attempting to authenticate access token',
       request
     )
 
@@ -26,23 +26,23 @@ export class AuthTokenUsecase implements IAuthTokenUsecase {
       await this.tokenService.verifyAccessToken(accessToken)
 
     if (userTokenInfos === 'JsonWebTokenError') {
-      this.logger.warn('AuthTokenUsecase: Invalid access token format')
+      this.logger.warn('AuthenticationUsecase: Invalid access token format')
       return new UnauthorizedError('Invalid format token')
     }
 
     if (userTokenInfos === 'TokenExpiredError') {
-      this.logger.warn('AuthTokenUsecase: Expired access token')
+      this.logger.warn('AuthenticationUsecase: Expired access token')
       return new UnauthorizedError('Expired token')
     }
 
     const payload = userTokenInfos as IUserTokenInfos
-    this.logger.debug('AuthTokenUsecase: Token payload extracted', {
+    this.logger.debug('AuthenticationUsecase: Token payload extracted', {
       userId: payload.userId,
       role: payload.role
     })
 
-    this.logger.info('Completed AuthTokenUsecase')
-    this.logger.debug('AuthTokenUsecase response', {
+    this.logger.info('Completed AuthenticationUsecase')
+    this.logger.debug('AuthenticationUsecase response', {
       userId: payload.userId,
       role: payload.role
     })

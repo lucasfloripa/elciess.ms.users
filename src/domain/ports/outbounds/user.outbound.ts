@@ -17,19 +17,20 @@ export interface IUpdateUserResponseDTO {
 }
 
 export interface IGetMeResponseDTO {
-  user: ISanitezedUser
+  email: string
+  role: string
 }
 
 export interface IRefreshTokenResponseDTO {
   accessToken: string
 }
 
-export interface IAuthUserResponseDTO {
+export interface ILoginResponseDTO {
   accessToken: string
   refreshTokenCookie: IRefreshTokenCookie
 }
 
-export interface IAuthTokenResponseDTO {
+export interface IAuthenticationResponseDTO {
   userId: string
   role: string
 }
@@ -50,4 +51,8 @@ export interface IPasswordResetResponseDTO {
 export interface IRefreshTokenCookie {
   value: string
   maxAge: number
+}
+
+export interface IAuthorizationResponseDTO {
+  allowed: boolean
 }

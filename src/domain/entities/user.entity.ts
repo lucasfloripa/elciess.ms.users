@@ -23,7 +23,7 @@ export class User {
     const userId = this._generateId()
     const userEmail = Email.create(email)
     const hashedPassword = await Password.create(password)
-    const defaultRole = UserRoles.DEFAULT
+    const defaultRole = UserRoles.USER
     return new User(userId, userEmail, hashedPassword, defaultRole)
   }
 

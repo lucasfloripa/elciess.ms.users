@@ -1,4 +1,7 @@
-import { type IUserRepository } from '@/application/contracts'
+import {
+  type IMessagerService,
+  type IUserRepository
+} from '@/application/contracts'
 import { CreateUserUsecase } from '@/application/usecases'
 import { type ILogger } from '@/domain/contracts'
 import { User } from '@/domain/entities'
@@ -12,6 +15,7 @@ jest.mock('@/domain/entities/user.entity')
 describe('CreateUserUsecase', () => {
   let createUserUsecase: CreateUserUsecase
   let userRepository: jest.Mocked<IUserRepository>
+  let messagerService: jest.Mocked<IMessagerService>
   let logger: ILogger
 
   beforeEach(() => {
@@ -25,8 +29,15 @@ describe('CreateUserUsecase', () => {
       getUser: jest.fn(),
       save: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>
+    messagerService = {
+      sendMessage: jest.fn()
+    } as unknown as jest.Mocked<IMessagerService>
 
-    createUserUsecase = new CreateUserUsecase(userRepository, logger)
+    createUserUsecase = new CreateUserUsecase(
+      userRepository,
+      messagerService,
+      logger
+    )
   })
 
   it('should create a user successfully', async () => {
@@ -43,7 +54,7 @@ describe('CreateUserUsecase', () => {
       'user-id',
       mockEmail,
       mockPassword,
-      UserRoles.DEFAULT
+      UserRoles.USER
     )
 
     jest.spyOn(User, 'create').mockResolvedValueOnce(mockUser)
@@ -70,7 +81,7 @@ describe('CreateUserUsecase', () => {
       userId: 'existing-id',
       email: 'test@example.com',
       password: 'hashed',
-      role: 'DEFAULT'
+      role: 'USER'
     }
 
     userRepository.getUser.mockResolvedValueOnce(existingUser)

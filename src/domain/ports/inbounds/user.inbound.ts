@@ -21,16 +21,16 @@ export interface IUpdateUserRequestDTO {
   email: string
 }
 
-export interface IAuthUserRequestDTO {
+export interface ILoginRequestDTO {
   email: string
   password: string
 }
 
-export interface IAuthTokenRequestDTO {
+export interface IAuthenticationRequestDTO {
   accessToken: string
 }
 
-export interface IAuthRoleRequestDTO {
+export interface IRoleGuardRequestDTO {
   role: string
 }
 
@@ -47,4 +47,11 @@ export interface IPasswordResetRequestDTO {
 
 export interface IRefreshTokenRequestDTO {
   refreshToken: string
+}
+
+export interface IAuthorizationRequestDTO {
+  userId: string
+  role: string
+  action: string
+  resource: string
 }

@@ -1,0 +1,11 @@
+version: '3.8'
+name: elciess_postgres
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: elciess_db
+      POSTGRES_USER: elciess
+      POSTGRES_PASSWORD: elciess
+    ports:
+      - "5432:5432"

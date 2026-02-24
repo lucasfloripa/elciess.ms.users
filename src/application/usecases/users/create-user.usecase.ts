@@ -1,4 +1,7 @@
-import { type IUserRepository } from '@/application/contracts'
+import {
+  type IMessagerService,
+  type IUserRepository
+} from '@/application/contracts'
 import { type ILogger, type ICreateUserUsecase } from '@/domain/contracts'
 import { User } from '@/domain/entities'
 import { EmailInUseError } from '@/domain/errors'
@@ -9,6 +12,7 @@ import { type ICreateUserResponseDTO } from '@/domain/ports/outbounds'
 export class CreateUserUsecase implements ICreateUserUsecase {
   constructor(
     private readonly userRepository: IUserRepository,
+    private readonly messagerService: IMessagerService,
     private readonly logger: ILogger
   ) {}
 
@@ -35,6 +39,12 @@ export class CreateUserUsecase implements ICreateUserUsecase {
       userId: user.userId
     })
     await this.userRepository.save(user.toPersistence())
+
+    await this.messagerService.sendMessage(
+      'user.notifications',
+      'user.created',
+      user.userId
+    )
 
     this.logger.info('Completed CreateUserUsecase')
     this.logger.debug('CreateUserUsecase response', {

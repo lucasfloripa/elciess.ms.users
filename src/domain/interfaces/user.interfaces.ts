@@ -10,7 +10,6 @@ export interface ISanitezedUser {
   userId: string
   email: string
   role: string
-  refreshToken?: string
 }
 
 export interface IUserTokenInfos {

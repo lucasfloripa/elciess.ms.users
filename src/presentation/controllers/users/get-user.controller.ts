@@ -29,7 +29,11 @@ export class GetUserController implements IController {
         return httpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.getUserUsecase.execute(request)
+      const requestDTO: IGetUserRequestDTO = {
+        id: request.id
+      }
+
+      const ucResponse = await this.getUserUsecase.execute(requestDTO)
 
       if (ucResponse instanceof NotFoundError) {
         this.logger.warn('GetUserController error:', ucResponse)

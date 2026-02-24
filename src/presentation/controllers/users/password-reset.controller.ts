@@ -29,7 +29,13 @@ export class PasswordResetController implements IController {
         return httpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.PasswordResetUsecase.execute(request.email)
+      const requestDTO: IPasswordResetRequestDTO = {
+        email: request.email
+      }
+
+      const ucResponse = await this.PasswordResetUsecase.execute(
+        requestDTO.email
+      )
 
       if (ucResponse instanceof NotFoundError) {
         this.logger.warn('PasswordResetController error:', ucResponse)

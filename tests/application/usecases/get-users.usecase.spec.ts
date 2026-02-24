@@ -41,32 +41,23 @@ describe('GetUsersUsecase', () => {
         userId: 'user-2',
         email: 'user2@example.com',
         password: 'hashed2',
-        role: 'DEFAULT',
+        role: 'USER',
         refreshToken: 'token2'
       }
     ]
+
+    const usersToReturn = dbUsers.map((dbUser: IUser) => ({
+      email: dbUser.email,
+      role: dbUser.role,
+      userId: dbUser.userId
+    }))
 
     userRepository.getUsers.mockResolvedValueOnce(dbUsers)
 
     const result = await getUsersUsecase.execute()
 
     expect(userRepository.getUsers).toHaveBeenCalled()
-    expect(result).toEqual({
-      users: [
-        {
-          userId: 'user-1',
-          email: 'user1@example.com',
-          role: 'ADMIN',
-          refreshToken: 'token1'
-        },
-        {
-          userId: 'user-2',
-          email: 'user2@example.com',
-          role: 'DEFAULT',
-          refreshToken: 'token2'
-        }
-      ]
-    })
+    expect(result).toEqual({ users: usersToReturn })
   })
 
   it('should return NotFoundError when no users found', async () => {

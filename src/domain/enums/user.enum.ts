@@ -5,6 +5,6 @@ export enum UserEnums {
 }
 
 export enum UserRoles {
-  DEFAULT = 'DEFAULT',
+  USER = 'USER',
   ADMIN = 'ADMIN'
 }

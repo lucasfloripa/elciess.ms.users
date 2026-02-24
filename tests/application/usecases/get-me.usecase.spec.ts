@@ -39,7 +39,7 @@ describe('GetMeUsecase', () => {
 
     tokenService.verifyAccessToken.mockResolvedValueOnce({
       userId: 'user-id',
-      role: 'DEFAULT'
+      role: 'USER'
     })
 
     userRepository.getUser.mockResolvedValueOnce(null)
@@ -50,19 +50,19 @@ describe('GetMeUsecase', () => {
     expect(result).toEqual(new NotFoundError('User not found'))
   })
 
-  it('should return the sanitized user when user exists in DB', async () => {
+  it('should return email and role from user when user exists in DB', async () => {
     const accessToken = 'valid-token'
 
     const dbUser: IUser = {
       userId: 'user-id',
       email: 'john@example.com',
-      role: 'DEFAULT',
+      role: 'USER',
       password: 'hashed-password'
     }
 
     tokenService.verifyAccessToken.mockResolvedValueOnce({
       userId: 'user-id',
-      role: 'DEFAULT'
+      role: 'USER'
     })
 
     userRepository.getUser.mockResolvedValueOnce(dbUser)
@@ -73,15 +73,8 @@ describe('GetMeUsecase', () => {
     expect(userRepository.getUser).toHaveBeenCalledWith({ userId: 'user-id' })
 
     expect(result).toEqual({
-      user: {
-        userId: 'user-id',
-        email: 'john@example.com',
-        role: 'DEFAULT'
-      }
+      email: dbUser.email,
+      role: dbUser.role
     })
-
-    // garante que o password foi removido
-    // @ts-expect-error — queremos garantir que não existe mesmo
-    expect(result.user.password).toBeUndefined()
   })
 })

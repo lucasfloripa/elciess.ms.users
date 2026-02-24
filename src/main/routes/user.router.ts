@@ -1,7 +1,10 @@
 import { Router } from 'express'
 
-import { UserRoles } from '@/domain/enums'
-import { adaptExpressRoute, adaptExpressMiddlware } from '@/main/adapters'
+import {
+  adaptExpressRoute,
+  adaptExpressAuthenticationMiddleware,
+  adaptExpressAuthorizationMiddleware
+} from '@/main/adapters'
 
 import {
   makeGetUsersController,
@@ -9,12 +12,11 @@ import {
   makeCreateUserController,
   makeUpdateUserPasswordController,
   makeDeleteUserController,
-  makeGetMeController,
   makePasswordResetController
 } from '../factories/controllers'
 import {
-  makeAuthTokenMiddleware,
-  makeAuthRoleMiddleware
+  makeAuthenticationMiddleware,
+  makeAuthorizationMiddleware
 } from '../factories/middlewares'
 
 export const userRouter = Router()
@@ -32,28 +34,23 @@ userRouter.post(
 )
 
 userRouter.get(
-  '/me',
-  adaptExpressMiddlware(makeAuthTokenMiddleware()),
-  adaptExpressRoute(makeGetMeController())
-)
-
-userRouter.get(
   '/:id',
-  adaptExpressMiddlware(makeAuthTokenMiddleware()),
-  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
+  adaptExpressAuthenticationMiddleware(makeAuthenticationMiddleware()),
   adaptExpressRoute(makeGetUserController())
 )
 
 userRouter.get(
   '/',
-  adaptExpressMiddlware(makeAuthTokenMiddleware()),
-  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
+  adaptExpressAuthenticationMiddleware(makeAuthenticationMiddleware()),
+  adaptExpressAuthorizationMiddleware(
+    makeAuthorizationMiddleware(),
+    'GET_USER'
+  ),
   adaptExpressRoute(makeGetUsersController())
 )
 
 userRouter.delete(
   '/:id',
-  adaptExpressMiddlware(makeAuthTokenMiddleware()),
-  adaptExpressMiddlware(makeAuthRoleMiddleware(UserRoles.ADMIN)),
+  adaptExpressAuthenticationMiddleware(makeAuthenticationMiddleware()),
   adaptExpressRoute(makeDeleteUserController())
 )

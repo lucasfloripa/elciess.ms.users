@@ -29,7 +29,13 @@ export class CreateUserController implements IController {
         return httpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.createUserUsecase.execute(request)
+      const requestDTO: ICreateUserRequestDTO = {
+        email: request.email,
+        confirmPassword: request.confirmPassword,
+        password: request.password
+      }
+
+      const ucResponse = await this.createUserUsecase.execute(requestDTO)
 
       if (ucResponse instanceof EmailInUseError) {
         this.logger.warn('CreateUserController error:', ucResponse)

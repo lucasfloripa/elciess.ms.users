@@ -6,7 +6,6 @@ import { type IGetMeUsecase, type ILogger } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import {
   type IUserTokenInfos,
-  type ISanitezedUser,
   type IUser
 } from '@/domain/interfaces/user.interfaces'
 import { type IGetMeResponseDTO } from '@/domain/ports/outbounds'
@@ -39,15 +38,15 @@ export class GetMeUsecase implements IGetMeUsecase {
       return new NotFoundError('User not found')
     }
 
-    const { password, ...sanitezedUser } = dbUser
-    const user: ISanitezedUser = sanitezedUser
-
-    this.logger.debug('GetMeUsecase: Caching user data', {
-      userId: payload.userId
+    this.logger.info('Completed GetMeUsecase')
+    this.logger.debug('GetMeUsecase response', {
+      email: dbUser.email,
+      role: dbUser.role
     })
 
-    this.logger.info('Completed GetMeUsecase')
-    this.logger.debug('GetMeUsecase response', { user })
-    return { user }
+    return {
+      email: dbUser.email,
+      role: dbUser.role
+    }
   }
 }

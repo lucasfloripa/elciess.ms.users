@@ -33,11 +33,8 @@ describe('GetMeController', () => {
       accessToken: 'valid_access_token'
     }
     const userResponse: IGetMeResponseDTO = {
-      user: {
-        userId: 'valid_user_id',
-        email: 'john.doe@example.com',
-        role: 'DEFAULT'
-      }
+      email: 'john.doe@example.com',
+      role: 'USER'
     }
     validator.validate.mockReturnValue(undefined)
     getMeUsecase.execute.mockResolvedValue(userResponse)

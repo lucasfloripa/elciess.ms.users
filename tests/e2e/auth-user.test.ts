@@ -1,6 +1,6 @@
 import request from 'supertest'
 
-import { AuthUserUsecase } from '@/application/usecases'
+import { LoginUsecase } from '@/application/usecases'
 import { MongoHelper } from '@/infra/mongo'
 import { createApp } from '@/main/config/app'
 import {
@@ -81,7 +81,7 @@ describe('[E2E] Auth User', () => {
 
   it('should return 500 when something not expected happens', async () => {
     jest
-      .spyOn(AuthUserUsecase.prototype, 'execute')
+      .spyOn(LoginUsecase.prototype, 'execute')
       .mockRejectedValueOnce(new Error('Simulated Database Error'))
 
     const res = await request(app).post('/api/auth/login').send({

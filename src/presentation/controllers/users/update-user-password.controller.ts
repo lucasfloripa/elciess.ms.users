@@ -32,7 +32,14 @@ export class UpdateUserPasswordController implements IController {
         return httpResponses.http400(hasInputError)
       }
 
-      const ucResponse = await this.updateUserPasswordUsecase.execute(request)
+      const dto: IUpdateUserPasswordRequestDTO = {
+        userId: request.userId,
+        confirmPassword: request.confirmPassword,
+        newPassword: request.newPassword,
+        password: request.password
+      }
+
+      const ucResponse = await this.updateUserPasswordUsecase.execute(dto)
 
       if (ucResponse instanceof NotFoundError) {
         this.logger.warn('UpdateUserPasswordController error:', ucResponse)

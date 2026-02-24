@@ -3,15 +3,15 @@ import {
   type ITokenService,
   type IUserRepository
 } from '@/application/contracts'
-import { AuthUserUsecase } from '@/application/usecases'
+import { LoginUsecase } from '@/application/usecases'
 import { type ILogger } from '@/domain/contracts'
 import { UnauthorizedError, ForbiddenError } from '@/domain/errors'
 import { type IUser } from '@/domain/interfaces'
-import { type IAuthUserRequestDTO } from '@/domain/ports/inbounds'
+import { type ILoginRequestDTO } from '@/domain/ports/inbounds'
 import { Password } from '@/domain/value-objects'
 
-describe('AuthUserUsecase', () => {
-  let authUserUsecase: AuthUserUsecase
+describe('LoginUsecase', () => {
+  let loginUsecase: LoginUsecase
   let userRepository: jest.Mocked<IUserRepository>
   let tokenService: jest.Mocked<ITokenService>
   let cacheService: jest.Mocked<ICacheService>
@@ -37,7 +37,7 @@ describe('AuthUserUsecase', () => {
       get: jest.fn(),
       delete: jest.fn()
     } as unknown as jest.Mocked<ICacheService>
-    authUserUsecase = new AuthUserUsecase(
+    loginUsecase = new LoginUsecase(
       userRepository,
       tokenService,
       cacheService,
@@ -46,7 +46,7 @@ describe('AuthUserUsecase', () => {
   })
 
   it('should authenticate a user successfully', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'test@example.com',
       password: 'password123'
     }
@@ -54,7 +54,7 @@ describe('AuthUserUsecase', () => {
     const user: IUser = {
       email: 'any_email',
       password: 'any_password',
-      role: 'DEFAULT',
+      role: 'USER',
       userId: 'any_id',
       refreshToken: 'any_refreshToken'
     }
@@ -68,7 +68,7 @@ describe('AuthUserUsecase', () => {
       .spyOn(tokenService, 'generateRefreshToken')
       .mockResolvedValueOnce('refreshToken')
 
-    const result = await authUserUsecase.execute(credentials)
+    const result = await loginUsecase.execute(credentials)
 
     expect(userRepository.getUser).toHaveBeenCalledWith({
       email: credentials.email
@@ -100,14 +100,14 @@ describe('AuthUserUsecase', () => {
   })
 
   it('should return UnauthorizedError if user does not exist', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'test@example.com',
       password: 'password123'
     }
 
     userRepository.getUser.mockResolvedValueOnce(null)
 
-    const result = await authUserUsecase.execute(credentials)
+    const result = await loginUsecase.execute(credentials)
 
     expect(userRepository.getUser).toHaveBeenCalledWith({
       email: credentials.email
@@ -116,7 +116,7 @@ describe('AuthUserUsecase', () => {
   })
 
   it('should return ForbiddenError if password is incorrect', async () => {
-    const credentials: IAuthUserRequestDTO = {
+    const credentials: ILoginRequestDTO = {
       email: 'test@example.com',
       password: 'password123'
     }
@@ -124,7 +124,7 @@ describe('AuthUserUsecase', () => {
     const user: IUser = {
       email: 'any_email',
       password: 'any_password',
-      role: 'DEFAULT',
+      role: 'USER',
       userId: 'any_id',
       refreshToken: 'any_refreshToken'
     }
@@ -132,7 +132,7 @@ describe('AuthUserUsecase', () => {
     userRepository.getUser.mockResolvedValueOnce(user)
     jest.spyOn(Password, 'comparePassword').mockResolvedValueOnce(false)
 
-    const result = await authUserUsecase.execute(credentials)
+    const result = await loginUsecase.execute(credentials)
 
     expect(userRepository.getUser).toHaveBeenCalledWith({
       email: credentials.email

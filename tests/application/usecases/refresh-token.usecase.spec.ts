@@ -57,7 +57,7 @@ describe('RefreshTokenUsecase', () => {
 
   it('should return ForbiddenError when refresh token is not found in Redis', async () => {
     const refreshToken = 'valid-refresh-token'
-    const payload: IUserTokenInfos = { userId: 'user-id', role: 'DEFAULT' }
+    const payload: IUserTokenInfos = { userId: 'user-id', role: 'USER' }
 
     tokenService.verifyRefreshToken.mockResolvedValueOnce(payload)
     cacheService.get.mockResolvedValueOnce(null) // Redis não tem o token
@@ -71,7 +71,7 @@ describe('RefreshTokenUsecase', () => {
 
   it('should return UnauthorizedError when refresh token in Redis mismatches', async () => {
     const refreshToken = 'valid-refresh-token'
-    const payload: IUserTokenInfos = { userId: 'user-id', role: 'DEFAULT' }
+    const payload: IUserTokenInfos = { userId: 'user-id', role: 'USER' }
 
     tokenService.verifyRefreshToken.mockResolvedValueOnce(payload)
     cacheService.get.mockResolvedValueOnce('other-refresh-token') // mismatch
@@ -85,7 +85,7 @@ describe('RefreshTokenUsecase', () => {
 
   it('should generate a new access token on valid refresh token', async () => {
     const refreshToken = 'valid-refresh-token'
-    const payload: IUserTokenInfos = { userId: 'user-id', role: 'DEFAULT' }
+    const payload: IUserTokenInfos = { userId: 'user-id', role: 'USER' }
 
     tokenService.verifyRefreshToken.mockResolvedValueOnce(payload)
     cacheService.get.mockResolvedValueOnce(refreshToken)

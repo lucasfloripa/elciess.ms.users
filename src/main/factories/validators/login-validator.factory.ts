@@ -5,7 +5,7 @@ import {
   EmailValidation
 } from '@/presentation/validators'
 
-export const makeAuthUserValidator = (): ValidationComposite => {
+export const makeLoginValidator = (): ValidationComposite => {
   const validations: IValidation[] = []
   for (const field of ['email', 'password']) {
     validations.push(new RequiredFieldValidation(field))

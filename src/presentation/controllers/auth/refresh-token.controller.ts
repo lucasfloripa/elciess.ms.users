@@ -29,8 +29,12 @@ export class RefreshTokenController implements IController {
         return httpResponses.http401(hasInputError)
       }
 
+      const requestDTO: IRefreshTokenRequestDTO = {
+        refreshToken: request.refreshToken
+      }
+
       const ucResponse = await this.refreshTokenUsecase.execute(
-        request.refreshToken
+        requestDTO.refreshToken
       )
 
       if (ucResponse instanceof UnauthorizedError) {

@@ -42,7 +42,7 @@ describe('CreateUserController', () => {
       user: {
         email: createUserData.email,
         userId: 'valid_id',
-        role: 'DEFAULT'
+        role: 'USER'
       }
     }
     validator.validate.mockReturnValue(undefined)

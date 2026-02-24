@@ -16,7 +16,6 @@ export class GetUsersController implements IController {
   async handle(): Promise<IHttpResponse<IGetUsersResponseDTO>> {
     try {
       this.logger.info('Init GetUsersController')
-      this.logger.debug('GetUsersController request:', { message: '' })
       const ucResponse = await this.getUsersUsecase.execute()
 
       if (ucResponse instanceof NotFoundError) {

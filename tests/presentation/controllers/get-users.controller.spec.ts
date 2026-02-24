@@ -28,7 +28,7 @@ describe('GetUsersController', () => {
         {
           userId: 'user_id_1',
           email: 'user1@example.com',
-          role: 'DEFAULT'
+          role: 'USER'
         },
         {
           userId: 'user_id_2',

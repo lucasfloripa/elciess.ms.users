@@ -1,5 +1,5 @@
 export * from './create-user-validator.factory'
-export * from './auth-user-validator.factory'
+export * from './login-validator.factory'
 export * from './refresh-token-validator.factory'
 export * from './get-user-validator.factory'
 export * from './delete-user-validator.factory'

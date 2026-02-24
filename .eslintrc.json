@@ -16,6 +16,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "ignorePatterns": ["package.json"],
   "settings": {
     "import/resolver": {
       "typescript": {
