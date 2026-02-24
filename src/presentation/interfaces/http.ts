@@ -3,6 +3,19 @@ export interface IHttpResponse<T = any> {
   body?: T
 }
 
+const errorResponse = (statusCode: number, error: Error): any => {
+  const newDate = new Date()
+  const gmtLess3 = new Date(newDate.getTime() - 3 * 60 * 60 * 1000)
+  const dateNow = gmtLess3.toISOString().split('.')[0]
+
+  return {
+    timestamp: dateNow,
+    statusCode,
+    error: error.name,
+    message: error.message
+  }
+}
+
 export const httpResponses = {
   http200: <T>(data: T): IHttpResponse => ({
     statusCode: 200,
@@ -21,22 +34,22 @@ export const httpResponses = {
   }),
   http401: (error: Error): IHttpResponse => ({
     statusCode: 401,
-    body: error
+    body: errorResponse(401, error)
   }),
   http403: (error: Error): IHttpResponse => ({
     statusCode: 403,
-    body: error
+    body: errorResponse(403, error)
   }),
   http404: (error: Error): IHttpResponse => ({
     statusCode: 404,
-    body: error
+    body: errorResponse(404, error)
   }),
   http409: (error: Error): IHttpResponse => ({
     statusCode: 409,
-    body: error
+    body: errorResponse(409, error)
   }),
   http500: (error: Error): IHttpResponse => ({
     statusCode: 500,
-    body: error.message
+    body: errorResponse(500, error)
   })
 }
