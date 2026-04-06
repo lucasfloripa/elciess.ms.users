@@ -1,6 +1,9 @@
+import { type UserRoles } from '@/domain/enums'
+
 export interface ICreateUserRequestDTO {
   email: string
   password: string
+  role: UserRoles
   confirmPassword: string
 }
 

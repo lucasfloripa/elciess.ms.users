@@ -31,6 +31,7 @@ export class CreateUserController implements IController {
 
       const requestDTO: ICreateUserRequestDTO = {
         email: request.email,
+        role: request.role,
         confirmPassword: request.confirmPassword,
         password: request.password
       }

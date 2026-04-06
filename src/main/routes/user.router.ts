@@ -2,8 +2,8 @@ import { Router } from 'express'
 
 import {
   adaptExpressRoute,
-  adaptExpressAuthenticationMiddleware,
-  adaptExpressAuthorizationMiddleware
+  adaptExpressAuthenticationMiddleware
+  // adaptExpressAuthorizationMiddleware
 } from '@/main/adapters'
 
 import {
@@ -15,8 +15,8 @@ import {
   makePasswordResetController
 } from '../factories/controllers'
 import {
-  makeAuthenticationMiddleware,
-  makeAuthorizationMiddleware
+  makeAuthenticationMiddleware
+  // makeAuthorizationMiddleware
 } from '../factories/middlewares'
 
 export const userRouter = Router()
@@ -42,10 +42,6 @@ userRouter.get(
 userRouter.get(
   '/',
   adaptExpressAuthenticationMiddleware(makeAuthenticationMiddleware()),
-  adaptExpressAuthorizationMiddleware(
-    makeAuthorizationMiddleware(),
-    'GET_USER'
-  ),
   adaptExpressRoute(makeGetUsersController())
 )
 

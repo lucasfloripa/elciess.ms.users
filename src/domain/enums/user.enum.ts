@@ -5,6 +5,7 @@ export enum UserEnums {
 }
 
 export enum UserRoles {
-  USER = 'USER',
-  ADMIN = 'ADMIN'
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  ORGANIZATION_ADMIN = 'ORGANIZATION_ADMIN',
+  ORGANIZATION_USER = 'ORGANIZATION_USER'
 }

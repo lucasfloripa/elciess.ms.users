@@ -4,15 +4,11 @@ import { type IHttpResponse, type IController } from '@/presentation/interfaces'
 
 export const adaptExpressRoute = (controller: IController) => {
   return async (req: Request, res: Response) => {
-    const authHeader = req.get('authorization')
-    const accessToken = authHeader?.split(' ')[1]
-
     const request = {
       ...req.user,
       ...req.body,
       ...req.params,
       ...req.query,
-      accessToken,
       refreshToken: req.refreshToken
     }
 
