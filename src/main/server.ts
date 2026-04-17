@@ -13,7 +13,7 @@ async function startServer(): Promise<void> {
     const { appPort } = config.get<AppConfig>('appConfig')
     await initializeInfrastructure()
     const app = createApp()
-    const server = app.listen(appPort, () => {
+    const server = app.listen(Number(appPort), '0.0.0.0', () => {
       console.log('App listening on port ' + appPort)
     })
 
