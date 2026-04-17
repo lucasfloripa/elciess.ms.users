@@ -9,7 +9,7 @@ export function setupMiddlewares(app: express.Application): void {
   app.use(cookieParser())
   app.use(
     cors({
-      origin: 'http://localhost:5173',
+      origin: ['http://localhost:5173', 'http://localhost:4173'],
       credentials: true
     })
   )
