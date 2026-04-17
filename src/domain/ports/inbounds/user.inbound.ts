@@ -12,7 +12,7 @@ export interface IGetUserRequestDTO {
 }
 
 export interface IGetMeRequestDTO {
-  accessToken: string
+  userId: string
 }
 
 export interface IDeleteUserRequestDTO {

@@ -1,13 +1,12 @@
-import { type ICacheService, type ITokenService } from '@/application/contracts'
+import { type ITokenService } from '@/application/contracts'
 import { type IRefreshTokenUsecase, type ILogger } from '@/domain/contracts'
-import { ForbiddenError, UnauthorizedError } from '@/domain/errors'
+import { UnauthorizedError } from '@/domain/errors'
 import { type IUserTokenInfos } from '@/domain/interfaces'
 import { type IRefreshTokenResponseDTO } from '@/domain/ports/outbounds'
 
 export class RefreshTokenUsecase implements IRefreshTokenUsecase {
   constructor(
     private readonly tokenService: ITokenService,
-    private readonly cacheService: ICacheService,
     private readonly logger: ILogger
   ) {}
 
@@ -35,20 +34,6 @@ export class RefreshTokenUsecase implements IRefreshTokenUsecase {
       userId: payload.userId,
       role: payload.role
     })
-
-    this.logger.debug('RefreshTokenUsecase: Checking stored session in Redis')
-    const storedSession = await this.cacheService.get(
-      `refreshToken:${payload.userId}`
-    )
-    if (!storedSession) {
-      this.logger.warn('Refresh token not found in Redis (maybe revoked)')
-      return new ForbiddenError('Refresh token revoked or invalidated')
-    }
-
-    if (storedSession !== refreshToken) {
-      this.logger.warn('RefreshTokenUsecase: Refresh token mismatch')
-      return new UnauthorizedError('Refresh token revoked or invalidated')
-    }
 
     this.logger.debug('RefreshTokenUsecase: Generating new access token')
     const newAccessToken =

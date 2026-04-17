@@ -30,10 +30,10 @@ export class GetMeController implements IController {
       }
 
       const requestDTO: IGetMeRequestDTO = {
-        accessToken: request.accessToken
+        userId: request.userId
       }
 
-      const ucResponse = await this.getMeUsecase.execute(requestDTO.accessToken)
+      const ucResponse = await this.getMeUsecase.execute(requestDTO.userId)
 
       if (ucResponse instanceof NotFoundError) {
         this.logger.warn('GetMeController error:', ucResponse)
