@@ -1,7 +1,4 @@
-import {
-  type IMessagerService,
-  type IUserRepository
-} from '@/application/contracts'
+import { type IUserRepository } from '@/application/contracts'
 import { CreateUserUsecase } from '@/application/usecases'
 import { type ILogger } from '@/domain/contracts'
 import { User } from '@/domain/entities'
@@ -15,7 +12,6 @@ jest.mock('@/domain/entities/user.entity')
 describe('CreateUserUsecase', () => {
   let createUserUsecase: CreateUserUsecase
   let userRepository: jest.Mocked<IUserRepository>
-  let messagerService: jest.Mocked<IMessagerService>
   let logger: ILogger
 
   beforeEach(() => {
@@ -29,21 +25,15 @@ describe('CreateUserUsecase', () => {
       getUser: jest.fn(),
       save: jest.fn()
     } as unknown as jest.Mocked<IUserRepository>
-    messagerService = {
-      sendMessage: jest.fn()
-    } as unknown as jest.Mocked<IMessagerService>
 
-    createUserUsecase = new CreateUserUsecase(
-      userRepository,
-      messagerService,
-      logger
-    )
+    createUserUsecase = new CreateUserUsecase(userRepository, logger)
   })
 
   it('should create a user successfully', async () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'test@example.com',
       password: 'password123',
+      role: UserRoles.ORGANIZATION_USER,
       confirmPassword: 'password123'
     }
 
@@ -54,7 +44,7 @@ describe('CreateUserUsecase', () => {
       'user-id',
       mockEmail,
       mockPassword,
-      UserRoles.USER
+      UserRoles.ORGANIZATION_USER
     )
 
     jest.spyOn(User, 'create').mockResolvedValueOnce(mockUser)
@@ -74,6 +64,7 @@ describe('CreateUserUsecase', () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'test@example.com',
       password: 'password123',
+      role: UserRoles.ORGANIZATION_USER,
       confirmPassword: 'password123'
     }
 
@@ -81,7 +72,7 @@ describe('CreateUserUsecase', () => {
       userId: 'existing-id',
       email: 'test@example.com',
       password: 'hashed',
-      role: 'USER'
+      role: UserRoles.ORGANIZATION_USER
     }
 
     userRepository.getUser.mockResolvedValueOnce(existingUser)

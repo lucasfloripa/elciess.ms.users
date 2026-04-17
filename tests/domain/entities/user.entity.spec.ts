@@ -23,6 +23,7 @@ describe('User Entity', () => {
       const input: ICreateUserRequestDTO = {
         email: 'test@example.com',
         password: 'password123',
+        role: UserRoles.ORGANIZATION_USER,
         confirmPassword: 'password123'
       }
       const generatedId = 'generated-id'
@@ -50,7 +51,7 @@ describe('User Entity', () => {
           generatedId,
           mockEmailInstance,
           mockPasswordInstance,
-          UserRoles.USER
+          UserRoles.ORGANIZATION_USER
         )
       )
     })
@@ -62,13 +63,13 @@ describe('User Entity', () => {
         'user-id',
         { value: () => 'email@example.com' } as unknown as Email,
         { value: () => 'hashed-password' } as unknown as Password,
-        UserRoles.USER
+        UserRoles.ORGANIZATION_USER
       )
 
       expect(user.toReturn()).toEqual({
         userId: 'user-id',
         email: 'email@example.com',
-        role: UserRoles.USER
+        role: UserRoles.ORGANIZATION_USER
       })
     })
   })
@@ -79,14 +80,14 @@ describe('User Entity', () => {
         'user-id',
         { value: () => 'email@example.com' } as unknown as Email,
         { value: () => 'hashed-password' } as unknown as Password,
-        UserRoles.USER
+        UserRoles.ORGANIZATION_USER
       )
 
       expect(user.toPersistence()).toEqual({
         userId: 'user-id',
         email: 'email@example.com',
         password: 'hashed-password',
-        role: UserRoles.USER
+        role: UserRoles.ORGANIZATION_USER
       })
     })
   })

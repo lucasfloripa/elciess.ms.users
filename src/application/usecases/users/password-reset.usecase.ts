@@ -1,7 +1,4 @@
-import {
-  type IMessagerService,
-  type IUserRepository
-} from '@/application/contracts'
+import { type IUserRepository } from '@/application/contracts'
 import { type IPasswordResetUsecase, type ILogger } from '@/domain/contracts'
 import { NotFoundError } from '@/domain/errors'
 import { type IUser } from '@/domain/interfaces'
@@ -10,7 +7,6 @@ import { type IPasswordResetResponseDTO } from '@/domain/ports/outbounds'
 export class PasswordResetUsecase implements IPasswordResetUsecase {
   constructor(
     private readonly userRepository: IUserRepository,
-    private readonly messagerService: IMessagerService,
     private readonly logger: ILogger
   ) {}
 
@@ -32,12 +28,7 @@ export class PasswordResetUsecase implements IPasswordResetUsecase {
       return new NotFoundError('User not found')
     }
 
-    this.logger.debug('PasswordResetUsecase: Sending password reset message')
-    await this.messagerService.sendMessage(
-      'user.notifications',
-      'user.password_reset',
-      email
-    )
+    this.logger.debug('PasswordResetUsecase: Password reset request accepted')
 
     this.logger.info('Completed PasswordResetUsecase')
     this.logger.debug(

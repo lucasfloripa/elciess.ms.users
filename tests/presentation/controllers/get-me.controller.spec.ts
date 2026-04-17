@@ -1,4 +1,5 @@
 import { type ILogger, type IGetMeUsecase } from '@/domain/contracts'
+import { UserRoles } from '@/domain/enums'
 import { NotFoundError } from '@/domain/errors'
 import { type IGetMeRequestDTO } from '@/domain/ports/inbounds'
 import { type IGetMeResponseDTO } from '@/domain/ports/outbounds'
@@ -30,11 +31,11 @@ describe('GetMeController', () => {
 
   it('should return 200 if user data is retrieved successfully', async () => {
     const getMeData: IGetMeRequestDTO = {
-      accessToken: 'valid_access_token'
+      userId: 'user-id'
     }
     const userResponse: IGetMeResponseDTO = {
       email: 'john.doe@example.com',
-      role: 'USER'
+      role: UserRoles.ORGANIZATION_USER
     }
     validator.validate.mockReturnValue(undefined)
     getMeUsecase.execute.mockResolvedValue(userResponse)
@@ -43,12 +44,12 @@ describe('GetMeController', () => {
 
     expect(response).toEqual(httpResponses.http200(userResponse))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
-    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.accessToken)
+    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
   })
 
   it('should return 400 if validation fails', async () => {
     const getMeData: IGetMeRequestDTO = {
-      accessToken: ''
+      userId: ''
     }
     const validationError = new Error('User ID is required')
     validator.validate.mockReturnValue(validationError)
@@ -62,7 +63,7 @@ describe('GetMeController', () => {
 
   it('should return 404 if user is not found', async () => {
     const getMeData: IGetMeRequestDTO = {
-      accessToken: 'non_existent_user_id'
+      userId: 'non_existent_user_id'
     }
     const notFoundError = new NotFoundError('User not found')
     validator.validate.mockReturnValue(undefined)
@@ -72,12 +73,12 @@ describe('GetMeController', () => {
 
     expect(response).toEqual(httpResponses.http404(notFoundError))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
-    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.accessToken)
+    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
   })
 
   it('should return 500 if an unexpected error occurs', async () => {
     const getMeData: IGetMeRequestDTO = {
-      accessToken: 'any_access_token'
+      userId: 'any_access_token'
     }
     const unexpectedError = new Error('Internal server error')
     validator.validate.mockReturnValue(undefined)
@@ -87,6 +88,6 @@ describe('GetMeController', () => {
 
     expect(response).toEqual(httpResponses.http500(unexpectedError))
     expect(validator.validate).toHaveBeenCalledWith(getMeData)
-    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.accessToken)
+    expect(getMeUsecase.execute).toHaveBeenCalledWith(getMeData.userId)
   })
 })

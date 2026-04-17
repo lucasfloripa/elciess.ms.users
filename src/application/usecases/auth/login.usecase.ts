@@ -1,5 +1,4 @@
 import {
-  type ICacheService,
   type ITokenService,
   type IUserRepository
 } from '@/application/contracts'
@@ -14,7 +13,6 @@ export class LoginUsecase implements ILoginUsecase {
   constructor(
     private readonly userRepository: IUserRepository,
     private readonly tokenService: ITokenService,
-    private readonly cacheService: ICacheService,
     private readonly logger: ILogger
   ) {}
 
@@ -67,15 +65,11 @@ export class LoginUsecase implements ILoginUsecase {
       role: userExists.role
     })
 
-    this.logger.debug('LoginUsecase: Caching refresh token', {
+    this.logger.debug('LoginUsecase: Persisting refresh token', {
       userId: userExists.userId,
       refreshToken
     })
-    await this.cacheService.set(
-      `refreshToken:${userExists.userId}`,
-      refreshToken,
-      this.SEVEN_DAYS_IN_SECONDS
-    )
+    await this.userRepository.saveRefreshToken(userExists.userId, refreshToken)
 
     this.logger.info('Completed LoginUsecase')
     this.logger.debug('LoginUsecase response', {

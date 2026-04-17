@@ -1,5 +1,4 @@
 import {
-  type ICacheService,
   type ITokenService,
   type IUserRepository
 } from '@/application/contracts'
@@ -14,7 +13,6 @@ describe('LoginUsecase', () => {
   let loginUsecase: LoginUsecase
   let userRepository: jest.Mocked<IUserRepository>
   let tokenService: jest.Mocked<ITokenService>
-  let cacheService: jest.Mocked<ICacheService>
   let logger: ILogger
 
   beforeEach(() => {
@@ -32,17 +30,7 @@ describe('LoginUsecase', () => {
       generateAccessToken: jest.fn(),
       generateRefreshToken: jest.fn()
     } as unknown as jest.Mocked<ITokenService>
-    cacheService = {
-      set: jest.fn(),
-      get: jest.fn(),
-      delete: jest.fn()
-    } as unknown as jest.Mocked<ICacheService>
-    loginUsecase = new LoginUsecase(
-      userRepository,
-      tokenService,
-      cacheService,
-      logger
-    )
+    loginUsecase = new LoginUsecase(userRepository, tokenService, logger)
   })
 
   it('should authenticate a user successfully', async () => {
@@ -85,10 +73,9 @@ describe('LoginUsecase', () => {
       userId: user.userId,
       role: user.role
     })
-    expect(cacheService.set).toHaveBeenCalledWith(
-      `refreshToken:${user.userId}`,
-      'refreshToken',
-      604800
+    expect(userRepository.saveRefreshToken).toHaveBeenCalledWith(
+      user.userId,
+      'refreshToken'
     )
     expect(result).toEqual({
       accessToken: 'accessToken',
@@ -141,6 +128,6 @@ describe('LoginUsecase', () => {
       credentials.password,
       user.password
     )
-    expect(result).toEqual(new ForbiddenError('Invalid Password'))
+    expect(result).toEqual(new ForbiddenError('Invalid password'))
   })
 })

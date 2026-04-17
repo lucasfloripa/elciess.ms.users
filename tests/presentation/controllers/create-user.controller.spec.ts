@@ -1,4 +1,5 @@
 import { type ILogger, type ICreateUserUsecase } from '@/domain/contracts'
+import { UserRoles } from '@/domain/enums'
 import { EmailInUseError } from '@/domain/errors'
 import { type ICreateUserRequestDTO } from '@/domain/ports/inbounds'
 import { type ICreateUserResponseDTO } from '@/domain/ports/outbounds'
@@ -36,13 +37,14 @@ describe('CreateUserController', () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password',
+      role: UserRoles.ORGANIZATION_USER,
       confirmPassword: 'valid_password'
     }
     const newUser: ICreateUserResponseDTO = {
       user: {
         email: createUserData.email,
         userId: 'valid_id',
-        role: 'USER'
+        role: UserRoles.ORGANIZATION_USER
       }
     }
     validator.validate.mockReturnValue(undefined)
@@ -59,6 +61,7 @@ describe('CreateUserController', () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'invalid_email',
       password: 'valid_password',
+      role: UserRoles.ORGANIZATION_USER,
       confirmPassword: 'valid_password'
     }
     const validationError = new Error('Validation error')
@@ -75,6 +78,7 @@ describe('CreateUserController', () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'already_taken@mail.com',
       password: 'valid_password',
+      role: UserRoles.ORGANIZATION_USER,
       confirmPassword: 'valid_password'
     }
     const emailInUseError = new EmailInUseError()
@@ -92,6 +96,7 @@ describe('CreateUserController', () => {
     const createUserData: ICreateUserRequestDTO = {
       email: 'valid_email@mail.com',
       password: 'valid_password',
+      role: UserRoles.ORGANIZATION_USER,
       confirmPassword: 'valid_password'
     }
     const error = new Error('Some error')
