@@ -1,4 +1,4 @@
-import { MongoClient, type Db, type Collection } from 'mongodb'
+import { MongoClient, type Db, type Collection, type Document } from 'mongodb'
 
 export class MongoHelper {
   private static instance: MongoHelper
@@ -17,10 +17,7 @@ export class MongoHelper {
   }
 
   public async connect(uri: string, dbName: string): Promise<void> {
-    // já conectado → não faz nada
     if (this.client && this.db) return
-
-    // evita múltiplas conexões simultâneas
     if (this.connecting) return
 
     this.connecting = true
@@ -42,11 +39,8 @@ export class MongoHelper {
       console.log('✅ Mongo conectado com sucesso')
     } catch (error) {
       console.error('❌ Erro ao conectar no MongoDB:', error)
-
-      // garante que estado não fica quebrado
       this.client = null
       this.db = null
-
       throw error
     } finally {
       this.connecting = false
@@ -74,7 +68,9 @@ export class MongoHelper {
     return this.db
   }
 
-  public getCollection<T extends Document = any>(name: string): Collection<T> {
+  public getCollection<T extends Document = Document>(
+    name: string
+  ): Collection<T> {
     if (!this.db) {
       throw new Error('Database not connected')
     }
