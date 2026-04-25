@@ -74,7 +74,7 @@ export class MongoHelper {
     return this.db
   }
 
-  public getCollection<T = any>(name: string): Collection<T> {
+  public getCollection<T extends Document = any>(name: string): Collection<T> {
     if (!this.db) {
       throw new Error('Database not connected')
     }
