@@ -2,8 +2,10 @@ import { MongoClient, type Db, type Collection } from 'mongodb'
 
 export class MongoHelper {
   private static instance: MongoHelper
+
   private client: MongoClient | null = null
   private db: Db | null = null
+  private connecting: boolean = false
 
   private constructor() {}
 
@@ -14,38 +16,68 @@ export class MongoHelper {
     return MongoHelper.instance
   }
 
-  async connect(uri: string, dbName: string): Promise<void> {
+  public async connect(uri: string, dbName: string): Promise<void> {
+    // já conectado → não faz nada
+    if (this.client && this.db) return
+
+    // evita múltiplas conexões simultâneas
+    if (this.connecting) return
+
+    this.connecting = true
+
     try {
-      if (!this.client) {
-        this.client = new MongoClient(uri, {
-          maxPoolSize: 10,
-          minPoolSize: 2,
-          connectTimeoutMS: 30000,
-          socketTimeoutMS: 45000
-        })
-        await this.client.connect()
-        this.db = this.client.db(dbName)
-      }
+      const client = new MongoClient(uri, {
+        maxPoolSize: 10,
+        minPoolSize: 2,
+        connectTimeoutMS: 5000,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 20000
+      })
+
+      await client.connect()
+
+      this.client = client
+      this.db = client.db(dbName)
+
+      console.log('✅ Mongo conectado com sucesso')
     } catch (error) {
-      console.error('Erro ao connectar no mongodb', error)
-      setTimeout(() => {
-        this.connect(uri, dbName).catch(console.error)
-      }, 5000)
+      console.error('❌ Erro ao conectar no MongoDB:', error)
+
+      // garante que estado não fica quebrado
+      this.client = null
+      this.db = null
+
+      throw error
+    } finally {
+      this.connecting = false
     }
   }
 
-  async disconnect(): Promise<void> {
-    if (this.client) {
+  public async disconnect(): Promise<void> {
+    if (!this.client) return
+
+    try {
       await this.client.close()
+      console.log('🔌 Mongo desconectado')
+    } catch (error) {
+      console.error('Erro ao desconectar Mongo:', error)
+    } finally {
       this.client = null
       this.db = null
     }
   }
 
-  async getCollection(name: string): Promise<Collection> {
+  public getDb(): Db {
     if (!this.db) {
       throw new Error('Database not connected')
     }
-    return this.db.collection(name)
+    return this.db
+  }
+
+  public getCollection<T = any>(name: string): Collection<T> {
+    if (!this.db) {
+      throw new Error('Database not connected')
+    }
+    return this.db.collection<T>(name)
   }
 }
