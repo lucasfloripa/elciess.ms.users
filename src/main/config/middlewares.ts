@@ -14,7 +14,8 @@ export function setupMiddlewares(app: express.Application): void {
         'http://localhost:4173',
         'https://strativy-flow-front.vercel.app',
         'https://strativyflow.com',
-        'https://www.strativyflow.com'
+        'https://www.strativyflow.com',
+        'https://app.strativyflow.com'
       ],
       credentials: true
     })
